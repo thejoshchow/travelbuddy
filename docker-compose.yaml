@@ -1,8 +1,13 @@
-# volumes:
+volumes:
+  buddy-db:
+    external: true
 services:
   fastapi:
     environment:
       CORS_HOST: http://localhost:3000
+      DATABASE_URLR: postgresql://postgres:password@db/buddy
+      WAIT_HOSTS: db:5432
+      PORT: 8000
     build:
       context: api
       dockerfile: Dockerfile.dev
@@ -25,3 +30,14 @@ services:
       HOST: "0.0.0.0"
       PUBLIC_URL: http://localhost:3000
       REACT_APP_API_HOST: ${REACT_APP_API_HOST}
+
+  db:
+    image: postgres:14.5-bullseye
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_USER: buddy
+      POSTGRES_DB: buddy
+    ports:
+      - "5432:5432"
+    volumes:
+      - buddy-db:/var/lib/postgresql/data
