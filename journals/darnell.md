@@ -1,0 +1,2 @@
+- Originated app idea
+- Helped complete wireframe
