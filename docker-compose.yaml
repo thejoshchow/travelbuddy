@@ -5,7 +5,7 @@ services:
   fastapi:
     environment:
       CORS_HOST: http://localhost:3000
-      DATABASE_URLR: postgresql://postgres:password@db/buddy
+      DATABASE_URL: postgresql://postgres:password@db/postgres
       WAIT_HOSTS: db:5432
       PORT: 8000
     build:
@@ -35,8 +35,8 @@ services:
     image: postgres:14.5-bullseye
     environment:
       POSTGRES_PASSWORD: password
-      POSTGRES_USER: buddy
-      POSTGRES_DB: buddy
+      POSTGRES_USER: postgres
+      POSTGRES_DB: postgres
     ports:
       - "5432:5432"
     volumes:
