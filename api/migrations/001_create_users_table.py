@@ -1,9 +1,8 @@
 steps = [
     [
-
         """
         CREATE TABLE users (
-            id SERIAL PRIMARY KEY NOT NULL,
+            user_id SERIAL PRIMARY KEY NOT NULL,
             username VARCHAR(20) UNIQUE NOT NULL,
             password VARCHAR(20) NOT NULL,
             email VARCHAR(100) UNIQUE NOT NULL,
@@ -17,6 +16,5 @@ steps = [
         """
         DROP TABLE users;
         """
-    
     ]
 ]

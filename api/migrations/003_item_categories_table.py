@@ -2,8 +2,8 @@ steps = [
     [
         """
         CREATE TABLE item_categories (
-            category_id SERIAL PRIMARY KEY NOT NULL,
-            trip_id INT REFERENCES trips (trip_id),
+  		    category_id SERIAL PRIMARY KEY,
+            trip_id INT REFERENCES trips ON DELETE CASCADE,
             category_name VARCHAR(50) NOT NULL
         );
         """,
