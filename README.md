@@ -1,4 +1,23 @@
 # Module3 Project Gamma
+Travel Buddy
+
+- Aaron Duque
+- Darnell Calahan
+- Josh Chow
+- Meghan Hyde
+
+
+Travel Buddy Vocabulary:
+
+trip: repository of users and suggestions for an event with specific date range
+user: someone authenticated in the system
+owner: user who creates a trip
+buddy: user invited to a trip
+guest: non-participant user with trip link
+item: item within a trip that can be suggested by buddies and voted on
+suggested: item in a suggested state, to be voted on
+confirmed: items that have at least a group majority vote
+scheduled: confirmed item that has been booked with vendor or added to itinerary
 
 ## Getting started
 
