@@ -4,7 +4,7 @@ steps = [
         """
         CREATE TABLE buddies (
             trip_id INT REFERENCES trips(trip_id),
-            user_id INT REFERENCES users(id),
+            id INT REFERENCES users(id),
             buddy BOOLEAN
         );
         """,
