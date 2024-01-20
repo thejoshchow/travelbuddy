@@ -2,6 +2,7 @@ from pydantic import BaseModel
 
 from queries.pool import pool
 
+
 class UserBase(BaseModel):
     username: str
     email: str
@@ -11,11 +12,14 @@ class UserBase(BaseModel):
     display_name: str
     picture_url: str
 
+
 class UserIn(UserBase):
     password: str
 
+
 class UserOut(UserBase):
     user_id: int
+
 
 class UserRepo:
     def create(self, user_form: UserIn):
@@ -59,4 +63,3 @@ class UserRepo:
                 )
                 old_data = user_form.dict()
                 return UserOut(user_id=user_id, **old_data)
-                

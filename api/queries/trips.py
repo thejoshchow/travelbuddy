@@ -5,6 +5,7 @@ from fastapi import HTTPException
 
 from queries.pool import pool
 
+
 class Error(BaseModel):
     message: dict
 
@@ -17,8 +18,10 @@ class TripIn(BaseModel):
     picture_ul: str
     owner: int
 
+
 class TripOut(TripIn):
     trip_id: int
+
 
 class TripRepo:
     def create(self, trip_form: TripIn):
@@ -26,9 +29,8 @@ class TripRepo:
 
             with pool.connection() as conn:
                 with conn.cursor() as cur:
-                    result=cur.execute(
+                    result = cur.execute(
                         """
-
                         INSERT INTO trips(
                             name,
                             location,
@@ -47,7 +49,6 @@ class TripRepo:
                             trip_form.end_date,
                             trip_form.picture_ul,
                             trip_form.owner,
-
                         ]
 
                     )
