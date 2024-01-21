@@ -26,7 +26,6 @@ class TripOut(TripIn):
 class TripRepo:
     def create(self, trip_form: TripIn):
         try:
-
             with pool.connection() as conn:
                 with conn.cursor() as cur:
                     result = cur.execute(
@@ -50,9 +49,10 @@ class TripRepo:
                             trip_form.picture_ul,
                             trip_form.owner,
                         ]
-
                     )
                     trip_id = result.fetchone()[0]
-                    return TripOut(trip_id=trip_id, **trip_form.dict())
+
         except Exception as e:
-            raise HTTPException(status_code=400, detail=f'error: {e}')
+            raise HTTPException(status_code=400, detail=f'{e}')
+
+        return TripOut(trip_id=trip_id, **trip_form.dict())
