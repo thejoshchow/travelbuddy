@@ -85,3 +85,37 @@ class TripRepo:
                     return TripOut(trip_id=trip_id, **updated_data)
         except Exception as e:
             raise HTTPException(status_code=400, detail=f"error: {e}")
+
+    def get_one_trip(self, trip_id: int):
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as cur:
+                    result = cur.execute(
+                        """
+                        SELECT  owner,
+                                name,
+                                location,
+                                start_date,
+                                end_date,
+                                picture_url
+                        FROM trips
+                        WHERE trip_id = %s
+                        """,
+                        [trip_id],
+                    )
+                    trip_data = result.fetchone()
+                    if trip_data is None:
+                        return None
+
+                    trip_dict = {
+                        "owner": trip_data[0],
+                        "name": trip_data[1],
+                        "location": trip_data[2],
+                        "start_date": trip_data[3],
+                        "end_date": trip_data[4],
+                        "picture_url": trip_data[5],
+                    }
+
+                    return TripOut(trip_id=trip_id, **trip_dict)
+        except Exception as e:
+            raise HTTPException(status_code=400, detail=f"error: {e}")
