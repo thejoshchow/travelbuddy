@@ -1,5 +1,5 @@
 from typing import Union
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends
 from queries.trips import TripIn, TripRepo, TripOut, Error
 
 
@@ -17,7 +17,4 @@ def create_trip(
 def update_trip(
     trip_id: int, trip_form: TripIn, trips: TripRepo = Depends()
 ) -> Union[TripOut, Error]:
-    try:
-        return trips.update(trip_id, trip_form)
-    except Exception as e:
-        raise HTTPException(status_code=400, detail=f"error: {e}")
+    return trips.update(trip_id, trip_form)

@@ -16,7 +16,7 @@ class ItemIn(BaseModel):
     url: Optional[str] = None
     picture_url: Optional[str] = None
     cost: Optional[Decimal] = None
-    cost_per_person: Optional[bool] = True
+    cost_per_person: Optional[bool] = None
     notes: Optional[str] = None
 
 

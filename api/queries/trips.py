@@ -1,4 +1,5 @@
 from datetime import date
+from typing import Optional
 
 from pydantic import BaseModel
 from fastapi import HTTPException
@@ -13,9 +14,9 @@ class Error(BaseModel):
 class TripIn(BaseModel):
     name: str
     location: str
-    start_date: date
-    end_date: date
-    picture_ul: str
+    start_date: Optional[date] = None
+    end_date: Optional[date] = None
+    picture_ul: Optional[str] = None
     owner: int
 
 
@@ -68,7 +69,7 @@ class TripRepo:
                             end_date = %s,
                             picture_url = %s,
                             owner = %s
-                        WHERE trip_id = %s
+                        WHERE trip_id = %s;
                         """,
                         [
                             trip_form.name,
