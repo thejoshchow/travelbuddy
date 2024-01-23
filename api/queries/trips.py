@@ -48,11 +48,39 @@ class TripRepo:
                             trip_form.end_date,
                             trip_form.picture_ul,
                             trip_form.owner,
-                        ]
+                        ],
                     )
                     trip_id = result.fetchone()[0]
-
+                    return TripOut(trip_id=trip_id, **trip_form.dict())
         except Exception as e:
-            raise HTTPException(status_code=400, detail=f'{e}')
+            raise HTTPException(status_code=400, detail=f"error: {e}")
 
-        return TripOut(trip_id=trip_id, **trip_form.dict())
+    def update(self, trip_id: int, trip_form: TripIn):
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as cur:
+                    cur.execute(
+                        """
+                        UPDATE trips
+                        SET name = %s,
+                            location = %s,
+                            start_date = %s,
+                            end_date = %s,
+                            picture_url = %s,
+                            owner = %s
+                        WHERE trip_id = %s
+                        """,
+                        [
+                            trip_form.name,
+                            trip_form.location,
+                            trip_form.start_date,
+                            trip_form.end_date,
+                            trip_form.picture_ul,
+                            trip_form.owner,
+                            trip_id,
+                        ],
+                    )
+                    updated_data = trip_form.dict()
+                    return TripOut(trip_id=trip_id, **updated_data)
+        except Exception as e:
+            raise HTTPException(status_code=400, detail=f"error: {e}")
