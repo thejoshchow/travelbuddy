@@ -16,5 +16,9 @@ Recommended naming convention is `first_last.md`.
   4. Forked the repo and docker working as intended
   5. Updated Journal
   
+## 01/15/2024 - 01/19/2024
+  1. Finalized Wireframes
+  2. Finished Tables
+  3. Started Work on API Endpoints for items Get, Get All, Update, Delete, Post Items
+  4. Discussed and worked on Authentication
   
-
