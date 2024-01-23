@@ -13,7 +13,7 @@ steps = [
         );
         """,
         """
-        DROP TABLE itenerary_items;
-        """
+        DROP TABLE itinerary_items;
+        """,
     ]
 ]
