@@ -11,9 +11,8 @@ steps = [
             scheduled BOOLEAN,
             url VARCHAR(200),
             picture_url VARCHAR(200),
-            cost MONEY,
+            cost NUMERIC(10,2),
             cost_per_person BOOLEAN,
-            cost_per_group BOOLEAN,
             notes TEXT
         );
         """,
