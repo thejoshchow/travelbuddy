@@ -1,6 +1,7 @@
 from typing import Union
 from fastapi import APIRouter, Depends, HTTPException
-from queries.trips import TripIn, TripRepo, TripOut, Error
+from queries.trips import TripIn, TripRepo, TripOut
+from queries.errors import Error
 
 
 router = APIRouter()

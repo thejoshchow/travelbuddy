@@ -7,10 +7,6 @@ from fastapi import HTTPException
 from queries.pool import pool
 
 
-class Error(BaseModel):
-    message: dict
-
-
 class TripIn(BaseModel):
     name: str
     location: str
