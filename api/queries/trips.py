@@ -115,3 +115,19 @@ class TripRepo:
                     return TripOut(trip_id=trip_id, **trip_dict)
         except Exception as e:
             raise HTTPException(status_code=400, detail=f"error: {e}")
+
+    def delete(self, trip_id: int) -> bool:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as cur:
+                    cur.execute(
+                        """
+                        DELETE FROM trips
+                        WHERE trip_id = %s
+                        """,
+                        [trip_id],
+                    )
+                    return True
+
+        except Exception as e:
+            raise HTTPException(status_code=400, detail=f"error: {e}")

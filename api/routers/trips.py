@@ -34,3 +34,10 @@ def get_one_trip(
         return trip_data
     except Exception as e:
         raise HTTPException(status_code=400, detail=f"error: {e}")
+
+
+@router.delete("/api/trip/{trip_id}")
+def delete_trip(
+    trip_id: int, trips: TripRepo = Depends()
+) -> bool:
+    return trips.delete(trip_id)
