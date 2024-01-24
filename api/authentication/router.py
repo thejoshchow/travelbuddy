@@ -15,6 +15,7 @@ from authentication.accounts import (
     AccountIn,
     AccountOut,
     AccountRepo,
+    AccountChange,
 )
 
 from queries.errors import Error
@@ -52,3 +53,34 @@ async def create_account(
     )
     token = await authenticator.login(response, request, form, accounts)
     return AccountToken(account=account, **token.dict())
+
+
+@router.put("/api/account/update")
+def update_account(
+    user_form: AccountChange,
+    request: Request,
+    repsonse: Response,
+    accounts: AccountRepo = Depends(),
+    account_data: dict = Depends(authenticator.get_current_account_data),
+):
+    account = accounts.get(account_data["username"])
+    user_form.username = account.username
+    if not authenticator.pwd_context.verify(
+        user_form.current_password, account.hashed_password
+    ):
+        raise HTTPException(status_code=400, detail="Invalid password")
+    elif user_form.new_password != user_form.confirm_new_password:
+        raise HTTPException(status_code=400, detail="Passwords do not match")
+    else:
+        try:
+            hashed_password = authenticator.hash_password(
+                user_form.new_password
+            )
+            updated_account = accounts.update(
+                account.user_id,
+                hashed_password,
+                user_form.email,
+            )
+            return updated_account
+        except Exception as e:
+            raise HTTPException(status_code=400, detail=f"{e}")

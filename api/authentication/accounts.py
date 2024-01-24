@@ -11,6 +11,12 @@ class AccountBase(BaseModel):
     email: str
 
 
+class AccountChange(AccountBase):
+    current_password: str
+    new_password: str
+    confirm_new_password: str
+
+
 class AccountIn(AccountBase):
     password: str
     phone: Optional[str] = None
@@ -106,3 +112,29 @@ class AccountRepo:
             raise HTTPException(
                 status_code=400, detail="Username and password do not match"
             )
+
+    def update(self, user_id, password, email):
+        with pool.connection() as conn:
+            with conn.cursor() as cur:
+                try:
+                    result = cur.execute(
+                        """
+                        UPDATE accounts
+                        SET email = %s,
+                            hashed_password = %s
+                        WHERE user_id = %s
+                        RETURNING user_id, username, email;
+                        """,
+                        [email, password, user_id],
+                    )
+                    account = result.fetchone()
+                    user_id = account[0]
+                    username = account[1]
+                    email = account[2]
+                    return AccountOut(
+                        user_id=user_id,
+                        username=username,
+                        email=email,
+                    )
+                except Exception as e:
+                    return f"{e}"
