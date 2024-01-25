@@ -7,6 +7,15 @@ from fastapi import HTTPException
 from queries.pool import pool
 
 
+class BuddyIn(BaseModel):
+    user_id: int
+    buddy: Optional[bool] = True
+
+
+class BuddyOut(BuddyIn):
+    trip_id: int
+
+
 class TripIn(BaseModel):
     name: str
     location: str
@@ -131,3 +140,23 @@ class TripRepo:
 
         except Exception as e:
             raise HTTPException(status_code=400, detail=f"error: {e}")
+
+    def add_buddy(self, info: BuddyIn, trip_id: int):
+        with pool.connection() as conn:
+            with conn.cursor() as cur:
+                try:
+                    cur.execute(
+                        """
+                        INSERT INTO buddies (trip_id, user_id, buddy)
+                        VALUES (%s, %s, %s);
+                        """,
+                        [
+                            trip_id,
+                            info.user_id,
+                            info.buddy,
+                        ],
+                    )
+                    return BuddyOut(trip_id=trip_id, **info.dict())
+                except Exception as e:
+                    print(e)
+                    raise Exception

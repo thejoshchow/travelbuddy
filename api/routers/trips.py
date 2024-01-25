@@ -1,6 +1,8 @@
 from typing import Union
+
 from fastapi import APIRouter, Depends, HTTPException
-from queries.trips import TripIn, TripRepo, TripOut
+
+from queries.trips import TripIn, TripRepo, TripOut, BuddyIn, BuddyOut
 from queries.errors import Error
 
 
@@ -37,7 +39,15 @@ def get_one_trip(
 
 
 @router.delete("/api/trip/{trip_id}")
-def delete_trip(
-    trip_id: int, trips: TripRepo = Depends()
-) -> bool:
+def delete_trip(trip_id: int, trips: TripRepo = Depends()) -> bool:
     return trips.delete(trip_id)
+
+
+@router.post("/trip/trip_id/buddy")
+def add_buddy(
+    info: BuddyIn, trip_id: int, trips: TripRepo = Depends()
+) -> Union[BuddyOut, Error]:
+    try:
+        return trips.add_buddy(info, trip_id)
+    except Exception:
+        raise HTTPException(status_code=400, detail="Add buddy failed")
