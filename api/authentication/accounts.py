@@ -34,6 +34,16 @@ class AccountWPW(AccountOut):
     hashed_password: str
 
 
+class IsBuddyIn(BaseModel):
+    user_id: int
+    trip_id: int
+
+
+class IsBuddyOut(BaseModel):
+    participant: bool
+    buddy: bool | None
+
+
 class AccountRepo:
     def create(self, user_form: AccountIn, hashed_password: str):
         try:
@@ -153,3 +163,23 @@ class AccountRepo:
                     return True
         except Exception:
             raise HTTPException(status_code=400, detail="User Id not Found")
+
+
+class Authorize:
+    def is_buddy(self, user_id: int, trip_id: int):
+        with pool.connection() as conn:
+            with conn.cursor() as cur:
+                cur.execute(
+                    """
+                    SELECT trip_id, buddy
+                    FROM buddies
+                    WHERE user_id = %s
+                    """,
+                    [user_id],
+                ),
+                trips = {}
+                for record in cur.fetchall():
+                    trips[record[0]] = record[1]
+                return IsBuddyOut(
+                    participant=trip_id in trips, buddy=trips.get(trip_id)
+                )

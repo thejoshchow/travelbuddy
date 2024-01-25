@@ -16,6 +16,7 @@ from authentication.accounts import (
     AccountOut,
     AccountRepo,
     AccountChange,
+    Authorize,
 )
 
 from queries.errors import Error
@@ -92,3 +93,16 @@ def delete_account(
     accounts: AccountRepo = Depends(),
 ):
     return accounts.delete(user_id)
+
+
+@router.patch("/api/trip/{trip_id}/buddy")
+def is_buddy(
+    trip_id: int,
+    auth: Authorize = Depends(),
+    account_data: dict = Depends(authenticator.get_current_account_data),
+):
+    user_id = account_data["user_id"]
+    buddy = auth.is_buddy(user_id, trip_id)
+    if buddy.participant:
+        return True
+    return False
