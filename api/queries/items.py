@@ -27,16 +27,11 @@ class ItemOut(ItemIn):
 
 class ItemUpdate(ItemIn):
     pass
-    author: int
-    category_id: int = 5
-    name: str
-    description: Optional[str] = None
-    scheduled: bool = False
-    url: Optional[str] = None
-    picture_url: Optional[str] = None
-    cost: Optional[Decimal] = None
-    cost_per_person: Optional[bool] = None
-    notes: Optional[str] = None
+
+
+class Vote(BaseModel):
+    item_id: int
+    user_id: int
 
 
 class ItemRepository:
@@ -140,3 +135,22 @@ class ItemRepository:
                     return ItemOut(trip_id=trip_id, item_id=id, **old_data)
         except Exception as e:
             raise HTTPException(status_code=400, detail=f"{e}")
+
+    def add_vote(self, item_id: int, user_id: int) -> Vote:
+        with pool.connection() as conn:
+            with conn.cursor() as cur:
+                try:
+                    cur.execute(
+                        """
+                        INSERT INTO item_votes (item_id, user_id)
+                        VALUES (%s, %s);
+                        """,
+                        [
+                            item_id,
+                            user_id,
+                        ],
+                    )
+                    return Vote(item_id=item_id, user_id=user_id)
+                except Exception as e:
+                    print("error: ", e)
+                    raise Exception
