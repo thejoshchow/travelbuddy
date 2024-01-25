@@ -25,7 +25,8 @@ class ItemOut(ItemIn):
     item_id: int
 
 
-class ItemUpdate(BaseModel):
+class ItemUpdate(ItemIn):
+    pass
     author: int
     category_id: int = 5
     name: str
@@ -39,26 +40,40 @@ class ItemUpdate(BaseModel):
 
 
 class ItemRepository:
+    def delete(self, trip_id: int, item_id: int):
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    db.execute(
+                        """
+                    DELETE FROM items
+                    WHERE trip_id = %s AND item_id = %s;
+                    """,
+                        [trip_id, item_id],
+                    )
+        except Exception as e:
+            raise HTTPException(status_code=400, detail=f"{e}")
+
     def update(self, trip_id, item_id, item: ItemUpdate) -> ItemOut:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
                     result = db.execute(
                         """
-                        UPDATE items
-                        SET author = %s,
-                            category_id = %s,
-                            name = %s,
-                            description = %s,
-                            scheduled = %s,
-                            url = %s,
-                            picture_url = %s,
-                            cost = %s,
-                            cost_per_person = %s,
-                            notes = %s
-                        WHERE trip_id = %s AND item_id = %s
-                        RETURNING item_id;
-                        """,
+                    UPDATE items
+                    SET author = %s,
+                        category_id = %s,
+                        name = %s,
+                        description = %s,
+                        scheduled = %s,
+                        url = %s,
+                        picture_url = %s,
+                        cost = %s,
+                        cost_per_person = %s,
+                        notes = %s
+                    WHERE trip_id = %s AND item_id = %s
+                    RETURNING item_id;
+                    """,
                         [
                             item.author,
                             item.category_id,
@@ -89,22 +104,22 @@ class ItemRepository:
                     # run insert statement
                     result = db.execute(
                         """
-                    INSERT INTO items (
-                    trip_id,
-                    author,
-                    category_id,
-                    name,
-                    description,
-                    scheduled,
-                    url,
-                    picture_url,
-                    cost,
-                    cost_per_person,
-                    notes)
-                    VALUES
-                    (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
-                    RETURNING item_id;
-                    """,
+                INSERT INTO items (
+                trip_id,
+                author,
+                category_id,
+                name,
+                description,
+                scheduled,
+                url,
+                picture_url,
+                cost,
+                cost_per_person,
+                notes)
+                VALUES
+                (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+                RETURNING item_id;
+                """,
                         [
                             trip_id,
                             item.author,

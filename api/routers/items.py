@@ -2,7 +2,12 @@ from typing import Union
 
 from fastapi import APIRouter, Depends
 
-from queries.items import ItemIn, ItemOut, ItemRepository, ItemUpdate
+from queries.items import (
+    ItemIn,
+    ItemOut,
+    ItemRepository,
+    ItemUpdate,
+)
 from queries.errors import Error
 
 
@@ -16,7 +21,7 @@ def create_item(
     return repo.create(trip_id, item)
 
 
-@router.put("/api/trip/{trip_id}/{item_id}")
+@router.put("/api/trip/{trip_id}/item/{item_id}")
 def update_item(
     item_id: int,
     trip_id: int,
@@ -24,3 +29,12 @@ def update_item(
     repo: ItemRepository = Depends(ItemRepository),
 ):
     return repo.update(trip_id, item_id, item)
+
+
+@router.delete("/api/trip/{trip_id}/{item_id}")
+def delete_item(
+    trip_id: int,
+    item_id: int,
+    repo: ItemRepository = Depends(ItemRepository),
+):
+    return repo.delete(trip_id, item_id)
