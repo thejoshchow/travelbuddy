@@ -84,3 +84,11 @@ def update_account(
             return updated_account
         except Exception as e:
             raise HTTPException(status_code=400, detail=f"{e}")
+
+
+@router.delete("/api/account/{user_id}")
+def delete_account(
+    user_id,
+    accounts: AccountRepo = Depends(),
+):
+    return accounts.delete(user_id)

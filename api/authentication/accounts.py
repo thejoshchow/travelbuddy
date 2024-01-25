@@ -113,28 +113,16 @@ class AccountRepo:
                 status_code=400, detail="Username and password do not match"
             )
 
-    def update(self, user_id, password, email):
-        with pool.connection() as conn:
-            with conn.cursor() as cur:
-                try:
+    def delete(self, user_id: int):
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as cur:
                     result = cur.execute(
                         """
-                        UPDATE accounts
-                        SET email = %s,
-                            hashed_password = %s
-                        WHERE user_id = %s
-                        RETURNING user_id, username, email;
-                        """,
-                        [email, password, user_id],
+                            DELETE FROM accounts
+                            WHERE user_id = %s;
+                            """,
+                        [user_id],
                     )
-                    account = result.fetchone()
-                    user_id = account[0]
-                    username = account[1]
-                    email = account[2]
-                    return AccountOut(
-                        user_id=user_id,
-                        username=username,
-                        email=email,
-                    )
-                except Exception as e:
-                    return f"{e}"
+        except Exception:
+            raise HTTPException(status_code=400, detail="User Id not Found")
