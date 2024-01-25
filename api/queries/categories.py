@@ -14,13 +14,11 @@ class CategoryIn(BaseModel):
 
 class CategoryOut(CategoryIn):
     category_id: int
-    trip_id: int
+    trip_id: int | None
 
 
 class CategoryRepo:
-    def create(
-        self, form: CategoryIn, trip_id: int
-    ) -> Union[CategoryOut, Error]:
+    def create(self, form, trip_id):
         with pool.connection() as conn:
             with conn.cursor() as cur:
                 try:

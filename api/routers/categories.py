@@ -19,6 +19,19 @@ def create_item_category(
         raise HTTPException(status_code=400, detail=f"{e}")
 
 
+@router.get("/api/trip/{trip_id}/category")
+def get_categories(
+    trip_id: int,
+    categories: CategoryRepo = Depends(),
+) -> Union[List[CategoryOut], Error]:
+    try:
+        return categories.get_categories(trip_id)
+    except Exception:
+        raise HTTPException(
+            status_code=400, detail="Failed to get item categories"
+        )
+
+
 @router.get("/api/trip/{trip_id}/category/{category_id}")
 def get_item_by_category(
     trip_id: int,
