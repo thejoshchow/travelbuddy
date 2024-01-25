@@ -111,6 +111,7 @@ class AccountRepo:
         except Exception:
             raise HTTPException(
                 status_code=400, detail="Username and password do not match"
+            )
 
     def update(self, user_id, password, email):
         with pool.connection() as conn:
@@ -137,7 +138,6 @@ class AccountRepo:
                     )
                 except Exception as e:
                     return f"{e}"
-            )
 
     def delete(self, user_id: int):
         try:

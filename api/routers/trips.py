@@ -43,6 +43,11 @@ def delete_trip(trip_id: int, trips: TripRepo = Depends()) -> bool:
     return trips.delete(trip_id)
 
 
+@router.get("/api/trip")
+def get_all_trips_for_user(user_id: int, trips: TripRepo = Depends()):
+    return trips.get_all(user_id)
+
+
 @router.post("/trip/trip_id/buddy")
 def add_buddy(
     info: BuddyIn, trip_id: int, trips: TripRepo = Depends()

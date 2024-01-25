@@ -21,7 +21,7 @@ class TripIn(BaseModel):
     location: str
     start_date: Optional[date] = None
     end_date: Optional[date] = None
-    picture_ul: Optional[str] = None
+    picture_url: Optional[str] = None
     owner: int
 
 
@@ -52,7 +52,7 @@ class TripRepo:
                             trip_form.location,
                             trip_form.start_date,
                             trip_form.end_date,
-                            trip_form.picture_ul,
+                            trip_form.picture_url,
                             trip_form.owner,
                         ],
                     )
@@ -81,7 +81,7 @@ class TripRepo:
                             trip_form.location,
                             trip_form.start_date,
                             trip_form.end_date,
-                            trip_form.picture_ul,
+                            trip_form.picture_url,
                             trip_form.owner,
                             trip_id,
                         ],
@@ -137,6 +137,38 @@ class TripRepo:
                         [trip_id],
                     )
                     return True
+
+        except Exception as e:
+            raise HTTPException(status_code=400, detail=f"error: {e}")
+
+    def get_all(self, user_id: int):
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as cur:
+                    cur.execute(
+                        """
+                        SELECT *
+                        FROM buddies
+                        INNER JOIN trips
+                            ON buddies.trip_id = trips.trip_id
+                        WHERE buddies.user_id = %s
+                        ORDER BY start_date;
+                        """,
+                        [user_id],
+                    )
+                    trip_list = []
+                    for record in cur:
+                        all_trips = TripOut(
+                            trip_id=record[3],
+                            name=record[4],
+                            location=record[5],
+                            start_date=record[6],
+                            end_date=record[7],
+                            picture_url=record[8],
+                            owner=record[9],
+                        )
+                        trip_list.append(all_trips)
+                    return trip_list
 
         except Exception as e:
             raise HTTPException(status_code=400, detail=f"error: {e}")
