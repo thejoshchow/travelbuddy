@@ -34,6 +34,10 @@ class Vote(BaseModel):
     user_id: int
 
 
+class VotesOut(BaseModel):
+    user_id: int
+
+
 class ItemRepository:
     def delete(self, trip_id: int, item_id: int):
         try:
@@ -151,6 +155,34 @@ class ItemRepository:
                         ],
                     )
                     return Vote(item_id=item_id, user_id=user_id)
+                except Exception as e:
+                    print("error: ", e)
+                    raise Exception
+
+    def get_vote(
+        self,
+        item_id: int,
+    ):
+        with pool.connection() as conn:
+            with conn.cursor() as cur:
+                try:
+                    print("2")
+                    result = cur.execute(
+                        """
+                        SELECT user_id
+                        FROM item_votes
+                        WHERE item_id=%s;
+                        """,
+                        [item_id],
+                    )
+                    votes = []
+                    for record in result.fetchall():
+                        print(record[0])
+                        votes.append(VotesOut(user_id=record[0]))
+
+                    print(votes)
+                    return votes
+
                 except Exception as e:
                     print("error: ", e)
                     raise Exception

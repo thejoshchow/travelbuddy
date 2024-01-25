@@ -1,9 +1,16 @@
-from typing import Union
+from typing import Union, List
 
 from fastapi import APIRouter, Depends, HTTPException
 
 from authentication.authentication import authenticator
-from queries.items import ItemIn, ItemOut, ItemRepository, ItemUpdate, Vote
+from queries.items import (
+    ItemIn,
+    ItemOut,
+    ItemRepository,
+    ItemUpdate,
+    Vote,
+    VotesOut,
+)
 from queries.errors import Error
 
 
@@ -47,3 +54,14 @@ def add_vote(
         return items.add_vote(item_id, user_id)
     except Exception:
         raise HTTPException(status_code=400, detail="Vote failed")
+
+
+@router.get("/api/item/{item_id}/vote")
+def get_vote(
+    item_id: int, items: ItemRepository = Depends()
+) -> List[VotesOut]:
+    try:
+        print("1")
+        return items.get_vote(item_id)
+    except Exception:
+        raise HTTPException(status_code=400, detail="failure to get votes")
