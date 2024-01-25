@@ -143,12 +143,13 @@ class AccountRepo:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as cur:
-                    result = cur.execute(
+                    cur.execute(
                         """
                             DELETE FROM accounts
                             WHERE user_id = %s;
                             """,
                         [user_id],
                     )
+                    return True
         except Exception:
             raise HTTPException(status_code=400, detail="User Id not Found")

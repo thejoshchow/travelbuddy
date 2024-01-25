@@ -2,6 +2,7 @@ from typing import Union
 
 from fastapi import APIRouter, Depends, HTTPException
 
+from authentication.authentication import authenticator
 from queries.trips import TripIn, TripRepo, TripOut, BuddyIn, BuddyOut
 from queries.errors import Error
 
@@ -11,9 +12,19 @@ router = APIRouter()
 
 @router.post("/api/trip")
 def create_trip(
-    trip_form: TripIn, trips: TripRepo = Depends()
+    trip_form: TripIn,
+    trips: TripRepo = Depends(),
+    account_data: dict = Depends(authenticator.get_current_account_data),
 ) -> Union[TripOut, Error]:
-    return trips.create(trip_form)
+    try:
+        trip_form.owner = account_data["user_id"]
+        trip = trips.create(trip_form)
+        trips.add_buddy(
+            BuddyIn(user_id=account_data["user_id"], buddy=True), trip.trip_id
+        )
+        return trip
+    except Exception:
+        raise HTTPException(status_code=400, detail="Create trip failed")
 
 
 @router.put("/api/trip/{trip_id}")
