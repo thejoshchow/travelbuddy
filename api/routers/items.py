@@ -3,6 +3,7 @@ from typing import Union, List
 from fastapi import APIRouter, Depends, HTTPException
 
 from authentication.authentication import authenticator
+from authentication.accounts import Authorize
 from queries.items import (
     ItemIn,
     ItemOut,
@@ -61,7 +62,22 @@ def get_vote(
     item_id: int, items: ItemRepository = Depends()
 ) -> List[VotesOut]:
     try:
-        print("1")
         return items.get_vote(item_id)
     except Exception:
         raise HTTPException(status_code=400, detail="failure to get votes")
+
+
+@router.delete("/api/trip/{trip_id}/item/{item_id}/vote")
+def delete_vote(
+    item_id: int,
+    trip_id: int,
+    repo: ItemRepository = Depends(),
+    account_data: dict = Depends(authenticator.get_current_account_data),
+    auth: Authorize = Depends(),
+):
+    user_id = account_data["user_id"]
+    buddy = auth.is_buddy(user_id, int(trip_id))
+    if buddy.participant and buddy.buddy:
+        return repo.delete_vote(item_id, user_id)
+    else:
+        raise HTTPException(status_code=401, detail="Vote not authorized")
