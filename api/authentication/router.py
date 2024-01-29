@@ -65,7 +65,7 @@ def update_account(
     account_data: dict = Depends(authenticator.get_current_account_data),
 ):
     account = accounts.get(account_data["username"])
-    user_form.username = account.username
+    user_form.username = account_data["username"]
     if not authenticator.pwd_context.verify(
         user_form.current_password, account.hashed_password
     ):
@@ -106,3 +106,23 @@ def is_buddy(
     if buddy.participant:
         return True
     return False
+
+
+# @router.get("/token")
+# def get_account(
+#     account_data: dict = Depends(authenticator.get_current_account_data),
+# ):
+#     return account_data
+
+
+@router.get("/token", response_model=AccountToken | None)
+async def get_token(
+    request: Request,
+    account: AccountOut = Depends(authenticator.try_get_current_account_data),
+) -> AccountToken | None:
+    if account or authenticator.cookie_name in request.cookies:
+        return {
+            "access_token": request.cookies[authenticator.cookie_name],
+            "type": "Bearer",
+            "account": account,
+        }

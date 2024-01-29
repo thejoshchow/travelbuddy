@@ -1,36 +1,30 @@
-import { useEffect, useState } from "react";
-import Construct from "./Construct.js";
-import ErrorNotification from "./ErrorNotification";
 import "./App.css";
+import { Routes, Route } from "react-router-dom";
+import Login from "./pages/Login";
+import Dashboard from "./pages/Dashboard";
+import Landing from "./pages/Landing";
+import RequireAuth from "./features/auth/RequireAuth";
+import CheckAuth from "./features/auth/CheckAuth";
 
 function App() {
-  const [launchInfo, setLaunchInfo] = useState([]);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    async function getData() {
-      let url = `${process.env.REACT_APP_API_HOST}/api/launch-details`;
-      console.log("fastapi url: ", url);
-      let response = await fetch(url);
-      console.log("------- hello? -------");
-      let data = await response.json();
-
-      if (response.ok) {
-        console.log("got launch data!");
-        setLaunchInfo(data.launch_details);
-      } else {
-        console.log("drat! something happened");
-        setError(data.message);
-      }
-    }
-    getData();
-  }, []);
 
   return (
-    <div>
-      <ErrorNotification error={error} />
-      <Construct info={launchInfo} />
-    </div>
+    <Routes>
+      <Route element={<CheckAuth />}>
+        <Route path='/'>
+
+          {/* public routes */}
+          <Route index element={<Landing />} />
+          <Route path='login' element={<Login />} />
+
+          {/* protected routes */}
+          <Route element={<RequireAuth />}>
+            <Route path='dashboard' element={<Dashboard />} />
+          </Route>
+
+        </Route>
+      </Route>
+    </Routes>
   );
 }
 

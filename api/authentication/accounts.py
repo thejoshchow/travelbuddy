@@ -8,16 +8,17 @@ from queries.pool import pool
 
 class AccountBase(BaseModel):
     username: str
-    email: str
 
 
 class AccountChange(AccountBase):
+    email: str
     current_password: str
     new_password: str
     confirm_new_password: str
 
 
 class AccountIn(AccountBase):
+    email: str
     password: str
     phone: Optional[str] = None
     first_name: str

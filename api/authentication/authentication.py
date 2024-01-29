@@ -40,4 +40,6 @@ class BuddyAuthenticator(Authenticator):
         return account.username, AccountOut(**account.dict())
 
 
-authenticator = BuddyAuthenticator(os.environ["SIGNING_KEY"])
+authenticator = BuddyAuthenticator(
+    os.environ["SIGNING_KEY"], cookie_name="buddy_token"
+)
