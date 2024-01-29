@@ -1,3 +1,5 @@
+from pydantic import BaseModel
+
 from fastapi import (
     Depends,
     HTTPException,
@@ -7,18 +9,14 @@ from fastapi import (
     Request,
 )
 from jwtdown_fastapi.authentication import Token
-from pydantic import BaseModel
 
 from authentication.authentication import authenticator
-
 from authentication.accounts import (
     AccountIn,
     AccountOut,
     AccountRepo,
     AccountChange,
-    Authorize,
 )
-
 from queries.errors import Error
 
 
@@ -56,20 +54,20 @@ async def create_account(
     return AccountToken(account=account, **token.dict())
 
 
-@router.put("/api/account/update")
+@router.put("/api/account")
 def update_account(
     user_form: AccountChange,
     request: Request,
     repsonse: Response,
     accounts: AccountRepo = Depends(),
     account_data: dict = Depends(authenticator.get_current_account_data),
-):
+) -> AccountOut:
     account = accounts.get(account_data["username"])
     user_form.username = account_data["username"]
     if not authenticator.pwd_context.verify(
         user_form.current_password, account.hashed_password
     ):
-        raise HTTPException(status_code=400, detail="Invalid password")
+        raise HTTPException(status_code=401, detail="Invalid password")
     elif user_form.new_password != user_form.confirm_new_password:
         raise HTTPException(status_code=400, detail="Passwords do not match")
     else:
@@ -83,36 +81,23 @@ def update_account(
                 user_form.email,
             )
             return updated_account
-        except Exception as e:
-            raise HTTPException(status_code=400, detail=f"{e}")
+        except Exception:
+            raise HTTPException(
+                status_code=400, detail="Could not update account"
+            )
 
 
-@router.delete("/api/account/{user_id}")
+@router.delete("/api/account")
 def delete_account(
-    user_id,
     accounts: AccountRepo = Depends(),
-):
-    return accounts.delete(user_id)
-
-
-@router.patch("/api/trip/{trip_id}/buddy")
-def is_buddy(
-    trip_id: int,
-    auth: Authorize = Depends(),
     account_data: dict = Depends(authenticator.get_current_account_data),
 ):
     user_id = account_data["user_id"]
-    buddy = auth.is_buddy(user_id, trip_id)
-    if buddy.participant:
-        return True
-    return False
-
-
-# @router.get("/token")
-# def get_account(
-#     account_data: dict = Depends(authenticator.get_current_account_data),
-# ):
-#     return account_data
+    try:
+        result = accounts.delete(user_id)
+        return True if result else None
+    except Exception:
+        raise HTTPException(status_code=400, detail="Failed to delete account")
 
 
 @router.get("/token", response_model=AccountToken | None)

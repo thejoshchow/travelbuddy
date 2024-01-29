@@ -1,4 +1,4 @@
-from typing import Union, List
+from typing import Union
 
 from fastapi import APIRouter, Depends, HTTPException
 
@@ -10,7 +10,7 @@ from queries.items import (
     ItemRepository,
     ItemUpdate,
     Vote,
-    VotesOut,
+    VotesList,
 )
 from queries.errors import Error
 
@@ -20,9 +20,21 @@ router = APIRouter()
 
 @router.post("/api/trip/{trip_id}/item")
 def create_item(
-    trip_id, item: ItemIn, repo: ItemRepository = Depends()
+    trip_id: int,
+    item: ItemIn,
+    repo: ItemRepository = Depends(),
+    account_data: dict = Depends(authenticator.get_current_account_data),
+    auth: Authorize = Depends(),
 ) -> Union[ItemOut, Error]:
-    return repo.create(trip_id, item)
+    user_id = account_data["user_id"]
+    is_buddy = auth.is_buddy(user_id, trip_id)
+    if is_buddy.participant and is_buddy.buddy:
+        try:
+            return repo.create(trip_id, item, user_id)
+        except Exception:
+            raise Exception
+    else:
+        raise HTTPException(status_code=401, detail="Unauthorized")
 
 
 @router.put("/api/trip/{trip_id}/item/{item_id}")
@@ -31,8 +43,19 @@ def update_item(
     trip_id: int,
     item: ItemUpdate,
     repo: ItemRepository = Depends(),
-):
-    return repo.update(trip_id, item_id, item)
+    auth: Authorize = Depends(),
+    account_data: dict = Depends(authenticator.get_current_account_data),
+) -> ItemOut:
+    user_id = account_data["user_id"]
+    is_admin = auth.is_buddy(user_id, trip_id).admin
+    is_author = auth.is_author(user_id, item_id)
+    if is_admin or is_author:
+        try:
+            return repo.update(trip_id, item_id, item)
+        except Exception:
+            raise HTTPException(status_code=400, detail="Update failed")
+    else:
+        raise HTTPException(status_code=401, detail="Unauthorized")
 
 
 @router.delete("/api/trip/{trip_id}/item/{item_id}")
@@ -40,27 +63,46 @@ def delete_item(
     trip_id: int,
     item_id: int,
     repo: ItemRepository = Depends(),
+    auth: Authorize = Depends(),
+    account_data: dict = Depends(authenticator.get_current_account_data),
 ):
-    return repo.delete(trip_id, item_id)
+    user_id = account_data["user_id"]
+    is_admin = auth.is_buddy(user_id, trip_id).admin
+    is_author = auth.is_author(user_id, item_id)
+    if is_admin or is_author:
+        try:
+            return repo.delete(trip_id, item_id)
+        except Exception:
+            raise HTTPException(status_code=400, detail="Item was not deleted")
+    else:
+        raise HTTPException(status_code=401, detail="Unauthorized")
 
 
 @router.post("/api/trip/{trip_id}/item/{item_id}/vote")
 def add_vote(
+    trip_id: int,
     item_id: int,
     items: ItemRepository = Depends(),
     account_data: dict = Depends(authenticator.get_current_account_data),
+    auth: Authorize = Depends(),
 ) -> Union[Vote, Error]:
     user_id = account_data["user_id"]
-    try:
-        return items.add_vote(item_id, user_id)
-    except Exception:
-        raise HTTPException(status_code=400, detail="Vote failed")
+    is_buddy = auth.is_buddy(user_id, trip_id)
+    if is_buddy.participant and is_buddy.buddy:
+        try:
+            return items.add_vote(item_id, user_id)
+        except Exception:
+            raise HTTPException(status_code=400, detail="Vote failed")
+    else:
+        raise HTTPException(status_code=401, detail="Unauthorized")
 
 
 @router.get("/api/item/{item_id}/vote")
 def get_vote(
-    item_id: int, items: ItemRepository = Depends()
-) -> List[VotesOut]:
+    item_id: int,
+    items: ItemRepository = Depends(),
+    account_data: dict = Depends(authenticator.get_current_account_data),
+) -> VotesList:
     try:
         return items.get_vote(item_id)
     except Exception:
@@ -78,6 +120,7 @@ def delete_vote(
     user_id = account_data["user_id"]
     buddy = auth.is_buddy(user_id, int(trip_id))
     if buddy.participant and buddy.buddy:
-        return repo.delete_vote(item_id, user_id)
+        result = repo.delete_vote(item_id, user_id)
+        return True if result else None
     else:
         raise HTTPException(status_code=401, detail="Vote not authorized")

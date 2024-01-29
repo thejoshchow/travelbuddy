@@ -57,4 +57,7 @@ class UserRepo:
                         user_id=user_id,
                     )
         except Exception as e:
-            raise HTTPException(status_code=400, detail=f"{e}")
+            print(e)
+            raise HTTPException(
+                status_code=400, detail="Could not update user details"
+            )

@@ -1,10 +1,9 @@
-from typing import Union
+from typing import List
 from decimal import Decimal
 
 from pydantic import BaseModel
 
 from queries.pool import pool
-from queries.errors import Error
 from queries.items import ItemOut
 
 
@@ -17,8 +16,12 @@ class CategoryOut(CategoryIn):
     trip_id: int | None
 
 
+class ItemsListCat(BaseModel):
+    items: List[ItemOut]
+
+
 class CategoryRepo:
-    def create(self, form, trip_id):
+    def create(self, form: CategoryIn, trip_id: int):
         with pool.connection() as conn:
             with conn.cursor() as cur:
                 try:
@@ -40,9 +43,31 @@ class CategoryRepo:
                 except Exception as e:
                     return f"{e}"
 
-    def get_items(
-        self, trip_id: int, category_id: int
-    ) -> Union[CategoryOut, Error]:
+    def get_categories(self, trip_id: int):
+        with pool.connection() as conn:
+            with conn.cursor() as cur:
+                try:
+                    cur.execute(
+                        """
+                        SELECT trip_id, category_id, category_name
+                        FROM item_categories
+                        WHERE trip_id=%s or trip_id IS NULL;
+                        """,
+                        [trip_id],
+                    )
+                    result = []
+                    for record in cur.fetchall():
+                        cat = CategoryOut(
+                            trip_id=record[0],
+                            category_id=record[1],
+                            category_name=record[2],
+                        )
+                        result.append(cat)
+                    return result
+                except Exception as e:
+                    raise e
+
+    def get_items(self, trip_id: int, category_id: int):
         with pool.connection() as conn:
             with conn.cursor() as cur:
                 try:
@@ -87,7 +112,7 @@ class CategoryRepo:
                             item_id=record[0],
                         )
                         result.append(item)
-                    return result
+                    return ItemsListCat(items=result)
 
                 except Exception as e:
                     print(e)

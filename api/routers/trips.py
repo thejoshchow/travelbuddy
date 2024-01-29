@@ -3,7 +3,15 @@ from typing import Union
 from fastapi import APIRouter, Depends, HTTPException
 
 from authentication.authentication import authenticator
-from queries.trips import TripIn, TripRepo, TripOut, BuddyIn, BuddyOut
+from authentication.accounts import Authorize
+from queries.trips import (
+    TripIn,
+    TripRepo,
+    TripOut,
+    BuddyIn,
+    BuddyOut,
+    TripListOut,
+)
 from queries.errors import Error
 
 
@@ -16,11 +24,12 @@ def create_trip(
     trips: TripRepo = Depends(),
     account_data: dict = Depends(authenticator.get_current_account_data),
 ) -> Union[TripOut, Error]:
+    user_id = account_data["user_id"]
     try:
-        trip_form.owner = account_data["user_id"]
-        trip = trips.create(trip_form)
+        trip = trips.create(trip_form, user_id)
         trips.add_buddy(
-            BuddyIn(user_id=account_data["user_id"], buddy=True), trip.trip_id
+            BuddyIn(user_id=user_id, buddy=True, admin=True),
+            trip.trip_id,
         )
         return trip
     except Exception:
@@ -29,41 +38,89 @@ def create_trip(
 
 @router.put("/api/trip/{trip_id}")
 def update_trip(
-    trip_id: int, trip_form: TripIn, trips: TripRepo = Depends()
+    trip_id: int,
+    trip_form: TripIn,
+    trips: TripRepo = Depends(),
+    auth: Authorize = Depends(),
+    account_data: dict = Depends(authenticator.get_current_account_data),
 ) -> Union[TripOut, Error]:
-    try:
-        return trips.update(trip_id, trip_form)
-    except Exception as e:
-        raise HTTPException(status_code=400, detail=f"error: {e}")
+    user_id = account_data["user_id"]
+    is_admin = auth.is_buddy(user_id, trip_id).admin
+    if is_admin:
+        try:
+            return trips.update(trip_id, trip_form)
+        except Exception as e:
+            raise HTTPException(status_code=400, detail=f"error: {e}")
+    else:
+        raise HTTPException(status_code=401, detail="Unauthorized")
 
 
 @router.get("/api/trip/{trip_id}")
 def get_one_trip(
     trip_id: int,
     trips: TripRepo = Depends(),
+    auth: Authorize = Depends(),
+    account_data: dict = Depends(authenticator.get_current_account_data),
 ) -> Union[TripOut, Error]:
-    trip_data = trips.get_one_trip(trip_id)
-    try:
-        return trip_data
-    except Exception as e:
-        raise HTTPException(status_code=400, detail=f"error: {e}")
+    isBuddy = auth.is_buddy(account_data["user_id"], trip_id)
+    if isBuddy.participant:
+        try:
+            trip_data = trips.get_one_trip(trip_id)
+            return trip_data
+        except Exception as e:
+            raise HTTPException(status_code=400, detail=f"error: {e}")
+    else:
+        raise HTTPException(status_code=401, detail="Unauthorized")
 
 
 @router.delete("/api/trip/{trip_id}")
-def delete_trip(trip_id: int, trips: TripRepo = Depends()) -> bool:
-    return trips.delete(trip_id)
+def delete_trip(
+    trip_id: int,
+    trips: TripRepo = Depends(),
+    auth: Authorize = Depends(),
+    account_data: dict = Depends(authenticator.get_current_account_data),
+):
+    user_id = account_data["user_id"]
+    is_admin = auth.is_buddy(user_id, trip_id).admin
+    if is_admin:
+        try:
+            return {"deleted": trips.delete(trip_id)}
+        except Exception:
+            raise HTTPException(status_code=400, detail="Delete trip failed")
+    else:
+        raise HTTPException(status_code=401, detail="Unauthorized")
 
 
 @router.get("/api/trip")
-def get_all_trips_for_user(user_id: int, trips: TripRepo = Depends()):
-    return trips.get_all(user_id)
-
-
-@router.post("/trip/trip_id/buddy")
-def add_buddy(
-    info: BuddyIn, trip_id: int, trips: TripRepo = Depends()
-) -> Union[BuddyOut, Error]:
+def get_all_trips_for_user(
+    trips: TripRepo = Depends(),
+    account_data: dict = Depends(authenticator.get_current_account_data),
+) -> TripListOut:
     try:
-        return trips.add_buddy(info, trip_id)
-    except Exception:
-        raise HTTPException(status_code=400, detail="Add buddy failed")
+        user_id = account_data["user_id"]
+        return trips.get_all(user_id)
+    except Exception as e:
+        print(e)
+        raise HTTPException(
+            status_code=400,
+            detail=f"Could not get trips for {account_data['username']}",
+        )
+
+
+@router.post("/trip/{trip_id}/buddy")
+def add_buddy(
+    info: BuddyIn,
+    trip_id: int,
+    trips: TripRepo = Depends(),
+    auth: Authorize = Depends(),
+    account_data: dict = Depends(authenticator.get_current_account_data),
+) -> Union[BuddyOut, Error]:
+    user_id = account_data["user_id"]
+    is_buddy = auth.is_buddy(user_id, trip_id)
+    if is_buddy.buddy:
+        try:
+            return trips.add_buddy(info, trip_id)
+        except Exception:
+            raise HTTPException(status_code=400, detail="Add buddy failed")
+    else:
+        raise HTTPException(status_code=401, detail="Unauthorized")

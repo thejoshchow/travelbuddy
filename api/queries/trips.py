@@ -1,5 +1,5 @@
 from datetime import date
-from typing import Optional
+from typing import Optional, List
 
 from pydantic import BaseModel
 from fastapi import HTTPException
@@ -10,6 +10,7 @@ from queries.pool import pool
 class BuddyIn(BaseModel):
     user_id: int
     buddy: Optional[bool] = True
+    admin: Optional[bool] = False
 
 
 class BuddyOut(BuddyIn):
@@ -22,15 +23,18 @@ class TripIn(BaseModel):
     start_date: Optional[date] = None
     end_date: Optional[date] = None
     picture_url: Optional[str] = None
-    owner: int
 
 
 class TripOut(TripIn):
     trip_id: int
 
 
+class TripListOut(BaseModel):
+    trips: List[TripOut]
+
+
 class TripRepo:
-    def create(self, trip_form: TripIn):
+    def create(self, trip_form: TripIn, user_id: int):
         try:
             with pool.connection() as conn:
                 with conn.cursor() as cur:
@@ -53,7 +57,7 @@ class TripRepo:
                             trip_form.start_date,
                             trip_form.end_date,
                             trip_form.picture_url,
-                            trip_form.owner,
+                            user_id,
                         ],
                     )
                     trip_id = result.fetchone()[0]
@@ -72,8 +76,7 @@ class TripRepo:
                             location = %s,
                             start_date = %s,
                             end_date = %s,
-                            picture_url = %s,
-                            owner = %s
+                            picture_url = %s
                         WHERE trip_id = %s;
                         """,
                         [
@@ -82,7 +85,6 @@ class TripRepo:
                             trip_form.start_date,
                             trip_form.end_date,
                             trip_form.picture_url,
-                            trip_form.owner,
                             trip_id,
                         ],
                     )
@@ -97,8 +99,7 @@ class TripRepo:
                 with conn.cursor() as cur:
                     result = cur.execute(
                         """
-                        SELECT  owner,
-                                name,
+                        SELECT  name,
                                 location,
                                 start_date,
                                 end_date,
@@ -113,16 +114,16 @@ class TripRepo:
                         return None
 
                     trip_dict = {
-                        "owner": trip_data[0],
-                        "name": trip_data[1],
-                        "location": trip_data[2],
-                        "start_date": trip_data[3],
-                        "end_date": trip_data[4],
-                        "picture_url": trip_data[5],
+                        "name": trip_data[0],
+                        "location": trip_data[1],
+                        "start_date": trip_data[2],
+                        "end_date": trip_data[3],
+                        "picture_url": trip_data[4],
                     }
 
                     return TripOut(trip_id=trip_id, **trip_dict)
         except Exception as e:
+            print(e)
             raise HTTPException(status_code=400, detail=f"error: {e}")
 
     def delete(self, trip_id: int) -> bool:
@@ -133,12 +134,16 @@ class TripRepo:
                         """
                         DELETE FROM trips
                         WHERE trip_id = %s
+                        RETURNING *;
                         """,
                         [trip_id],
                     )
-                    return True
+                    result = cur.fetchone()
+                    if result is not None:
+                        return True
 
         except Exception as e:
+            print(e)
             raise HTTPException(status_code=400, detail=f"error: {e}")
 
     def get_all(self, user_id: int):
@@ -158,20 +163,20 @@ class TripRepo:
                     )
                     trip_list = []
                     for record in cur:
-                        all_trips = TripOut(
-                            trip_id=record[3],
-                            name=record[4],
-                            location=record[5],
-                            start_date=record[6],
+                        trip = TripOut(
+                            trip_id=record[4],
+                            name=record[5],
+                            location=record[6],
+                            start_date=record[7],
                             end_date=record[7],
-                            picture_url=record[8],
-                            owner=record[9],
+                            picture_url=record[9],
                         )
-                        trip_list.append(all_trips)
-                    return trip_list
+                        trip_list.append(trip)
+                    result = TripListOut(trips=trip_list)
+                    return result
 
         except Exception as e:
-            raise HTTPException(status_code=400, detail=f"error: {e}")
+            print(e)
 
     def add_buddy(self, info: BuddyIn, trip_id: int):
         with pool.connection() as conn:
@@ -179,13 +184,14 @@ class TripRepo:
                 try:
                     cur.execute(
                         """
-                        INSERT INTO buddies (trip_id, user_id, buddy)
-                        VALUES (%s, %s, %s);
+                        INSERT INTO buddies (trip_id, user_id, buddy, admin)
+                        VALUES (%s, %s, %s, %s);
                         """,
                         [
                             trip_id,
                             info.user_id,
                             info.buddy,
+                            info.admin,
                         ],
                     )
                     return BuddyOut(trip_id=trip_id, **info.dict())

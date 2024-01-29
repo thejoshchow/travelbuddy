@@ -41,8 +41,13 @@ class IsBuddyIn(BaseModel):
 
 
 class IsBuddyOut(BaseModel):
-    participant: bool
+    participant: bool | None
     buddy: bool | None
+    admin: bool | None
+
+
+class BuddyOf(BaseModel):
+    trips: dict
 
 
 class AccountRepo:
@@ -156,23 +161,36 @@ class AccountRepo:
                 with conn.cursor() as cur:
                     cur.execute(
                         """
-                            DELETE FROM accounts
-                            WHERE user_id = %s;
-                            """,
+                        DELETE FROM accounts
+                        WHERE user_id = %s
+                        RETURNING *;
+                        """,
                         [user_id],
                     )
-                    return True
-        except Exception:
-            raise HTTPException(status_code=400, detail="User Id not Found")
+                    result = cur.fetchone()
+                    return result
+
+        except Exception as e:
+            print(e)
 
 
 class Authorize:
     def is_buddy(self, user_id: int, trip_id: int):
+        trips = self.buddy_of(user_id)
+        if trip_id in trips:
+            return IsBuddyOut(
+                participant=trip_id in trips,
+                buddy=trips.get(trip_id)[0],
+                admin=trips.get(trip_id)[1],
+            )
+        return IsBuddyOut(participant=False)
+
+    def buddy_of(self, user_id: int):
         with pool.connection() as conn:
             with conn.cursor() as cur:
                 cur.execute(
                     """
-                    SELECT trip_id, buddy
+                    SELECT trip_id, buddy, admin
                     FROM buddies
                     WHERE user_id = %s
                     """,
@@ -180,7 +198,21 @@ class Authorize:
                 ),
                 trips = {}
                 for record in cur.fetchall():
-                    trips[record[0]] = record[1]
-                return IsBuddyOut(
-                    participant=trip_id in trips, buddy=trips.get(trip_id)
+                    trips[record[0]] = record[1], record[2]
+                return trips
+
+    def is_author(self, user_id: int, item_id: int):
+        with pool.connection() as conn:
+            with conn.cursor() as cur:
+                result = cur.execute(
+                    """
+                    SELECT author
+                    FROM items
+                    WHERE item_id = %s;
+                    """,
+                    [item_id],
                 )
+                author = result.fetchone()[0]
+                if author == user_id:
+                    return True
+                return False

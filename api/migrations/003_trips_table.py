@@ -13,6 +13,6 @@ steps = [
         """,
         """
         DROP TABLE trips;
-        """
+        """,
     ]
 ]
