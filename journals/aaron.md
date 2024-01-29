@@ -21,4 +21,9 @@ Recommended naming convention is `first_last.md`.
   2. Finished Tables
   3. Started Work on API Endpoints for items Get, Get All, Update, Delete, Post Items
   4. Discussed and worked on Authentication
+
+## 01/22/2024 - 01/26/2024
+  1. Finished Backend Items Get,Delete,PUT,Post
+  2. Started Frontend Signup Page,Navbar,Redux Implementation
+  3. Discussed and worked on Authentication
   
