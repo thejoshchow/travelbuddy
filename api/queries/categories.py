@@ -43,6 +43,19 @@ class CategoryRepo:
                 except Exception as e:
                     return f"{e}"
 
+    def delete(self, trip_id: int, category_id: int):
+        with pool.connection() as conn:
+            with conn.cursor() as cur:
+                result = cur.execute(
+                    """
+                    DELETE FROM item_categories
+                    WHERE trip_id = %s AND category_id = %s
+                    RETURNING *;
+                    """,
+                    [trip_id, category_id],
+                )
+                return result.fetchone()
+
     def get_categories(self, trip_id: int):
         with pool.connection() as conn:
             with conn.cursor() as cur:
