@@ -9,7 +9,7 @@ const Login = () => {
     const [password, setPassword] = useState('')
     const [success, setSuccess] = useState(false)
     const [login] = useLoginMutation()
-    const { data: token, refetch, isSuccess } = useGetAccountQuery()
+    const { data: token, refetch, isSeuccss } = useGetAccountQuery()
     const navigate = useNavigate()
 
     const handleSubmit = async (e) => {

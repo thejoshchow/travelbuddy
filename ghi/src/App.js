@@ -5,6 +5,7 @@ import Dashboard from "./pages/Dashboard";
 import Landing from "./pages/Landing";
 import RequireAuth from "./features/auth/RequireAuth";
 import CheckAuth from "./features/auth/CheckAuth";
+import ItemsForm from "./pages/items/ItemsForm";
 
 function App() {
 
@@ -19,6 +20,7 @@ function App() {
 
           {/* protected routes */}
           <Route element={<RequireAuth />}>
+            <Route path='items' element={<ItemsForm />} />
             <Route path='dashboard' element={<Dashboard />} />
           </Route>
 
