@@ -13,6 +13,7 @@ import Nav from './Nav';
 import SignupForm from "./pages/SignupForm"
 // import "./App.css";
 // import './styles/main.scss';
+import ItemsForm from "./pages/items/ItemsForm";
 
 function App() {
    return (
@@ -28,6 +29,7 @@ function App() {
              
           {/* protected routes */}
           <Route element={<RequireAuth />}>
+            <Route path='items' element={<ItemsForm />} />
             <Route path='dashboard' element={<Dashboard />} />
             <Route path='test' element={<Test />} />
             <Route path='items' element={<ItemsForm />} />
