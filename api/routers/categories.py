@@ -69,3 +69,24 @@ def get_items_by_category(
             raise HTTPException(status_code=400, detail="Get items failed")
     else:
         raise HTTPException(status_code=401, detail="Unauthorized")
+
+
+@router.delete("/api/trip/{trip_id}/category/{category_id}")
+def delete_category(
+    trip_id: int,
+    category_id: int,
+    categories: CategoryRepo = Depends(),
+    auth: Authorize = Depends(),
+    account_data: dict = Depends(authenticator.get_current_account_data),
+):
+    is_buddy = auth.is_buddy(account_data["user_id"], trip_id)
+    if is_buddy.admin:
+        try:
+            result = categories.delete(trip_id, category_id)
+            return True if result else False
+        except Exception:
+            raise HTTPException(
+                status_code=400, detail="Delete category failed"
+            )
+    else:
+        raise HTTPException(status_code=401, detail="Unauthorized")
