@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { useLoginMutation } from '../features/auth/authApi';
-import { setToken } from '../features/auth/authSlice';
+import { useLoginMutation } from '../services/authApi';
+import { setToken } from '../state/auth/authSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 
