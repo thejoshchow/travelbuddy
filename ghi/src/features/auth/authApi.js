@@ -35,7 +35,18 @@ export const authApi = createApi({
       }),
       providesTags: ['token']
     }),
-  })
-});
-
-export const { useLoginMutation, useLogoutMutation, useGetAccountQuery } = authApi
+    createAccount: build.mutation({
+        query: (userInfo) => {
+            return {
+                url: '/api/account',  
+                method: "POST",
+                body: userInfo
+              }
+          },
+          invalidatesTags: ['token']
+        }),
+    })
+  });
+  
+  export const { useLoginMutation, useLogoutMutation, useGetAccountQuery, useCreateAccountMutation } = authApi;
+                    
