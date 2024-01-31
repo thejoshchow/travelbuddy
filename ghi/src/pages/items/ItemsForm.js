@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useAddItemMutation } from "../../features/items/itemsApi";
+import { useAddItemMutation } from "../../services/itemsApi";
 
 const ItemsForm = () => {
     const [addItem, {}] = useAddItemMutation()

@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./App.css";
@@ -13,7 +13,6 @@ import Nav from './Nav';
 import SignupForm from "./pages/SignupForm"
 // import "./App.css";
 // import './styles/main.scss';
-import ItemsForm from "./pages/items/ItemsForm";
 
 function App() {
    return (
@@ -25,7 +24,7 @@ function App() {
           <Route index element={<Landing />} />
           <Route path='token' element={<LoginForm />} />
           <Route path='login' element={<Login />} />
-             <Route path='signup' element={<SignupForm />} />
+          <Route path='signup' element={<SignupForm />} />
              
           {/* protected routes */}
           <Route element={<RequireAuth />}>
