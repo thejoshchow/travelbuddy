@@ -1,53 +1,26 @@
-import { useNavigate } from 'react-router-dom'
-import { Link } from 'react-router-dom';
-import { useGetAccountQuery, useLogoutMutation } from "../features/auth/authApi";
-import { deleteToken } from '../features/auth/authSlice';
-import { useDeleteVoteMutation } from '../features/items/itemsApi';
-
-import { useSelector, useDispatch } from 'react-redux';
+import { useLogoutMutation } from "../services/authApi";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteToken, selectToken } from "../state/auth/authSlice";
+import { Link } from "react-router-dom";
 
 
 const Dashboard = () => {
-    const navigate = useNavigate()
-    const token = useSelector((state) => state.auth.token)
+    const [logout] = useLogoutMutation()
     const dispatch = useDispatch()
-
-    const [logout, {reset}] = useLogoutMutation()
-    const { data: account } = useGetAccountQuery()
+    const token = useSelector(selectToken)
 
     const handleClick = async () => {
         logout()
-        reset()
         dispatch(deleteToken())
-        navigate('/')
     }
-
-    const [deleteVote, data]  = useDeleteVoteMutation()
-    const handleTest = async () => {
-        deleteVote({ trip_id: 1, item_id: 1 })
-        console.log(token)
-        console.log(data)
-    }
+    const showToken = () => console.log(token)
     return (
         <>
             <Link to='/'>Home</Link>
-            <div>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>username</th>
-                            <th>user_id</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>{account.account.username}</td>
-                            <td>{account.account.user_id}</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <button onClick={handleClick}>Log out</button>
-            </div>
+            <h1>Dashboard</h1>
+            <button onClick={handleClick}>Logout</button>
+            <br/>
+            <button onClick={showToken}>Show token</button>
         </>
     )
 }

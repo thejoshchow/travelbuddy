@@ -1,48 +1,53 @@
-import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { useNavigate, Navigate } from 'react-router-dom';
-
-import { useGetAccountQuery, useLoginMutation } from '../features/auth/authApi';
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useLoginMutation } from '../services/authApi'
+import { setToken, selectToken } from "../state/auth/authSlice";
 
 const Login = () => {
-    const [username, setUsername] = useState('')
-    const [password, setPassword] = useState('')
-    const [success, setSuccess] = useState(false)
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [success, setSuccess] = useState(false);
     const [login] = useLoginMutation()
-    const { data: token, refetch, isSuccess } = useGetAccountQuery()
+    const token = useSelector(selectToken)
+    const dispatch = useDispatch()
     const navigate = useNavigate()
 
     const handleSubmit = async (e) => {
-        try {
-            e.preventDefault()
-            const info = {
-                username: username,
-                password: password
-            }
-            const result = await login(info).unwrap()
-            if (result.access_token) {
-                setSuccess(true)
-            }
-        } catch (error) {
-            console.log(error)
+        e.preventDefault()
+        const form = {
+            username: username,
+            password: password,
         }
+        const response = await login(form).unwrap()
+        dispatch(setToken(response?.access_token))
+        setSuccess(true)
+        setUsername('')
+        setPassword('')
+        console.log(token)
     }
+    
     useEffect(() => {
-        refetch()
+        if (token) {
+            navigate('/dashboard')
+        }
     }, [success])
 
-    if (token) {
-        navigate('/dashboard')
-    }
-
     return (
-        <div>
+        <>
+            <Link to="/">Home</Link>
+            <h1>Login</h1>
             <form onSubmit={handleSubmit}>
-                <input type="username" value={username} onChange={(e) => setUsername(e.target.value)} />
-                <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-                <button type='submit'>Login</button>
+                <div>
+                    <input required value={username} onChange={(e) => setUsername(e.target.value)} type='username' placeholder='Username' />
+                </div>
+                <div>
+                    <input required value={password} onChange={(e) => setPassword(e.target.value)} type='password' placeholder="Password" />
+                </div>
+                <button type='submit'>Log in</button>
             </form>
-        </div>
+        </>
     )
 }
 

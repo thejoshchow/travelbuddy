@@ -6,8 +6,8 @@ import Login from "./pages/Login";
 import LoginForm from "./pages/LoginForm";
 import Dashboard from "./pages/Dashboard";
 import Landing from "./pages/Landing";
-import RequireAuth from "./features/auth/RequireAuth";
-import CheckAuth from "./features/auth/CheckAuth";
+import RequireAuth from "./state/auth/RequireAuth";
+import Test from "./pages/Test";
 import Nav from './Nav';
 import SignupForm from "./pages/SignupForm"
 // import "./App.css";
@@ -18,20 +18,19 @@ function App() {
     <div>
       <Nav />
     <Routes>
-      <Route element={<CheckAuth />}>
         <Route path='/'>
           {/* public routes */}
           <Route index element={<Landing />} />
           <Route path='token' element={<LoginForm />} />
           <Route path='login' element={<Login />} />
           <Route path='signup' element={<SignupForm />} />
-          <Route path='dashboard' element={<Dashboard />} /> 
           {/* protected routes */}
           <Route element={<RequireAuth />}>
-          {/* <Route path='dashboard' element={<Dashboard />} /> */}
+            <Route path='dashboard' element={<Dashboard />} />
+            <Route path='test' element={<Test />} />
           </Route>
         </Route>
-      </Route>
+        <Route path='*' element={<p>Does not exist</p>} />
     </Routes>
     </div>
   );
