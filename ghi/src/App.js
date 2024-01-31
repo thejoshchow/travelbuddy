@@ -12,6 +12,7 @@ import Nav from './Nav';
 import SignupForm from "./pages/SignupForm"
 // import "./App.css";
 // import './styles/main.scss';
+import CreateTrip from "./pages/CreateTrip";
 
 function App() {
    return (
@@ -21,6 +22,7 @@ function App() {
         <Route path='/'>
           {/* public routes */}
           <Route index element={<Landing />} />
+          <Route path='createtrip' element={<CreateTrip />} />
           <Route path='token' element={<LoginForm />} />
           <Route path='login' element={<Login />} />
           <Route path='signup' element={<SignupForm />} />
@@ -35,10 +37,9 @@ function App() {
     </div>
   );
 }
-  
-         
+
+
 
 
 
 export default App;
-
