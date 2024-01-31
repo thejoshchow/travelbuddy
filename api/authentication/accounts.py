@@ -90,6 +90,7 @@ class AccountRepo:
                         ],
                     )
 
+        # create error for email and username already in use
         except Exception as e:
             raise HTTPException(status_code=400, detail=f"{e}")
 
