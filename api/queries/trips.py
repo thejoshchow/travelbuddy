@@ -33,6 +33,10 @@ class TripListOut(BaseModel):
     trips: List[TripOut]
 
 
+class TripBuddyList(BaseModel):
+    buddies: list
+
+
 class TripRepo:
     def create(self, trip_form: TripIn, user_id: int):
         try:
@@ -198,3 +202,24 @@ class TripRepo:
                 except Exception as e:
                     print(e)
                     raise Exception
+
+    def get_buddies(self, trip_id: int):
+        with pool.connection() as conn:
+            with conn.cursor() as cur:
+                # try:
+                cur.execute(
+                    """
+                    SELECT b.user_id, u.display_name
+                    FROM buddies b
+                    JOIN users u ON b.user_id=u.user_id
+                    WHERE b.trip_id=%s;
+                    """,
+                    [trip_id],
+                )
+                buddy_list = []
+                result = cur.fetchall()
+                for record in result:
+                    buddy_list.append(
+                        {"user_id": record[0], "display_name": record[1]}
+                    )
+                return buddy_list

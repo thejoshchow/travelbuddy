@@ -11,6 +11,7 @@ from queries.trips import (
     BuddyIn,
     BuddyOut,
     TripListOut,
+    TripBuddyList,
 )
 from queries.errors import Error
 
@@ -122,5 +123,26 @@ def add_buddy(
             return trips.add_buddy(info, trip_id)
         except Exception:
             raise HTTPException(status_code=400, detail="Add buddy failed")
+    else:
+        raise HTTPException(status_code=401, detail="Unauthorized")
+
+
+@router.get("/trip/{trip_id}/buddy")
+def get_trip_buddies(
+    trip_id: int,
+    trips: TripRepo = Depends(),
+    auth: Authorize = Depends(),
+    account_data: dict = Depends(authenticator.get_current_account_data),
+) -> TripBuddyList:
+    user_id = account_data["user_id"]
+    is_buddy = auth.is_buddy(user_id, trip_id)
+    if is_buddy.buddy:
+        try:
+            buddies = trips.get_buddies(trip_id)
+            return TripBuddyList(buddies=buddies)
+        except Exception:
+            raise HTTPException(
+                status_code=400, detail="Could not get trip buddies"
+            )
     else:
         raise HTTPException(status_code=401, detail="Unauthorized")
