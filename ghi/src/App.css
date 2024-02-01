@@ -1,13 +1,6 @@
 body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #cbf3f0; 
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+  background-color: #FFFFFF;
 }
-
 
 .App {
   text-align: center;
@@ -31,31 +24,30 @@ border-width: 2px;
 border-radius: 10px;
 }
 .custom-navbar {
-  background-color: #FF9F1C ;
-  border: 3px solid #2EC4B6;
-  border-radius: 12px;
+  background-color: #2ec4b6 ;
+
 }
 
 .nav-links {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   width: fit-content;
-  margin-left: auto;
-  margin-right: auto;
+
 }
 
 .navbar-link {
   color: #FFFFFF ;
-  text-decoration: none; 
+  text-decoration: none;
   font-weight: bold;
   margin: 0 10px;
 }
 .navbar-link:hover {
-  color: #2EC4B6 ;
+  color: #ffbf69 ;
+  opacity: .85;
 }
 
 button.btn-signup.btn-active:active {
-  background-color: #CBF3F0; 
+  background-color: #CBF3F0;
   color: #FFBF69;
 }
 
@@ -77,12 +69,34 @@ button.btn-signup {
 h1.sign-up-title{
  color: #FF9F1C;
  text-shadow: -1px 0 #2EC4B6, 0 1px #2EC4B6, 1px 0 #2EC4B6, 0 -1px #2EC4B6;
- 
+
 }
 
 .formDisplayName{
 pointer-events: none;
 }
+
+.logo{
+  margin-right: 20px;
+}
+
+.custom-navbar{
+  height: 60px;
+}
+
+
+.custom-dropdown {
+  position: relative;
+  display: inline-block;
+  color: #FFFFFF ;
+  text-decoration: none;
+  font-weight: bold;
+  margin: 0 10px;
+}
+
+
+
+
 
 /* Trip Overview CSS */
 
