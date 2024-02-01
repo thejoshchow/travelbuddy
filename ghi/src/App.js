@@ -21,7 +21,7 @@ import PrevTripDash from './pages/PrevTripDash';
 function App() {
    return (
     <div>
-      <Nav />
+      {/* <Nav /> */}
     <Routes>
         <Route path='/'>
             {/* public routes */}
@@ -29,8 +29,8 @@ function App() {
             <Route path='createtrip' element={<CreateTrip />} />
             <Route path='token' element={<LoginForm />} />
             <Route path='login' element={<Login />} />
-            <Route path='signup' element={<SignupForm />} />
-
+            <Route path='signup' element={<SignupForm />} />    
+             
             {/* protected routes */}
             <Route element={<RequireAuth />}>
                 <Route path='items' element={<ItemsForm />} />
