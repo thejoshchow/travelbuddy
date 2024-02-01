@@ -1,5 +1,11 @@
 body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: #cbf3f0; 
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 
@@ -17,6 +23,7 @@ body {
   font-size: calc(10px + 2vmin);
   color: white;
 }
+
 .signup-card{
 background-color: #FFFFFF;
 border-color:  #2EC4B6;
@@ -67,7 +74,6 @@ button.btn-signup {
   color: #FF9F1C;
 }
 
-
 h1.sign-up-title{
  color: #FF9F1C;
  text-shadow: -1px 0 #2EC4B6, 0 1px #2EC4B6, 1px 0 #2EC4B6, 0 -1px #2EC4B6;
@@ -77,3 +83,80 @@ h1.sign-up-title{
 .formDisplayName{
 pointer-events: none;
 }
+
+/* Trip Overview CSS */
+
+.trip-overview{
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+.details{
+  display: flex;
+
+  justify-content: center ;
+  gap:20px;
+  border:2px solid blue;
+}
+
+
+.card-container-trip-details{
+  display: flex;
+
+  min-width: 200px;
+}
+
+.card-title-trip-details{
+  display: flex;
+ 
+}
+.trip-detail-body{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid purple;
+}
+.card-container-buddies{
+  min-width: 200px;
+}
+.buddy-body{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid black;
+}
+
+
+.categories{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin-top: 10px;
+  flex-direction: row;
+  padding: 10px;
+  gap: 20px;
+  border:2px solid red;
+}
+.card-container-categories{
+ display: flex;
+ min-height: 200px;
+}
+.category-body{
+
+  display: flex;
+  justify-content: space-around;
+  
+  border:2px solid yellow;
+}
+
+.category-items{
+  display: flex;
+  border: 2px solid orange;
+}
+
