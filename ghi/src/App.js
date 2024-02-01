@@ -1,8 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import React from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
+// import 'bootstrap/dist/css/bootstrap.min.css';
 import "./App.css";
-import './styles/custom.scss';
 import Login from "./pages/Login";
 import LoginForm from "./pages/LoginForm";
 import Dashboard from "./pages/Dashboard";
