@@ -33,7 +33,8 @@ def create_trip(
             trip.trip_id,
         )
         return trip
-    except Exception:
+    except Exception as e:
+        print(e)
         raise HTTPException(status_code=400, detail="Create trip failed")
 
 

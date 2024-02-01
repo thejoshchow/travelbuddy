@@ -1,23 +1,38 @@
 from fastapi.testclient import TestClient
 from main import app
-from queries.trips import TripRepo
+from queries.trips import TripRepo, TripOut
+from authentication.authentication import authenticator
+from authentication.accounts import AccountOut
 
-client = TestClient(app)  # pull from api/testing docs
+client = TestClient(app)
 
 
 class EmptyTripRepo:
     def get_all(self, user_id: int):
         return {"trips": []}
 
+    def create(self, trip_form, user_id: int):
+        result = {"trip_id": 1}
+        result.update(trip_form)
+        return TripOut(**result)
+
+    def add_buddy(self, user_id: int, trip_id: int, buddy=True):
+        return True
+
+
+def fake_user_account_data():
+    return {"username": "string", "email": "string", "user_id": 1}
+
 
 def test_get_all_trips():
     # Arrange
     app.dependency_overrides[TripRepo] = EmptyTripRepo
+    app.dependency_overrides[
+        authenticator.get_current_account_data
+    ] = fake_user_account_data
 
     # Act
-    response = client.get(
-        "/api/trip", params={"user_id": 1}
-    )  # response var will obtain what is being called through api
+    response = client.get("/api/trip", params={"user_id": 1})
 
     # Assert
     assert response.status_code == 200
@@ -27,27 +42,37 @@ def test_get_all_trips():
     app.dependency_overrides = {}
 
 
-def test_init():
-    assert 1 == 1
+def test_create_trip():
+    # Arrange
+    app.dependency_overrides[TripRepo] = EmptyTripRepo
+    app.dependency_overrides[
+        authenticator.get_current_account_data
+    ] = fake_user_account_data
+
+    trip = {
+        "name": "Bob",
+        "location": "Gob",
+        "start_date": "2024-01-30",
+        "end_date": "2024-01-30",
+        "picture_url": "string",
+    }
+    expected = {
+        "name": "Bob",
+        "location": "Gob",
+        "start_date": "2024-01-30",
+        "end_date": "2024-01-30",
+        "picture_url": "string",
+        "trip_id": 1,
+    }
+
+    # Act
+    response = client.post("/api/trip", json=trip)
+
+    # Assert
+    assert response.status_code == 200
+    assert response.json() == expected
+
+    # Clean up
+    app.dependency_overrides = {}
 
 
-# install pytest in requirements.txt
-# command to run in docker terminal is python -m pytest
-# go to fastapi docs for testing - grab test client and import
-# testclient = create instance of fastapi and pass it through
-    # a variable to Testclient
-# don't want to connect to the db but we want to simulate the
-    # db = dependency override
-# creating fake instances of a class that connect to db and
-    # return what we expencted = fake version of class returns what is
-    # being expected
-# import db for trips
-# set up Arrange, Act, Assert
-# override tripRepo with a fake class that would get all trips
-    # record (return empty list)
-# Dependency injection - things we need to work so we have to over
-    # ride these dependencies which will allow us to simulate this
-# ACT - create an instance and see if it returns what we wanted
-# good practice to create empty dictionary clears everything
-    # we set after being called
-# Assert gets what we wanted
