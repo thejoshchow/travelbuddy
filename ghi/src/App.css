@@ -1,5 +1,5 @@
 body {
-  background-color: #cbf3f0; 
+  background-color: #cbf3f0;
 }
 
 
@@ -39,7 +39,7 @@ border-radius: 10px;
 
 .navbar-link {
   color: #FFFFFF ;
-  text-decoration: none; 
+  text-decoration: none;
   font-weight: bold;
   margin: 0 10px;
 }
@@ -48,7 +48,7 @@ border-radius: 10px;
 }
 
 button.btn-signup.btn-active:active {
-  background-color: #CBF3F0; 
+  background-color: #CBF3F0;
   color: #FFBF69;
 }
 
@@ -71,9 +71,10 @@ button.btn-signup {
 h1.sign-up-title{
  color: #FF9F1C;
  text-shadow: -1px 0 #2EC4B6, 0 1px #2EC4B6, 1px 0 #2EC4B6, 0 -1px #2EC4B6;
- 
+
 }
 
 .formDisplayName{
 pointer-events: none;
 }
+

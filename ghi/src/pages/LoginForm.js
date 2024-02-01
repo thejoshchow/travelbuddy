@@ -92,7 +92,7 @@ function LoginForm() {
                 <label htmlFor="name">Password</label>
               </div>
 
-              <button className="btn btn-primary">Login</button>
+              <button className="btn btn-primary custom-btn-primary">Login</button>
             </form>
           </div>
         </div>
