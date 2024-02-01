@@ -42,8 +42,8 @@ class IsBuddyIn(BaseModel):
 
 class IsBuddyOut(BaseModel):
     participant: bool | None
-    buddy: bool | None
-    admin: bool | None
+    buddy: Optional[bool] = None
+    admin: Optional[bool] = None
 
 
 class BuddyOf(BaseModel):

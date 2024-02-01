@@ -109,7 +109,7 @@ def get_all_trips_for_user(
         )
 
 
-@router.post("/trip/{trip_id}/buddy")
+@router.post("/api/trip/{trip_id}/buddy")
 def add_buddy(
     info: BuddyIn,
     trip_id: int,
@@ -128,7 +128,7 @@ def add_buddy(
         raise HTTPException(status_code=401, detail="Unauthorized")
 
 
-@router.get("/trip/{trip_id}/buddy")
+@router.get("/api/trip/{trip_id}/buddy")
 def get_trip_buddies(
     trip_id: int,
     trips: TripRepo = Depends(),

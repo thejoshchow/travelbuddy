@@ -9,7 +9,7 @@ steps = [
         """,
         """
         DROP TABLE item_categories;
-        """
+        """,
     ],
     [
         """
@@ -22,6 +22,6 @@ steps = [
             ('miscellaneous');
         """,
         """
-        """
-    ]
+        """,
+    ],
 ]
