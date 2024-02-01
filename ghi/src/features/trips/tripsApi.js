@@ -6,6 +6,11 @@ export const tripsApi = createApi({
     baseQuery: baseQuery,
     tagTypes: ['TripsList'],
     endpoints: (build) => ({
+        getAllTrips: build.query({
+            query: () => "/api/trip",
+            providesTags: ['TripsList'],
+        }),
+
         createTrip: build.mutation({
             query: (info) => ({
                 url: "/api/trip",
@@ -17,4 +22,4 @@ export const tripsApi = createApi({
     })
 })
 
-export const { useCreateTripMutation } = tripsApi
+export const { useCreateTripMutation, useGetAllTripsQuery} = tripsApi

@@ -15,6 +15,8 @@ import TripOverview from './pages/TripOverview';
 // import "./App.css";
 // import './styles/main.scss';
 import CreateTrip from "./pages/CreateTrip";
+import CurrentDash from './pages/CurrentTripDash';
+import PrevTripDash from './pages/PrevTripDash';
 
 function App() {
    return (
@@ -28,21 +30,24 @@ function App() {
             <Route path='token' element={<LoginForm />} />
             <Route path='login' element={<Login />} />
             <Route path='signup' element={<SignupForm />} />
-             
+
             {/* protected routes */}
             <Route element={<RequireAuth />}>
                 <Route path='items' element={<ItemsForm />} />
-                <Route path='dashboard' element={<Dashboard />} />
-                <Route path='test' element={<Test />} />
-             
+                 <Route path='dashboard' element={<Dashboard />}>
+               <Route path='/dashboard/current' element={<CurrentDash />} />
+               <Route path='/dashboard/past' element={<PrevTripDash />} />
+                 </Route>
+            <Route path='test' element={<Test />} />
 
-                <Route path='trip/' >    
+
+                <Route path='trip/' >
                     <Route path=':trip_id' element={<TripOverview />} />
-                </Route> 
-             
+                </Route>
+
             </Route>
         </Route>
-        
+
         <Route path='*' element={<p>Does not exist</p>} />
     </Routes>
     </div>
@@ -50,4 +55,3 @@ function App() {
 }
 
 export default App;
-
