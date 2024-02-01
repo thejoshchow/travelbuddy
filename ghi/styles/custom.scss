@@ -1,22 +1,17 @@
 @import "../node_modules/bootstrap/scss/bootstrap";
 
-$primary: #2EC4B6;
-$secondary: #FF9F1c;
-$success: #CBF3F0;
-$info: #FFBF69;
 
-
-
-
-$theme-colors: (
-  "primary": $primary,
-  "secondary": $secondary,
-  "success": $success,
-  "info": $info,
+$custom-colors: (
+    "cc-1": #2EC4B6,
+    "cc-2": #FF9F1c,
+    "cc-3": #CBF3F0,
+    "cc-4": #FFBF69,
 );
 
+$theme-colors: map-merge($theme-colors, $custom-colors);
 
+@import "../node_modules/bootstrap/scss/bootstrap";
 
-.custom-btn-primary{
-  background-color: $primary;
+.custom-btn{
+  background-color: #FF9F1c;
 }
