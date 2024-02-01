@@ -6,7 +6,7 @@ import Login from "./pages/Login";
 import LoginForm from "./pages/LoginForm";
 import Dashboard from "./pages/Dashboard";
 import Landing from "./pages/Landing";
-// import ItemsForm from "./pages/items/ItemsForm";
+import ItemsForm from "./pages/items/ItemsForm";
 import RequireAuth from "./state/auth/RequireAuth";
 import Test from "./pages/Test";
 import Nav from './Nav';
@@ -31,7 +31,7 @@ function App() {
              
             {/* protected routes */}
             <Route element={<RequireAuth />}>
-                {/* <Route path='items' element={<ItemsForm />} /> */}
+                <Route path='items' element={<ItemsForm />} />
                 <Route path='dashboard' element={<Dashboard />} />
                 <Route path='test' element={<Test />} />
              
@@ -49,8 +49,5 @@ function App() {
   );
 }
 
-
-
-
-
 export default App;
+

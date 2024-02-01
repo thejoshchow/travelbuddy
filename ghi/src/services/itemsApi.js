@@ -10,8 +10,16 @@ export const itemsApi = createApi({
                 url: `/api/trip/${info.trip_id}/item/${info.item_id}/vote`,
                 method: "delete",
             })
+        }),
+        addItem: build.mutation({
+            query: (info, trip_id=7) => ({
+                url: `/api/trip/${trip_id}/item`,
+                method: 'post',
+                body: info
+            })
         })
     })
+
 })
 
-export const { useDeleteVoteMutation } = itemsApi
+export const { useDeleteVoteMutation, useAddItemMutation } = itemsApi

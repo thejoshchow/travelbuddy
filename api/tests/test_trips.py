@@ -74,5 +74,3 @@ def test_create_trip():
 
     # Clean up
     app.dependency_overrides = {}
-
-
