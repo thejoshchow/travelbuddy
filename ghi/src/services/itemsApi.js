@@ -17,9 +17,15 @@ export const itemsApi = createApi({
                 method: 'post',
                 body: info
             })
+        }),
+        getItems: build.query({
+            query: (info) => ({
+                url: `/api/trip/${info.trip_id}/category/${info.category_id}`,
+                method: 'get'
+            })
         })
     })
 
 })
 
-export const { useDeleteVoteMutation, useAddItemMutation } = itemsApi
+export const { useDeleteVoteMutation, useAddItemMutation, useGetItemsQuery } = itemsApi

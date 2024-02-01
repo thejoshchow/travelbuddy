@@ -17,6 +17,7 @@ import TripOverview from './pages/TripOverview';
 import CreateTrip from "./pages/CreateTrip";
 import CurrentDash from './pages/CurrentTripDash';
 import PrevTripDash from './pages/PrevTripDash';
+import Items from './pages/items/Items';
 
 function App() {
    return (
@@ -30,19 +31,20 @@ function App() {
             <Route path='token' element={<LoginForm />} />
             <Route path='login' element={<Login />} />
             <Route path='signup' element={<SignupForm />} />    
-             
+                   
             {/* protected routes */}
             <Route element={<RequireAuth />}>
                 <Route path='items' element={<ItemsForm />} />
-                 <Route path='dashboard' element={<Dashboard />}>
-               <Route path='/dashboard/current' element={<CurrentDash />} />
-               <Route path='/dashboard/past' element={<PrevTripDash />} />
-                 </Route>
-            <Route path='test' element={<Test />} />
+                <Route path='dashboard' element={<Dashboard />}>
+                    <Route path='/dashboard/current' element={<CurrentDash />} />
+                    <Route path='/dashboard/past' element={<PrevTripDash />} />
+                </Route>
 
 
                 <Route path='trip/' >
-                    <Route path=':trip_id' element={<TripOverview />} />
+                    <Route index element={<Dashboard />} />           
+                    <Route path=':trip_id/' element={<TripOverview />} />
+                    <Route path=':trip_id/:category_id/' element={<Items />} />             
                 </Route>
 
             </Route>

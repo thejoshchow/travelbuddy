@@ -11,11 +11,11 @@ const CategoriesMenu = ({ trip_id }) => {
                 <button className='btn btn-secondary me-3'>Add item</button>
             </div>
             <div>
-                <ul class="nav nav-underline">
+                <ul className="nav nav-underline">
                     {categories.map((cat) => {
                         return (
-                            <li key={cat.category_id} class="nav-item">
-                                <a class="nav-link active" aria-current="page" href={cat.category_id}>{cat.category_name}</a>
+                            <li key={cat.category_id} className="nav-item">
+                                <a className="nav-link" aria-current="page" href={`/trip/${trip_id}/${cat.category_id}`}>{cat.category_name}</a>
                             </li>
                         )
                     })}
