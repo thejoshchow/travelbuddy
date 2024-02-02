@@ -18,6 +18,7 @@ import CreateTrip from "./pages/CreateTrip";
 import CurrentDash from './pages/Dashboard/CurrentTripDash';
 import PrevTripDash from './pages/Dashboard/PrevTripDash';
 import Items from './pages/items/Items';
+import UsersUpdate from './pages/UsersUpdate';
 
 function App() {
    return (
@@ -37,7 +38,8 @@ function App() {
                 <Route path='dashboard' element={<Dashboard />}>
                     <Route path='/dashboard/current' element={<CurrentDash />} />
                     <Route path='/dashboard/past' element={<PrevTripDash />} />
-                </Route>
+             </Route>
+             <Route path='user/update' element={<UsersUpdate />} />
 
 
                 <Route path='trip/' >
