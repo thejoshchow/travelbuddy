@@ -1,3 +1,10 @@
+custom-color-blue{
+  color: #CBF3F0
+}
+btn-custom-color-orange{
+  color: #FF9F1C
+}
+
 body {
   background-color: #FFFFFF;
 }
@@ -70,11 +77,66 @@ h1.sign-up-title{
  color: #FF9F1C;
  text-shadow: -1px 0 #2EC4B6, 0 1px #2EC4B6, 1px 0 #2EC4B6, 0 -1px #2EC4B6;
 
+
 }
 
+/* Login page design elements */
 .formDisplayName{
 pointer-events: none;
 }
+
+.login-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.right-half{
+  right: 0;
+
+}
+.split {
+  height: 100%;
+  width: 50%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+
+.left {
+  left: 0;
+  background-color: #2EC4B6;
+}
+
+.right {
+  right: 0;
+}
+
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+.centered img {
+  width: 150px;
+  border-radius: 50%;
+}
+
+.login-button {
+    background-color: #FF9F1C;
+    border-color: #FF9F1C;
+}
+.login-button:hover {
+  background-color: #FFbf69;
+  border-color: #FF9F1C;
+}
+
 
 .logo{
   margin-right: 20px;
@@ -124,7 +186,7 @@ pointer-events: none;
 
 .card-title-trip-details{
   display: flex;
- 
+
 }
 .trip-detail-body{
   display: flex;
@@ -165,7 +227,7 @@ pointer-events: none;
 
   display: flex;
   justify-content: space-around;
-  
+
   border:2px solid yellow;
 }
 

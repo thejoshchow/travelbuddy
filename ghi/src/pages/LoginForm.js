@@ -62,11 +62,14 @@ function LoginForm() {
     };
 
 
-    return (
-        <div className="row">
+  return (
+    <div className="login-container">
+      <div className="split right">
+        <div className="centered-right">
+        <div className="d-flex align-items-center">
         <div className="offset-3 col-6">
           <div className="shadow p-4 mt-4">
-            <h1>Travel Buddy Login</h1>
+            <h1 style={{ textAlign: 'center' }}>Login</h1>
             <form onSubmit={handleSubmit}
               id="login-form">
 
@@ -92,11 +95,26 @@ function LoginForm() {
                 <label htmlFor="name">Password</label>
               </div>
 
-              <button className="btn btn-primary">Login</button>
+              <div className="container d-flex justify-content-center align-items-center">
+                <button className="btn btn-primary login-button">Login</button>
+              </div>
             </form>
           </div>
         </div>
+          </div>
+          </div>
       </div>
+
+      <div className="split left">
+        <div class="centered">
+        <img src="logo-transparent-png.png" alt="" style={{ width: '400px', height: 'auto' }} />
+        <h2>Welcome!</h2>
+        <p>blah blah blah</p>
+      </div>
+
+      </div>
+
+    </div>
   );
 
 
