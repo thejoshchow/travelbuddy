@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { useAddItemMutation } from "../../services/itemsApi";
+import { useGetCategoriesQuery } from "../../services/categoryApi";
 
-const ItemsForm = () => {
-    const [addItem, {}] = useAddItemMutation()
+const ItemsForm = ({ trip }) => {
+    const [addItem, { }] = useAddItemMutation()
+    const { data: categories } = useGetCategoriesQuery(trip)
     const [formData, setFormData] = useState({
-        category: 5,
+        category: '',
         name: '',
         description: '',
         url: '',
@@ -29,8 +31,13 @@ const ItemsForm = () => {
     return (
         <div className='container'>
             <form onSubmit={handleSubmit}>
-                <select className="form-select mb-3">
+                <select onChange={handleFormChange} name='category' className="form-select mb-3">
                     <option value=''>Select category</option>
+                    {categories.map((category) => {
+                        return (
+                            <option key={category.category_id} vaule={category.category_id}>{category.category_name}</option>
+                        )
+                    })}
                 </select>
                 <div className="mb-3">
                     <input value={formData.name} onChange={handleFormChange} type="text" className="form-control" name="name" id="item-name" placeholder="Item name" />
