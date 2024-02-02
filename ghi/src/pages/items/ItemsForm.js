@@ -20,7 +20,7 @@ const ItemsForm = () => {
         })
     }
 
-    const handleSubmit = async (e) => { 
+    const handleSubmit = async (e) => {
         e.preventDefault()
         const { fulfilled } = await addItem(formData).unwrap()
         console.log(fulfilled)
