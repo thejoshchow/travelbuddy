@@ -27,7 +27,6 @@ function App() {
         <Route path='/'>
             {/* public routes */}
             <Route index element={<Landing />} />
-            <Route path='createtrip' element={<CreateTrip />} />
             <Route path='token' element={<LoginForm />} />
             <Route path='login' element={<Login />} />
             <Route path='signup' element={<SignupForm />} />

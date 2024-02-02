@@ -45,14 +45,21 @@ const CreateTrip = () => {
     }
 
     return (
-        <div>
+        <div className="container">
             <form onSubmit={handleSubmit}>
-                <input type="text" name='name' value={formData.name} onChange={handleChange} />
-                <input type="text" name='location' value={formData.location} onChange={handleChange} />
-                <input type="date" name='start_date' value={formData.start_date}  onChange={handleChange} />
-                <input type="date" name='end_date' value={formData.end_date} onChange={handleChange} />
-                <input type="text" name='picture_url' value={formData.picture_url} onChange={handleChange} />
-                <button type='submit'>Submit</button>
+                <div className="mb-3">
+                    <input type="text" name='name' value={formData.name} onChange={handleChange} className="form-control" placeholder="Item name"/>
+                </div>
+                <div className="mb-3">
+                    <input type="text" name='location' value={formData.location} onChange={handleChange} className="form-control" placeholder="Location" />
+                </div>
+                <div className="mb-3">
+                    <input type="date" name='start_date' value={formData.start_date}  onChange={handleChange} className="form-control" />
+                </div>
+                <div className="mb-3">
+                    <input type="date" name='end_date' value={formData.end_date} onChange={handleChange} className="form-control"/>
+                </div>
+                <button className='btn btn-primary' type='submit'>Submit</button>
             </form>
         </div>
     )
