@@ -2,12 +2,12 @@ import React, { useState} from 'react';
 //import { useNavigate } from 'react-router-dom';
 //import { useDispatch } from 'react-redux';
 import { useCreateAccountMutation } from '../services/authApi';
-import {Container, 
-        Row, 
-        Col, 
-        Card, 
-        Form, 
-        Button, 
+import {Container,
+        Row,
+        Col,
+        Card,
+        Form,
+        Button,
         Alert } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../App.css'
@@ -22,9 +22,9 @@ export function SignupForm() {
     username: '',
     email: '',
     password: '',
-    first_name: '', 
-    last_name: '', 
-    display_name: '', 
+    first_name: '',
+    last_name: '',
+    display_name: '',
     phone: '',
     picture_url: ''
   });
@@ -40,7 +40,7 @@ export function SignupForm() {
   const signUp = (accountData) => {
   accountData.display_name = `${accountData.first_name}.${accountData.last_name}`;
   createAccount(accountData)
-  
+
   //need to create email and username already in use error
   .then(result => {
     if (result.error) {
@@ -50,16 +50,16 @@ export function SignupForm() {
         username: '',
         email: '',
         password: '',
-        first_name: '', 
-        last_name: '', 
-        display_name: '', 
+        first_name: '',
+        last_name: '',
+        display_name: '',
         phone: '',
         picture_url: ''
       });
       //bring navigate back delete seterror when dashboard is working
       setError("")
       //navigate("/dashboard")
-     
+
     }})
 };
 
@@ -67,31 +67,32 @@ const handleSubmit = (e) => {
   e.preventDefault();
   signUp(formData);
 
- 
+
 };
 
  return (
     <Container>
       <Row className="justify-content-md-center">
-        <Col md={4}>
-          <h1 className="text-center sign-up-title mb-4 mt-4">Travelbuddy Signup</h1>
-          <Card className = "signup-card">
+       <Col md={6} className="split signup-left">
+         <div className="centered-signup-left">
+          <h1 className="text-center sign-up-title mb-4 mt-4">Signup</h1>
+          <Card className ="signup-card shadow p-4 mt-4">
             <Card.Body>
                <Form onSubmit={handleSubmit}>
              {error && <Alert variant="danger">{error}</Alert>}
 
-               
+
                 <Form.Group id="formUsername" >
                   <Form.Label>Username</Form.Label>
-                  <Form.Control 
+                  <Form.Control
                     name="username"
-                    type="text" 
-                    placeholder="Enter username" 
-                    value={formData.username} 
-                    onChange={handleFormChange} 
+                    type="text"
+                    placeholder="Enter username"
+                    value={formData.username}
+                    onChange={handleFormChange}
                   />
                 </Form.Group>
-               
+
                  <Form.Group controlId="formEmail" className="mt-3">
                   <Form.Label>Email</Form.Label>
                   <Form.Control
@@ -103,7 +104,7 @@ const handleSubmit = (e) => {
                   />
                 </Form.Group>
 
-            
+
                  <Form.Group controlId="formPassword" className="mt-3" >
                   <Form.Label>Password</Form.Label>
                   <Form.Control
@@ -115,8 +116,8 @@ const handleSubmit = (e) => {
                   />
                 </Form.Group>
 
-              
-                 <Form.Group controlId="formFirstName"className="mt-3"> 
+
+                 <Form.Group controlId="formFirstName"className="mt-3">
                   <Form.Label>First Name</Form.Label>
                   <Form.Control
                     name="first_name"
@@ -127,7 +128,7 @@ const handleSubmit = (e) => {
                   />
                 </Form.Group>
 
-              
+
                 <Form.Group controlId="formLastName" className="mt-3">
                   <Form.Label>Last Name</Form.Label>
                   <Form.Control
@@ -139,7 +140,7 @@ const handleSubmit = (e) => {
                   />
                 </Form.Group>
 
-              
+
                 <Form.Group controlId="formDisplayName" className="formDisplayName mt-3">
                   <Form.Label>Display Name</Form.Label>
                   <Form.Control
@@ -151,7 +152,7 @@ const handleSubmit = (e) => {
                   />
                 </Form.Group>
 
-              
+
                 <Form.Group controlId="formPhone" className="mt-3">
                   <Form.Label>Phone</Form.Label>
                   <Form.Control
@@ -174,17 +175,27 @@ const handleSubmit = (e) => {
                   />
                 </Form.Group>
 
-               <Button className="btn btn-lg btn-signup btn-active mt-3" variant="primary" type="submit" disabled={isLoading}>
+                <Button className="btn btn-lg btn-signup btn-active mt-3" variant="primary" type="submit" disabled={isLoading}>
                   {isLoading ? 'Taking a short trip...' : 'Sign Up'}
                 </Button>
+
               </Form>
             </Card.Body>
           </Card>
-        </Col>
+         </div>
+       </Col>
+
+       <Col md={6} className="split signup-right">
+         <div className="centered-signup-right">
+           <img src="logo-transparent-png.png" alt="" style={{ width: '400px', height: 'auto' }} />
+           <h2>Welcome!</h2>
+           <p>blah blah blah</p>
+         </div>
+       </Col>
+
       </Row>
     </Container>
   );
 }
 
 export default SignupForm
-     

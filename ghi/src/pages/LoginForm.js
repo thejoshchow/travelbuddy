@@ -36,29 +36,6 @@ function LoginForm() {
       } catch (e) {
         console.log(e)
       }
-
-      // if (token) {
-      //   return <Navigate to = '/dashboard'/>
-      // }
-
-        // const loginUrl = 'http://localhost:5432/api/token/';
-        // const fetchConfig = {
-        //     method: "POST",
-        //     body: JSON.stringify(data),
-        //     headers: {
-        //         'Content-Type': 'application/json',
-        //     }
-        // };
-
-        // const response = await fetch(loginUrl, fetchConfig);
-        // if (response.ok) {
-        //     const newLogin = await response.json();
-        //     console.log(newLogin)
-
-        //     setUsername('');
-        //     setPassword('');
-        // }
-
     };
 
 

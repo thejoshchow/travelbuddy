@@ -1,12 +1,12 @@
 custom-color-blue{
   color: #CBF3F0
 }
-btn-custom-color-orange{
+custom-color-orange{
   color: #FF9F1C
 }
 
 body {
-  background-color: #FFFFFF;
+  background-color: #ffffff;
 }
 
 .App {
@@ -26,10 +26,9 @@ body {
 
 .signup-card{
 background-color: #FFFFFF;
-border-color:  #2EC4B6;
-border-width: 2px;
-border-radius: 10px;
+border: #FFFFFF;
 }
+
 .custom-navbar {
   background-color: #2ec4b6 ;
 
@@ -53,38 +52,34 @@ border-radius: 10px;
   opacity: .85;
 }
 
-button.btn-signup.btn-active:active {
+/* button.btn-signup.btn-active:active {
   background-color: #CBF3F0;
   color: #FFBF69;
-}
+} */
 
 
 button.btn-signup {
-  background-color: #FF9F1C;
+  background-color: #2EC4B6;
   color: #FFFFFF;
   border-color:  #2EC4B6;
   border-width: 2px;
   margin-left: 125px;
+  justify-content: center;
+  align-items: center;
+  margin-left: 175px;
 
  }
 
  button.btn-signup:hover {
-  background-color: #2EC4B6;
-  color: #FF9F1C;
+  background-color: #acf8f3;
+  border-color: #2EC4B6;
 }
 
-h1.sign-up-title{
- color: #FF9F1C;
- text-shadow: -1px 0 #2EC4B6, 0 1px #2EC4B6, 1px 0 #2EC4B6, 0 -1px #2EC4B6;
-
-
-}
-
-/* Login page design elements */
 .formDisplayName{
 pointer-events: none;
 }
 
+/* Login page design elements */
 .login-container {
   display: flex;
   flex-direction: column;
@@ -137,15 +132,16 @@ pointer-events: none;
   border-color: #FF9F1C;
 }
 
-
 .logo{
   margin-right: 20px;
 }
 
-.custom-navbar{
+/* end login page elements */
+
+/* Additional features to navbar */
+/* .custom-navbar{
   height: 60px;
 }
-
 
 .custom-dropdown {
   position: relative;
@@ -154,7 +150,7 @@ pointer-events: none;
   text-decoration: none;
   font-weight: bold;
   margin: 0 10px;
-}
+} */
 
 
 
@@ -236,3 +232,36 @@ pointer-events: none;
   border: 2px solid orange;
 }
 
+
+/* Signup page design  */
+.signup-right{
+    right:0;
+    background-color: #ff9f1c;
+}
+
+.centered-signup-right img {
+  width: 150px;
+  border-radius: 50%;
+}
+
+.signup-left{
+    left: 0;
+}
+
+.centered-signup-right {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.signup-card .card-body {
+  padding: 30px;
+  margin: 0;
+}
+
+.signup-card {
+  width: 80%;
+  margin: 0 auto;
+}
