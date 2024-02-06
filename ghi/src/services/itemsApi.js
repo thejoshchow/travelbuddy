@@ -12,10 +12,10 @@ export const itemsApi = createApi({
             })
         }),
         addItem: build.mutation({
-            query: (info, trip_id=7) => ({
-                url: `/api/trip/${trip_id}/item`,
+            query: (info) => ({
+                url: `/api/trip/${info.trip_id}/item`,
                 method: 'post',
-                body: info
+                body: info.form
             })
         }),
         getItems: build.query({
