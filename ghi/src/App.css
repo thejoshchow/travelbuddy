@@ -1,12 +1,16 @@
-custom-color-blue{
-  color: #CBF3F0
-}
-custom-color-orange{
-  color: #FF9F1C
+@font-face {
+  font-family: 'Sharpie';
+  src: url('./styles/sharpie.ttf') format('truetype');
 }
 
 body {
-  background-color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: white;
 }
 
 .App {
@@ -24,6 +28,9 @@ body {
   color: white;
 }
 
+
+
+/* Signup css */
 .signup-card{
 background-color: #FFFFFF;
 border: #FFFFFF;
@@ -159,6 +166,19 @@ pointer-events: none;
 /* Trip Overview CSS */
 
 .trip-overview{
+  font-family: 'Sharpie', sans-serif;
+}
+.card{
+  display: flex;
+  justify-content: center;
+  border-radius: 0px;
+  border:solid 1px rgb(126, 125, 125);
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.19), 0px 6px 6px rgba(0, 0, 0, 0.23);
+  font-family: 'Sharpie', sans-serif;
+  border: 2px solid black;
+}
+ 
+.trip-overview{
   display: flex;
   justify-content: center;
   margin-top: 50px;
@@ -167,16 +187,15 @@ pointer-events: none;
 
 .details{
   display: flex;
-
+  border-radius: 0px;
   justify-content: center ;
   gap:20px;
-  border:2px solid blue;
+ 
 }
 
 
 .card-container-trip-details{
   display: flex;
-
   min-width: 200px;
 }
 
@@ -184,16 +203,27 @@ pointer-events: none;
   display: flex;
 
 }
+.header-trip-details{
+  background-color: #e6aa5b;
+  border-radius: 0px;
+}
 .trip-detail-body{
   display: flex;
+  border-radius: 0px;
   flex-direction: column;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  border: 2px solid purple;
+  text-decoration:none;
+  color:#000;
+  background:#FFBF69;
+  
+  
 }
 .card-container-buddies{
+  font-family: 'Sharpie', sans-serif;
   min-width: 200px;
+  background-color: #FF9F1C;
 }
 .buddy-body{
   display: flex;
@@ -201,7 +231,7 @@ pointer-events: none;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  border: 2px solid black;
+
 }
 
 
@@ -213,23 +243,84 @@ pointer-events: none;
   flex-direction: row;
   padding: 10px;
   gap: 20px;
-  border:2px solid red;
+  
 }
+
+
+
 .card-container-categories{
  display: flex;
  min-height: 200px;
+ transform: rotate(0deg);
+ transition: transform 1s;
 }
-.category-body{
 
+.card-container-categories:hover {
+  transform: scale(1.1) rotate(1deg) !important;
+}
+
+.images{
   display: flex;
-  justify-content: space-around;
-
-  border:2px solid yellow;
+  justify-content: center;
+  align-items: center;
+  width: 250px;
+  height: 250px;
+  border: 1px solid black;
 }
 
+.category-body{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  
+
+}
+
+div.category-body.card-body{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+ 
+}
+
+
+
+.categories{
+  display: flex;
+  font-size: large;
+  justify-content: center;
+ 
+}
 .category-items{
   display: flex;
-  border: 2px solid orange;
+  justify-content: center;
+ 
+}
+.category-items:hover{
+ color: #2EC4B6;
+}
+/* Trip overview dummy total cost css */
+
+.card-container-cost{
+  display:flex;
+  background-color: #cbf3f0;
+  
+}
+
+.card-title-cost{
+display: flex;
+justify-content: center;
+
+
+
+}
+
+.total-cost{
+display: flex;
+justify-content: center;
+margin-top: 20px;
+font-size:xx-large;
 }
 
 

@@ -6,7 +6,7 @@ function Nav() {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark custom-navbar">
       <div className="container-fluid">
-        <a class="logo" href="/">
+        <a className="logo" href="/">
           <img src="logo-transparent-png.png" alt="" width="60" height="48"/>
         </a>
 
