@@ -56,7 +56,37 @@ class UserRepo:
                         user_id=user_id,
                     )
         except Exception as e:
-            print(e)
             raise HTTPException(
-                status_code=400, detail="Could not update user details"
+                status_code=400,
+                detail=f"error: {e} ---Could not update user details",
             )
+
+    def get_one_user(self, user_id: int):
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as cur:
+                    result = cur.execute(
+                        """
+                        SELECT  phone,
+                                first_name,
+                                last_name,
+                                display_name,
+                                picture_url
+                        FROM users
+                        WHERE user_id = %s
+                        """,
+                        [user_id],
+                    )
+                    user_data = result.fetchone()
+                    if user_data is None:
+                        return None
+                    user_dict = {
+                        "phone": user_data[0],
+                        "first_name": user_data[1],
+                        "last_name": user_data[2],
+                        "display_name": user_data[3],
+                        "picture_url": user_data[4],
+                    }
+                    return UserOut(user_id=user_id, **user_dict)
+        except Exception as e:
+            raise HTTPException(status_code=400, detail=f"error: {e}")

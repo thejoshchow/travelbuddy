@@ -2,6 +2,8 @@ from fastapi import APIRouter, Depends, HTTPException
 
 from queries.users import UserIn, UserRepo, UserOut
 from authentication.authentication import authenticator
+from typing import Union
+from queries.errors import Error
 
 router = APIRouter()
 
@@ -24,3 +26,17 @@ def update_user(
         raise HTTPException(
             status_code=400, detail="Could not update user details"
         )
+
+
+@router.get("/api/trip/{user_id}")
+def get_one_user(
+    user_id: int,
+    user: UserRepo = Depends(),
+    account_data: dict = Depends(authenticator.get_current_account_data),
+) -> Union[UserOut, Error]:
+    user_id = account_data["user_id"]
+    try:
+        user_data = user.get_one_user(user_id)
+        return user_data
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=f"error: {e}")
