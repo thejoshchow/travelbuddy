@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { tripsApi, useCreateTripMutation } from "../features/trips/tripsApi";
+import { tripsApi, useCreateTripMutation } from "../services/tripsApi";
 
 
 const CreateTrip = () => {

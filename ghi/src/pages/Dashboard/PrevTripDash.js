@@ -1,5 +1,5 @@
 
-import { useGetAllTripsQuery } from "../../features/trips/tripsApi";
+import { useGetAllTripsQuery } from "../../services/tripsApi";
 import TripsDisplay from "./TripDisplayfun";
 
 const PrevTripDash = () => {

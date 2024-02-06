@@ -16,6 +16,7 @@ from authentication.accounts import (
     AccountOut,
     AccountRepo,
     AccountChange,
+    Authorize,
 )
 from queries.errors import Error
 
@@ -111,3 +112,14 @@ async def get_token(
             "type": "Bearer",
             "account": account,
         }
+
+
+@router.get("/api/trip/{trip_id}/role")
+def is_buddy(
+    trip_id: int,
+    account_data: dict = Depends(authenticator.get_current_account_data),
+    auth: Authorize = Depends(),
+):
+    user_id = account_data["user_id"]
+    buddy = auth.is_buddy(user_id, trip_id)
+    return buddy

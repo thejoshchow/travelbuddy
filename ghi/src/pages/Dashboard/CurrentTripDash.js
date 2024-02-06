@@ -1,5 +1,5 @@
 
-import { useGetAllTripsQuery } from "../../features/trips/tripsApi";
+import { useGetAllTripsQuery } from "../../services/tripsApi";
 import TripsDisplay from "./TripDisplayfun";
 import AddModal from "../../components/AddModal";
 import { useState } from "react";

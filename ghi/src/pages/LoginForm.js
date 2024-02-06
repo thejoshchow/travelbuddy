@@ -83,7 +83,7 @@ function LoginForm() {
       </div>
 
       <div className="split left">
-        <div class="centered">
+        <div className="centered">
         <img src="logo-transparent-png.png" alt="" style={{ width: '400px', height: 'auto' }} />
         <h2>Welcome!</h2>
         <p>blah blah blah</p>

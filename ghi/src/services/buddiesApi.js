@@ -10,8 +10,14 @@ export const buddiesApi = createApi({
                 url: `/api/trip/${trip_id}/buddy`,
                 method: 'GET',
             }),
+        }),
+        isBuddy: builder.query({
+            query: (trip_id) => ({
+                url: `/api/trip/${trip_id}/role`,
+                method: 'GET'
+            })
         })
     }),
 })
 
-export const { useGetBuddyQuery } = buddiesApi;
+export const { useGetBuddyQuery, useIsBuddyQuery } = buddiesApi;

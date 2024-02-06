@@ -1,4 +1,4 @@
-import { useGetAllTripsQuery } from "../../features/trips/tripsApi"
+import { useGetAllTripsQuery } from "../../services/tripsApi"
 import { Link } from "react-router-dom"
 const TripsDisplay = ({ trip, index }) => {
     const {data} = useGetAllTripsQuery()

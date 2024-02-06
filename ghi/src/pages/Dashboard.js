@@ -2,7 +2,7 @@ import { useLogoutMutation } from "../services/authApi";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteToken, selectToken } from "../state/auth/authSlice";
 import { Link, Outlet } from "react-router-dom";
-import { useGetAllTripsQuery } from "../features/trips/tripsApi";
+import { useGetAllTripsQuery } from "../services/tripsApi";
 
 
 
