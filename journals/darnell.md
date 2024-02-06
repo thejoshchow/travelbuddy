@@ -11,3 +11,7 @@ week two
  - completed "add buddy" backend
  - completed "get vote by id" backend
  - completed "delete account" backend
+
+ week four
+ - completed "create trip" frontend
+ - completed "dashboard trip widget" frontend

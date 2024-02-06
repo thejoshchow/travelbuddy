@@ -27,3 +27,7 @@ Recommended naming convention is `first_last.md`.
   2. Started Frontend Signup Page,Navbar,Redux Implementation
   3. Discussed and worked on Authentication
   
+## 01/29/2024 - 02/02/2024
+  1. Worked on get buddies endpoint
+  2. Worked on Trip overview api
+  3. Worked on Trip Overview CSS

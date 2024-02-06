@@ -19,7 +19,16 @@
 ### 1/27/2024
 
 - [x] finished writing most of our backend api endpoints
-- [ ] go back and refactor endpoints to protect and handle authorization
+- [x] go back and refactor endpoints to protect and handle authorization
 - [x] implement frontend auth
 - [x] created react components to handle persisting login and protected routes
-- [ ] start building out front end pages
+- [x] start building out front end pages
+
+### 2/1/2024
+
+- [x] build out the skeleton of frontend pages. 
+- [x] write rtk queries for frontend page data
+- [x] start the design process of page elements, layout and placement
+- [x] created modal component to be used wherever forms are needed
+- [ ] review process and steps to deploy backend to cloud
+- [ ] add migration to create a new column in item categories table: show
