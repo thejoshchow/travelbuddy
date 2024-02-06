@@ -2,7 +2,6 @@ from fastapi.testclient import TestClient
 from main import app
 from queries.trips import TripRepo, TripOut
 from authentication.authentication import authenticator
-from authentication.accounts import AccountOut
 
 client = TestClient(app)
 
@@ -27,9 +26,9 @@ def fake_user_account_data():
 def test_get_all_trips():
     # Arrange
     app.dependency_overrides[TripRepo] = EmptyTripRepo
-    app.dependency_overrides[
-        authenticator.get_current_account_data
-    ] = fake_user_account_data
+    app.dependency_overrides[authenticator.get_current_account_data] = (
+        fake_user_account_data
+    )
 
     # Act
     response = client.get("/api/trip", params={"user_id": 1})
@@ -45,9 +44,9 @@ def test_get_all_trips():
 def test_create_trip():
     # Arrange
     app.dependency_overrides[TripRepo] = EmptyTripRepo
-    app.dependency_overrides[
-        authenticator.get_current_account_data
-    ] = fake_user_account_data
+    app.dependency_overrides[authenticator.get_current_account_data] = (
+        fake_user_account_data
+    )
 
     trip = {
         "name": "Bob",

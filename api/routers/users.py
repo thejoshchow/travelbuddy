@@ -6,6 +6,11 @@ from authentication.authentication import authenticator
 router = APIRouter()
 
 
+@router.get("/")
+def root():
+    return {"message": "You hit the root path!"}
+
+
 @router.put("/api/user")
 def update_user(
     user_form: UserIn,
