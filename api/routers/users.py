@@ -28,7 +28,7 @@ def update_user(
         )
 
 
-@router.get("/api/trip/{user_id}")
+@router.get("/api/user")
 def get_one_user(
     user_id: int,
     user: UserRepo = Depends(),
