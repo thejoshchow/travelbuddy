@@ -19,18 +19,20 @@ import CurrentDash from './pages/Dashboard/CurrentTripDash';
 import PrevTripDash from './pages/Dashboard/PrevTripDash';
 import Items from './pages/items/Items';
 import UsersUpdate from './pages/UsersUpdate';
+import CheckAuth from './state/auth/CheckAuth';
 
 function App() {
    return (
     <div>
-       <Nav /> 
+    <Nav />
     <Routes>
-        <Route path='/'>
-            {/* public routes */}
-            <Route index element={<Landing />} />
-            <Route path='token' element={<LoginForm />} />
-            <Route path='login' element={<Login />} />
-            <Route path='signup' element={<SignupForm />} />
+        <Route element={<CheckAuth />}> 
+            <Route path='/'>
+                {/* public routes */}       
+                <Route index element={<Landing />} />      
+                <Route path='token' element={<LoginForm />} />
+                <Route path='login' element={<Login />} />
+                <Route path='signup' element={<SignupForm />} />
 
             {/* protected routes */}
             <Route element={<RequireAuth />}>
@@ -42,16 +44,17 @@ function App() {
              <Route path='user/update' element={<UsersUpdate />} />
 
 
-                <Route path='trip/' >
-                    <Route index element={<Dashboard />} />
-                    <Route path=':trip_id/' element={<TripOverview />} />
-                    <Route path=':trip_id/:category_id/' element={<Items />} />
+                    <Route path='trip/' >
+                        <Route index element={<Dashboard />} />
+                        <Route path=':trip_id/' element={<TripOverview />} />
+                        <Route path=':trip_id/:category_id/' element={<Items />} />
+                    </Route>
+
                 </Route>
-
             </Route>
-        </Route>
 
-        <Route path='*' element={<p>Does not exist</p>} />
+            <Route path='*' element={<p>Does not exist</p>} />
+        </Route>
     </Routes>
     </div>
   );
