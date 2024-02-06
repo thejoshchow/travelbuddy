@@ -2,6 +2,8 @@ from fastapi.testclient import TestClient
 from main import app
 from queries.trips import TripRepo, TripOut
 from authentication.authentication import authenticator
+from authentication.accounts import IsBuddyOut, Authorize
+
 
 client = TestClient(app)
 
@@ -18,9 +20,23 @@ class EmptyTripRepo:
     def add_buddy(self, user_id: int, trip_id: int, buddy=True):
         return True
 
+    def delete(self, trip_id: int):
+
+        return True
+
+
+class TestAuth:
+    def is_buddy(self, user_id, trip_id):
+
+        return IsBuddyOut(participant=True, buddy=True, admin=True)
+
 
 def fake_user_account_data():
-    return {"username": "string", "email": "string", "user_id": 1}
+    return {
+        "username": "string",
+        "email": "string",
+        "user_id": 1,
+    }
 
 
 def test_get_all_trips():
@@ -44,6 +60,7 @@ def test_get_all_trips():
 def test_create_trip():
     # Arrange
     app.dependency_overrides[TripRepo] = EmptyTripRepo
+
     app.dependency_overrides[authenticator.get_current_account_data] = (
         fake_user_account_data
     )
@@ -70,6 +87,26 @@ def test_create_trip():
     # Assert
     assert response.status_code == 200
     assert response.json() == expected
+
+    # Clean up
+    app.dependency_overrides = {}
+
+
+def test_delete_trip():
+    # Arrange
+
+    app.dependency_overrides[TripRepo] = EmptyTripRepo
+    app.dependency_overrides[Authorize] = TestAuth
+    app.dependency_overrides[authenticator.get_current_account_data] = (
+        fake_user_account_data
+    )
+
+    # Act
+    response = client.delete("/api/trip/1")
+
+    # Assert
+    assert response.status_code == 200
+    assert response.json() == {"deleted": True}
 
     # Clean up
     app.dependency_overrides = {}

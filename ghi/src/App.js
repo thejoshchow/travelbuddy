@@ -23,7 +23,7 @@ import UsersUpdate from './pages/UsersUpdate';
 function App() {
    return (
     <div>
-      {/* <Nav /> */}
+       <Nav /> 
     <Routes>
         <Route path='/'>
             {/* public routes */}
