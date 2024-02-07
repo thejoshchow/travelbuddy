@@ -3,15 +3,20 @@ import { useLoginMutation } from '../services/authApi';
 import { setToken } from '../state/auth/authSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
-
+import { useNavigate } from 'react-router-dom';
 
 function LoginForm() {
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [login] = useLoginMutation();
+    const [success, setSuccess] = useState(false);
     const dispatch = useDispatch();
-    const token = useSelector((state) => state.auth.token)
+  
+  
+  const token = useSelector((state) => state.auth.token)
+  
+
 
     const handleUsernameChange = (event) => {
         setUsername(event.target.value);
@@ -20,7 +25,7 @@ function LoginForm() {
     const handlePasswordChange = (event) => {
         setPassword(event.target.value);
     }
-
+    const navigate = useNavigate(); 
     const handleSubmit = async (event) => {
         event.preventDefault();
         const data = {};
@@ -30,14 +35,20 @@ function LoginForm() {
 
       try {
         const result = await login(data).unwrap();
-        dispatch(setToken(result.access_token))
-        return <Navigate to = '/dashboard'/>
+        dispatch(setToken(result.access_token));
+          navigate('/dashboard');
+        return <Navigate to = '/dashboard/current'/>
 
       } catch (error) {
         console.error('Login error, please check your credentials', error);
       }
     };
-
+    
+  useEffect(() => {
+            if (token) {
+                navigate('/dashboard')
+            }
+        }, [success])
 
   return (
     <div className="login-container">

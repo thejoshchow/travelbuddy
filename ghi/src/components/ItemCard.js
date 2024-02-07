@@ -1,6 +1,7 @@
 import accomodations from '../pages/tripOverviewPlaceholderphotos/accomodations.jpg'
 
 
+
 const ItemCard = ({ item }) => {
     return (
         <div className="image-card">

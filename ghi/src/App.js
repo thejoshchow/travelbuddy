@@ -29,8 +29,7 @@ function App() {
         <Route path='/' element={<CheckAuth />}>
             {/* public routes */}
             <Route index element={<Landing />} />
-            <Route path='token' element={<LoginForm />} />
-            <Route path='login' element={<Login />} />
+            <Route path='login' element={<LoginForm />} />
             <Route path='signup' element={<SignupForm />} />
             <Route path='test' element={<AddBuddyModal />} />
 
