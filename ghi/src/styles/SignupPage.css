@@ -1,9 +1,18 @@
+.sign-up-title{
+  display: flex;
+  justify-content: center;
+  margin-top: 75px ;
+}
+
+
 .signup-card{
 background-color: #FFFFFF;
 border: #FFFFFF;
 display: flex;
 align-items: left;
 justify-content: center;
+font-family: "Arial", "Helvetica", sans-serif;
+
 }
 
 button.btn-signup {

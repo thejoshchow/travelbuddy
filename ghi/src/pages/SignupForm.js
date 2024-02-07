@@ -2,6 +2,7 @@ import React, { useState} from 'react';
 //import { useNavigate } from 'react-router-dom';
 //import { useDispatch } from 'react-redux';
 import { useCreateAccountMutation } from '../services/authApi';
+import '../styles/SignupPage.css';
 import {Container,
         Row,
         Col,
@@ -10,7 +11,7 @@ import {Container,
         Button,
         Alert } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../App.css'
+
 
 
 export function SignupForm() {
@@ -75,7 +76,7 @@ const handleSubmit = (e) => {
       <Row className="justify-content-md-center">
        <Col md={4} className="split signup-left">
          <div className="centered-signup-left">
-           <h1 className="text-center sign-up-title mb-4 mt-4" style={{}}>Signup</h1>
+           <h1 className="sign-up-title" style={{}}>Signup</h1>
           <Card className ="signup-card shadow p-4 mt-4">
             <Card.Body>
                <Form onSubmit={handleSubmit}>

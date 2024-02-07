@@ -32,7 +32,7 @@ const UsersUpdate = () => {
             console.log(error)
 
         } else {
-             setFormData({
+            setFormData({
                 first_name: '',
                 last_name: '',
                 display_name: '',
@@ -54,6 +54,7 @@ const UsersUpdate = () => {
         }
     }, [userData])
     return (
+        <>
         <form onSubmit={handlesubmit}>
             <input type="text" name="first_name" value={formData.first_name} onChange={handleChange} placeholder="First Name" />
             <input type="text" name="last_name" value={formData.last_name} onChange={handleChange} placeholder="last Name" />
@@ -62,6 +63,7 @@ const UsersUpdate = () => {
             <input type="text" name="phone" value={formData.phone} onChange={handleChange} placeholder="phone"/>
             <button type="submit">Submit</button>
         </form>
+        </>
     )
 }
 

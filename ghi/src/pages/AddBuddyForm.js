@@ -1,16 +1,16 @@
 import { useState } from "react";
 import { useAddBuddyMutation } from "../services/buddiesApi";
+import SuccessAlert from "../components/SucessAlert";
+import Spinner from "../components/Spinner";
 
-const AddBuddyForm = ({trip_id}) => {
+const AddBuddyForm = ({ trip_id }) => {
     const [username, setUsername] = useState('');
     const [selectedOption, setSelectedOption] = useState('buddy');
-    const [error, setError] = useState(null);
-    const [addBuddy] = useAddBuddyMutation();
+    const [addBuddy, {isLoading, isSuccess}] = useAddBuddyMutation();
 
 
     const handleUsernameChange = (event) => {
         setUsername(event.target.value);
-        setError(null);
     }
 
     const handleFormChange = (event) => {
@@ -20,11 +20,6 @@ const AddBuddyForm = ({trip_id}) => {
     const handleSubmit = async (event) => {
         event.preventDefault();
 
-
-        if (!username) {
-            setError('Username is required');
-            return;
-        }
 
         try {
             const data = {
@@ -36,20 +31,20 @@ const AddBuddyForm = ({trip_id}) => {
                 trip_id: trip_id,
             };
 
-            await addBuddy(info);
+            const response = await addBuddy(info).unwrap();
             setUsername('');
-            console.log('Buddy added successfully');
 
         } catch (error) {
             console.error('Error adding buddy', error);
-            setError('An error occurred while adding a buddy');
         }
 
     }
 
 return (
     <div className="form-container">
-        <form onSubmit={handleSubmit}>
+        <Spinner isLoading={isLoading} />
+        <SuccessAlert isSuccess={isSuccess} message='Buddy added!' />
+        <form className={!isSuccess ? null : 'd-none' } onSubmit={handleSubmit}>
             <label>
                 Username:
                 <input

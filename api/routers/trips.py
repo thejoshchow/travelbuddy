@@ -32,6 +32,7 @@ def create_trip(
         trips.add_buddy(
             BuddyIn(user=user, buddy=True, admin=True),
             trip.trip_id,
+            user_id,
         )
         return trip
     except Exception as e:

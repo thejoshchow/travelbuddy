@@ -17,11 +17,8 @@ function Nav() {
           <NavLink className="navbar-link" to="signup">
             Signup
           </NavLink>
-          <NavLink className="navbar-link" to="token">
-            Login
-          </NavLink>
           <NavLink className="navbar-link" to="login">
-            Login2
+            Login
           </NavLink>
         </div>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
