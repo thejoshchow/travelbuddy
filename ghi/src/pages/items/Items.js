@@ -2,7 +2,7 @@ import CategoriesMenu from "../../components/CategoriesMenu";
 import { useParams } from "react-router-dom";
 import { useGetItemsQuery } from "../../services/itemsApi";
 import ItemCard from "../../components/ItemCard";
-import { useGetCategoriesQuery } from "../../services/categoryApi";
+import { useGetBuddyQuery } from "../../services/buddiesApi";
 import "./items.css"
 
 const Items = () => {
@@ -12,6 +12,7 @@ const Items = () => {
         category_id: category_id,
     }
     const { data: items, isLoading } = useGetItemsQuery(info)
+    const {data: buddies} = useGetBuddyQuery(trip_id)
 
 
 
@@ -19,13 +20,13 @@ const Items = () => {
         isLoading ? null :
         <div className='navbar-items'>
                 <CategoriesMenu trip_id={trip_id} />
-     
+
                 <div className='items d-flex flex-row flex-wrap'>
                     {items.items.map((item) => {
-                        return  <ItemCard key={item.item_id} item={item} /> 
+                        return <ItemCard key={item.item_id} buddies={buddies} item={item} trip_id={trip_id} />
                 })}
                 </div>
-       
+
         </div>
     )
 }
