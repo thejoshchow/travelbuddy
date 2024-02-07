@@ -11,8 +11,11 @@ export const usersApi = createApi({
                 body: info,
                 method: "put",
             })
+        }),
+         getCurrentUser: build.query({
+            query: () => "/api/user"
         })
     })
 })
 
-export const { useUpdateUserMutation } = usersApi
+export const { useUpdateUserMutation, useGetCurrentUserQuery } = usersApi

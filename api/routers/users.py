@@ -30,7 +30,6 @@ def update_user(
 
 @router.get("/api/user")
 def get_one_user(
-    user_id: int,
     user: UserRepo = Depends(),
     account_data: dict = Depends(authenticator.get_current_account_data),
 ) -> Union[UserOut, Error]:

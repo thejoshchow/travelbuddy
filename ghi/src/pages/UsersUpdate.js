@@ -1,8 +1,9 @@
-import { useUpdateUserMutation } from "../services/usersApi";
-import { useState } from "react";
+import { useUpdateUserMutation, useGetCurrentUserQuery } from "../services/usersApi";
+import { useState, useEffect } from "react";
+
 
 const UsersUpdate = () => {
-
+    const { data: userData } = useGetCurrentUserQuery()
     const [updateUser, result, error] = useUpdateUserMutation()
     const[formData, setFormData] = useState({
         first_name: '',
@@ -11,6 +12,10 @@ const UsersUpdate = () => {
         picture_url: '',
         phone: ''
     })
+
+
+
+    console.log(userData)
 
      const handleChange = (e) => {
         const name = e.target.name;
@@ -37,6 +42,17 @@ const UsersUpdate = () => {
         }
     }
 
+    useEffect(() => {
+        if (userData) {
+            setFormData({
+                first_name: userData.first_name,
+                last_name: userData.last_name,
+                display_name: userData.display_name,
+                picture_url: userData.picture_url,
+                phone: userData.phone
+            })
+        }
+    }, [userData])
     return (
         <form onSubmit={handlesubmit}>
             <input type="text" name="first_name" value={formData.first_name} onChange={handleChange} placeholder="First Name" />
