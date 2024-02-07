@@ -33,8 +33,8 @@ function LoginForm() {
         dispatch(setToken(result.access_token))
         return <Navigate to = '/dashboard'/>
 
-      } catch (e) {
-        console.log(e)
+      } catch (error) {
+        console.error('Login error, please check your credentials', error);
       }
     };
 
@@ -43,12 +43,10 @@ function LoginForm() {
     <div className="login-container">
       <div className="split right">
         <div className="centered-right">
-        <div className="d-flex align-items-center">
-        <div className="offset-3 col-6">
-          <div className="shadow p-4 mt-4">
-            <h1 style={{ textAlign: 'center' }}>Login</h1>
-            <form onSubmit={handleSubmit}
-              id="login-form">
+          <h1 style={{ textAlign: 'center', marginBottom: '20px', color: '#ff9f1c' }}>Login</h1>
+          <div className="offset-md-3 col-md-6" style={{ border: '2px solid #ff9f1c' }}>
+            <div className="shadow p-4 mt-2">
+              <form onSubmit={handleSubmit} id="login-form">
 
                 <div className="form-floating mb-3">
                 <input onChange={handleUsernameChange}
@@ -76,7 +74,7 @@ function LoginForm() {
                 <button className="btn btn-primary login-button">Login</button>
               </div>
             </form>
-          </div>
+
         </div>
           </div>
           </div>
@@ -84,9 +82,9 @@ function LoginForm() {
 
       <div className="split left">
         <div className="centered">
-        <img src="logo-transparent-png.png" alt="" style={{ width: '400px', height: 'auto' }} />
-        <h2>Welcome!</h2>
-        <p>blah blah blah</p>
+        <img src="TB_transparent_logo_orange.png" alt="" style={{ width: '400px', height: 'auto', filter: 'drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.5))' }} />
+        <h2 style={{ color: '#ff9f1c' }}>Welcome!</h2>
+        <p style={{ color: '#ff9f1c' }}>blah blah blah</p>
       </div>
 
       </div>

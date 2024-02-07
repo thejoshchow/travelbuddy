@@ -75,108 +75,10 @@ border: #FFFFFF;
   opacity: .85;
 }
 
-/* button.btn-signup.btn-active:active {
-  background-color: #CBF3F0;
-  color: #FFBF69;
-} */
-
-
-button.btn-signup {
-  background-color: #2EC4B6;
-  color: #FFFFFF;
-  border-color:  #2EC4B6;
-  border-width: 2px;
-  margin-left: 125px;
-  justify-content: center;
-  align-items: center;
-  margin-left: 175px;
-
- }
-
- button.btn-signup:hover {
-  background-color: #acf8f3;
-  border-color: #2EC4B6;
-}
 
 .formDisplayName{
 pointer-events: none;
 }
-
-/* Login page design elements */
-.login-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-
-.right-half{
-  right: 0;
-
-}
-.split {
-  height: 100%;
-  width: 50%;
-  position: fixed;
-  z-index: 1;
-  top: 0;
-  overflow-x: hidden;
-  padding-top: 20px;
-}
-
-.left {
-  left: 0;
-  background-color: #2EC4B6;
-}
-
-.right {
-  right: 0;
-}
-
-.centered {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-}
-.centered img {
-  width: 150px;
-  border-radius: 50%;
-}
-
-.login-button {
-    background-color: #FF9F1C;
-    border-color: #FF9F1C;
-}
-.login-button:hover {
-  background-color: #FFbf69;
-  border-color: #FF9F1C;
-}
-
-.logo{
-  margin-right: 20px;
-}
-
-/* end login page elements */
-
-/* Additional features to navbar */
-/* .custom-navbar{
-  height: 60px;
-}
-
-.custom-dropdown {
-  position: relative;
-  display: inline-block;
-  color: #FFFFFF ;
-  text-decoration: none;
-  font-weight: bold;
-  margin: 0 10px;
-} */
-
-
-
 
 
 /* Trip Overview CSS */
@@ -196,7 +98,7 @@ pointer-events: none;
   font-family: 'Sharpie', sans-serif;
   border: 2px solid black;
 }
- 
+
 
 
 .details{
@@ -233,8 +135,8 @@ pointer-events: none;
   text-decoration:none;
   color:#000;
   background:#FFBF69;
-  
-  
+
+
 }
 
 .card-header-whos-going{
@@ -294,7 +196,7 @@ pointer-events: none;
   display: flex;
   justify-content: center;
   flex-direction: column;
-  
+
 
 }
 
@@ -303,7 +205,7 @@ div.category-body.card-body{
   justify-content: center;
   align-items: center;
   flex-direction: column;
- 
+
 }
 
 
@@ -312,12 +214,12 @@ div.category-body.card-body{
   display: flex;
   font-size: large;
   justify-content: center;
- 
+
 }
 .category-items{
   display: flex;
   justify-content: center;
- 
+
 }
 .category-items:hover{
  color: #2EC4B6;
@@ -346,35 +248,4 @@ font-size:xx-large;
 }
 
 
-/* Signup page design  */
-.signup-right{
-    right:0;
-    background-color: #ff9f1c;
-}
 
-.centered-signup-right img {
-  width: 150px;
-  border-radius: 50%;
-}
-
-.signup-left{
-    left: 0;
-}
-
-.centered-signup-right {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-}
-
-.signup-card .card-body {
-  padding: 30px;
-  margin: 0;
-}
-
-.signup-card {
-  width: 80%;
-  margin: 0 auto;
-}

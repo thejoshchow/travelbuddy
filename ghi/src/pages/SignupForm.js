@@ -73,9 +73,9 @@ const handleSubmit = (e) => {
  return (
     <Container>
       <Row className="justify-content-md-center">
-       <Col md={6} className="split signup-left">
+       <Col md={4} className="split signup-left">
          <div className="centered-signup-left">
-          <h1 className="text-center sign-up-title mb-4 mt-4">Signup</h1>
+           <h1 className="text-center sign-up-title mb-4 mt-4" style={{}}>Signup</h1>
           <Card className ="signup-card shadow p-4 mt-4">
             <Card.Body>
                <Form onSubmit={handleSubmit}>
@@ -174,10 +174,14 @@ const handleSubmit = (e) => {
                     onChange={handleFormChange}
                   />
                 </Form.Group>
+                  <Form onSubmit={handleSubmit} className="text-center">
+                  {error && <Alert variant="danger">{error}</Alert>}
+                  <Button className="btn-signup mt-3" type="submit" disabled={isLoading}>
+                    {isLoading ? 'Taking a short trip...' : 'Sign Up'}
+                  </Button>
+                </Form>
 
-                <Button className="btn btn-lg btn-signup btn-active mt-3" variant="primary" type="submit" disabled={isLoading}>
-                  {isLoading ? 'Taking a short trip...' : 'Sign Up'}
-                </Button>
+
 
               </Form>
             </Card.Body>
@@ -187,9 +191,9 @@ const handleSubmit = (e) => {
 
        <Col md={6} className="split signup-right">
          <div className="centered-signup-right">
-           <img src="logo-transparent-png.png" alt="" style={{ width: '400px', height: 'auto' }} />
-           <h2>Welcome!</h2>
-           <p>blah blah blah</p>
+           <img src="TB_transparent_logo_white.png" alt="" style={{ width: '400px', height: 'auto', filter: 'drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.5))' }} />
+           <h2 style={{ color: 'white' }}>Welcome!</h2>
+           <p style={{ color: 'white' }}>blah blah blah</p>
          </div>
        </Col>
 

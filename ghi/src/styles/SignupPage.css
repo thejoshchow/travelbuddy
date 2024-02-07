@@ -1,0 +1,60 @@
+.signup-card{
+background-color: #FFFFFF;
+border: #FFFFFF;
+display: flex;
+align-items: left;
+justify-content: center;
+}
+
+button.btn-signup {
+  background-color: #2EC4B6;
+  color: #FFFFFF;
+  border-color:  #2EC4B6;
+  border-width: 2px;
+  justify-content: center;
+  align-items: center;
+
+ }
+
+ .signup-button {
+    background-color: #2EC4B6;
+    color: #FFFFFF;
+ }
+
+ button.btn-signup:hover {
+  background-color: #acf8f3;
+  border-color: #2EC4B6;
+}
+
+.signup-right{
+    right:0;
+    background-color: #FFbf69;
+}
+
+.centered-signup-right img {
+  width: 300px;
+  height: 300px;
+}
+
+.signup-left{
+    left: 0;
+}
+
+.centered-signup-right {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.signup-card .card-body {
+  padding: 30px;
+  margin: 0;
+}
+
+.signup-card {
+  width: 80%;
+  margin: 0 auto;
+}
+
