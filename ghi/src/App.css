@@ -45,6 +45,7 @@ body {
 
 
 
+
 /* Signup css */
 .signup-card{
 background-color: #FFFFFF;
@@ -182,30 +183,28 @@ pointer-events: none;
 
 .trip-overview{
   font-family: 'Sharpie', sans-serif;
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+  margin-bottom: 50px;
 }
 .card{
   display: flex;
   justify-content: center;
-  border-radius: 0px;
   border:solid 1px rgb(126, 125, 125);
   box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.19), 0px 6px 6px rgba(0, 0, 0, 0.23);
   font-family: 'Sharpie', sans-serif;
   border: 2px solid black;
 }
  
-.trip-overview{
-  display: flex;
-  justify-content: center;
-  margin-top: 50px;
-  margin-bottom: 50px;
-}
+
 
 .details{
   display: flex;
   border-radius: 0px;
   justify-content: center ;
   gap:20px;
- 
+  border-radius: 5px;
 }
 
 
@@ -219,6 +218,8 @@ pointer-events: none;
 
 }
 .header-trip-details{
+  display: flex;
+  justify-content: center;
   background-color: #e6aa5b;
   border-radius: 0px;
 }
@@ -235,10 +236,16 @@ pointer-events: none;
   
   
 }
+
+.card-header-whos-going{
+  display: flex;
+  justify-content: center;
+}
 .card-container-buddies{
   font-family: 'Sharpie', sans-serif;
   min-width: 200px;
   background-color: #FF9F1C;
+  border-radius: 5px;
 }
 .buddy-body{
   display: flex;
@@ -258,7 +265,6 @@ pointer-events: none;
   flex-direction: row;
   padding: 10px;
   gap: 20px;
-  
 }
 
 
@@ -268,6 +274,7 @@ pointer-events: none;
  min-height: 200px;
  transform: rotate(0deg);
  transition: transform 1s;
+ border-radius: 0px;
 }
 
 .card-container-categories:hover {
@@ -320,7 +327,7 @@ div.category-body.card-body{
 .card-container-cost{
   display:flex;
   background-color: #cbf3f0;
-  
+  border-radius: 5px;
 }
 
 .card-title-cost{

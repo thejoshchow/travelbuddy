@@ -198,4 +198,4 @@ const handleSubmit = (e) => {
   );
 }
 
-export default SignupForm
+export default SignupForm;

@@ -3,25 +3,68 @@
   src: url('./sharpie.ttf') format('truetype');
 }
 
-.navbar-items{
-    border: solid 1px red;
+/* Add item btn and Nav categories*/
+
+
+.nav-container{
+    display: flex;
+    justify-content: space-around ;
+    align-items: center;
+    gap: 25px;
+    margin-left: 25px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    font-family: 'Sharpie', sans-serif;
+  
 }
+.btn-add-item{
+    font-family: 'Sharpie', sans-serif;
+    color:black;
+    border-radius: 25px;
+    background-color: #FF9F1C;
+    padding: 10px;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.19), 0px 6px 6px rgba(0, 0, 0, 0.23);
+    margin-right: 25px;
+    transition: background-color 0.5s ease, box-shadow 0.5s ease, transform 0.2s ease;
+    border: solid 4px black;
+}
+.btn-add-item:hover{
+    background-color: #2EC4B6;
+}
+.btn-add-item:active{
+    background-color: #2EC4B6;
+    box-shadow: 10px 5px 00px rgba(0, 0, 0, 0.19), 0px 3px 3px rgba(0, 0, 0, 0.23);
+    transform: translateY(4px);  
+}
+
+.navbar-categories{
+    color: #2EC4B6;
+}
+.navbar-categories:hover{
+    color: #cbf3f0;
+}
+.navbar-categories.active {
+  text-decoration: underline;
+}
+/* Items */
 
 
 .items{
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
+    align-items: center;
     margin-top: 10px;
     flex-direction: row;
     padding: 10px;
     gap: 20px;
-    border:2px solid red;
-    
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 1250px;
    
 }
 
-.card{
+.image-card{
     min-width: 250px;
     min-height: 250px;
     justify-content: center;
@@ -29,23 +72,44 @@
     border:solid 1px rgb(126, 125, 125);
     box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.19), 0px 6px 6px rgba(0, 0, 0, 0.23);
     font-family: 'Sharpie', sans-serif;
-    border: 2px solid black;
+    border: 1px solid black;
+    max-height: 100px;
 
-}
-.card:hover{
-    cursor: pointer;
 }
 
 .card-footer{
     display: flex;
     justify-content: space-between;
+    margin: 25px;
 }
 
 .vote-button{
     display: inline-flex;
-    border:1px solid black;
+    border:3px solid black;
     border-radius: 10px;
-    background-color: aqua;
+    background-color: #2EC4B6;
     padding: 5px;
+    transition: background-color 0.5s ease, box-shadow 0.5s ease, transform 0.2s ease;
+}
+.vote-button:hover{
+
+    background-color: #cbf3f0;
+    cursor: pointer;
     
 }
+.vote-button:active{
+    box-shadow: 10px 5px 00px rgba(0, 0, 0, 0.19), 0px 3px 3px rgba(0, 0, 0, 0.23);
+    transform: translateY(4px);  
+    background-color: #cbf3f0;
+    cursor: pointer;
+    
+}
+
+.image{
+  max-width: 250px;
+  max-height: 100%;
+  border:solid 1px black;
+  border-radius: 25px;
+}
+
+

@@ -72,15 +72,16 @@ function skewCard() {
             </Card>
             
             <Card style={{ width: '18rem' }} className="card-container-cost">
-                <Card.Body className="trip-total-cost-body">
-                    <Card.Title className="card-title-cost">Total Cost</Card.Title>
-                    {<div className="total-cost"><strong>$1097.56</strong></div>}
-                </Card.Body>
+                <Card.Header className="card-title-cost">Total Cost</Card.Header>
+                    <Card.Body className="trip-total-cost-body">
+                        {<div className="total-cost"><strong>$1097.56</strong></div>}
+                    </Card.Body>
             </Card>
             
             <Card style={{ width: '18rem' }} className="card-container-buddies">
-                <Card.Body className="buddy-body">
-                    <Card.Title>Who's going</Card.Title>
+                   <Card.Header className="card-header-whos-going">Who's going</Card.Header>
+                    <Card.Body className="buddy-body">
+                 
                     {buddies.buddies.map((buddy) => (
                         <p key={buddy.user_id}>
                             {buddy.display_name}
