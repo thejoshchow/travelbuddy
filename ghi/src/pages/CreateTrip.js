@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { tripsApi, useCreateTripMutation } from "../services/tripsApi";
+import SuccessAlert from "../components/SucessAlert";
+import Spinner from "../components/Spinner";
 
 
 const CreateTrip = () => {
-    const [createTrip, result] = useCreateTripMutation()
+    const [createTrip, {isLoading, isSuccess}] = useCreateTripMutation()
     const [error, setError] = useState('');
 
     const [formData, setFormData] = useState({
@@ -36,19 +38,18 @@ const CreateTrip = () => {
                     start_date: '',
                     end_date: '',
                     picture_url: '',
-            });
-
-    }})
-
-
-
+                });
+            }
+        })
     }
 
     return (
         <div className="container">
-            <form onSubmit={handleSubmit}>
+            <Spinner isLoading={isLoading} />
+            <SuccessAlert isSuccess={isSuccess} message='Trip added'/>
+            <form className={!isSuccess ? null: 'd-none'} onSubmit={handleSubmit}>
                 <div className="mb-3">
-                    <input type="text" name='name' value={formData.name} onChange={handleChange} className="form-control" placeholder="Item name"/>
+                    <input type="text" name='name' value={formData.name} onChange={handleChange} className="form-control" placeholder="Trip name"/>
                 </div>
                 <div className="mb-3">
                     <input type="text" name='location' value={formData.location} onChange={handleChange} className="form-control" placeholder="Location" />

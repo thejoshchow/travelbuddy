@@ -13,7 +13,7 @@ function AddBuddyModal() {
                 show={show}
                 onHide={() => setShow(false)}
                 modaltitle='Add Buddy'
-                form={<AddBuddyForm trip_id={6} />} />
+                form={<AddBuddyForm trip_id={14} />} />
             <div className='container'>
                 <button className="blue-button blue-button:hover" onClick={() => setShow(true)}>Add Buddy</button>
             </div>

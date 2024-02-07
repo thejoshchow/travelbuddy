@@ -26,7 +26,7 @@ function App() {
     <>
     <Nav />
     <Routes>
-        <Route path='/'>
+        <Route path='/' element={<CheckAuth />}>
             {/* public routes */}
             <Route index element={<Landing />} />
             <Route path='token' element={<LoginForm />} />

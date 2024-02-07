@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 import { useGetOneTripQuery, useUpdateTripMutation } from "../services/tripsApi";
+import SuccessAlert from "../components/SucessAlert";
+import Spinner from "../components/Spinner";
 
 const TripAdmin = ({trip_id}) => {
     const { data: trip } = useGetOneTripQuery(trip_id)
-    const [updateTrip, {isSuccess}] = useUpdateTripMutation()
+    const [updateTrip, {isSuccess, isLoading}] = useUpdateTripMutation()
     const [formChange, setFormChange] = useState({
         name: '',
         location: '',
@@ -31,10 +33,7 @@ const TripAdmin = ({trip_id}) => {
             form: d,
             trip_id: trip_id
         }
-        const response = await updateTrip(info).unwrap()
-        if (isSuccess) {
-            console.log('success')
-        }
+        await updateTrip(info).unwrap()
 
     }
 
@@ -49,9 +48,13 @@ const TripAdmin = ({trip_id}) => {
         }
 
     }, [trip])
+
     return (
+        <>
         <div className='container'>
-            <form onSubmit={handleSubmit}>
+            <Spinner isLoading={isLoading} />
+            <SuccessAlert isSuccess={isSuccess} message='Trip details updated successfully'/>
+            <form className={!isSuccess ? null: 'd-none'} onSubmit={handleSubmit}>
                 <div className='mb-3'>
                     <input onChange={handleFormChange} value={formChange.name} className='form-control' name='name' type='text' />
                 </div>
@@ -64,9 +67,10 @@ const TripAdmin = ({trip_id}) => {
                 <div className='mb-3'>
                     <input onChange={handleFormChange} value={formChange.end_date} className='form-control' name='end_date' type='date' />
                 </div>
-                <button className='btn login-button'>Update trip</button>
+                <button className='btn blue-button'>Update trip</button>
             </form>
         </div>
+        </>
     )
 }
 

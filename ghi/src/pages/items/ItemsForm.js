@@ -1,16 +1,18 @@
 import { useState } from "react";
 import { useAddItemMutation } from "../../services/itemsApi";
 import { useGetCategoriesQuery } from "../../services/categoryApi";
+import SuccessAlert from "../../components/SucessAlert";
+import Spinner from "../../components/Spinner";
 
 const ItemsForm = ({ trip }) => {
-    const [addItem, { }] = useAddItemMutation()
+    const [addItem, { isLoading, isSuccess }] = useAddItemMutation()
     const { data: categories } = useGetCategoriesQuery(trip)
     const [formData, setFormData] = useState({
         category_id: '',
         name: '',
         description: '',
         url: '',
-        cost: '',
+        cost: 0,
         costPerPerson: true,
         notes: ''
     })
@@ -24,13 +26,14 @@ const ItemsForm = ({ trip }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        const { fulfilled } = await addItem({form: formData, trip_id: trip}).unwrap()
-        console.log(fulfilled)
+        await addItem({ form: formData, trip_id: trip })
     }
 
     return (
         <div className='container'>
-            <form onSubmit={handleSubmit}>
+            <Spinner isLoading={isLoading} />
+            <SuccessAlert isSuccess={isSuccess} message='Item added' />
+            <form className={!isSuccess ? null : 'd-none'} onSubmit={handleSubmit}>
                 <select onChange={handleFormChange} name='category_id' className="form-select mb-3">
                     <option value=''>Select category</option>
                     {categories.map((category) => {
@@ -49,7 +52,7 @@ const ItemsForm = ({ trip }) => {
                     <input value={formData.url} onChange={handleFormChange} type="text" className="form-control" id="item-url" name="url" placeholder="Item url"/>
                 </div>
                 <div className="mb-3">
-                    <input value={formData.cost} onChange={handleFormChange} type="text" className="form-control" name="cost" id="item-cost" placeholder="Item cost"/>
+                    <input value={formData.cost} onChange={handleFormChange} type="number" className="form-control" name="cost" id="item-cost" placeholder="Item cost"/>
                 </div>
                 <div className="form-check mb-3">
                     <input value={true} onChange={handleFormChange} type="radio" className="form-check-input" id="item-costPerPerson" name="costPerPerson"/>

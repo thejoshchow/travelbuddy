@@ -13,10 +13,9 @@ const CurrentDash = () => {
     if (upcoming === undefined) {
         return null
     }
-
     return (
         <>
-         <AddModal show={show} onHide={() => setShow(false)} modaltitle='Create A Trip' form={ <CreateTrip /> } />
+            <AddModal show={show} onHide={() => setShow(false)} modaltitle='Create A Trip' form={ <CreateTrip /> } />
             <div className='container'>
             <button onClick={()=> setShow(true)} >Create Trip</button>
             <div className='row m-2'>
