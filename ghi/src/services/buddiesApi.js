@@ -11,6 +11,14 @@ export const buddiesApi = createApi({
                 method: 'GET',
             }),
         }),
+
+        addBuddy: builder.mutation({
+            query: (info) => ({
+                url: `/api/trip/${info.trip_id}/buddy`,
+                method: 'POST',
+                body: info.form,
+            })
+        }),
         isBuddy: builder.query({
             query: (trip_id) => ({
                 url: `/api/trip/${trip_id}/role`,
@@ -20,4 +28,4 @@ export const buddiesApi = createApi({
     }),
 })
 
-export const { useGetBuddyQuery, useIsBuddyQuery } = buddiesApi;
+export const { useGetBuddyQuery, useIsBuddyQuery, useAddBuddyMutation } = buddiesApi;

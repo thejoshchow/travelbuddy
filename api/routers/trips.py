@@ -26,10 +26,11 @@ def create_trip(
     account_data: dict = Depends(authenticator.get_current_account_data),
 ) -> Union[TripOut, Error]:
     user_id = account_data["user_id"]
+    user = account_data["username"]
     try:
         trip = trips.create(trip_form, user_id)
         trips.add_buddy(
-            BuddyIn(user_id=user_id, buddy=True, admin=True),
+            BuddyIn(user=user, buddy=True, admin=True),
             trip.trip_id,
         )
         return trip
@@ -117,11 +118,13 @@ def add_buddy(
     auth: Authorize = Depends(),
     account_data: dict = Depends(authenticator.get_current_account_data),
 ) -> Union[BuddyOut, Error]:
+    print(info, trip_id, account_data)
     user_id = account_data["user_id"]
     is_buddy = auth.is_buddy(user_id, trip_id)
     if is_buddy.buddy:
         try:
-            return trips.add_buddy(info, trip_id)
+            buddy_user_id = trips.get_id_from_username(info)
+            return trips.add_buddy(info, trip_id, buddy_user_id)
         except Exception:
             raise HTTPException(status_code=400, detail="Add buddy failed")
     else:

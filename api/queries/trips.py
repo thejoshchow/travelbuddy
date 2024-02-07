@@ -8,7 +8,7 @@ from queries.pool import pool
 
 
 class BuddyIn(BaseModel):
-    user_id: int
+    user: str
     buddy: Optional[bool] = True
     admin: Optional[bool] = False
 
@@ -182,7 +182,7 @@ class TripRepo:
         except Exception as e:
             print(e)
 
-    def add_buddy(self, info: BuddyIn, trip_id: int):
+    def add_buddy(self, info: BuddyIn, trip_id: int, buddy_user_id: int):
         with pool.connection() as conn:
             with conn.cursor() as cur:
                 try:
@@ -193,7 +193,7 @@ class TripRepo:
                         """,
                         [
                             trip_id,
-                            info.user_id,
+                            buddy_user_id,
                             info.buddy,
                             info.admin,
                         ],
@@ -223,3 +223,26 @@ class TripRepo:
                         {"user_id": record[0], "display_name": record[1]}
                     )
                 return buddy_list
+
+    def get_id_from_username(self, user: BuddyIn):
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as cur:
+                    result = cur.execute(
+                        """
+                                SELECT user_id, username, email
+                                FROM accounts
+                                WHERE username=%s OR email=%s;
+                                """,
+                        [user.user, user.user],
+                    )
+                    user = result.fetchone()
+                    if user:
+                        user_id = user[0]
+                        return user_id
+
+        except Exception as e:
+            print(e)
+            raise HTTPException(
+                status_code=400, detail="Username or email does not exist"
+            )

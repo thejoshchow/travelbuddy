@@ -4,9 +4,6 @@
 }
 
 body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -26,6 +23,24 @@ body {
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+}
+
+.orange-button {
+    background-color: #FF9F1C;
+    border-color: #FF9F1C;
+}
+.login-button:hover {
+  background-color: #FFbf69;
+  border-color: #FF9F1C;
+}
+
+.blue-button {
+    background-color: #2EC4B6;
+    border-color: #2EC4B6;
+}
+.blue-button:hover {
+  background-color: #acf8f3;
+  border-color: #2EC4B6;
 }
 
 
