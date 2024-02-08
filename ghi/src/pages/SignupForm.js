@@ -76,13 +76,35 @@ const handleSubmit = (e) => {
     <Container>
       <Row className="justify-content-md-center">
        <Col md={4} className="split signup-left">
-         <div className="centered-signup-left">
-           <h1 className="sign-up-title" style={{}}>Signup</h1>
-          <Card className ="signup-card shadow p-4 mt-4">
+         <div className="centered-signup-left" >
+           <h1 className="sign-up-title" style={{ color: '#2EC4B6'}}>Signup</h1>
+          <Card className ="signup-card shadow p-4 mt-4" style={{ border: '2px solid #2EC4B6' }}>
             <Card.Body>
                <Form onSubmit={handleSubmit}>
              {error && <Alert variant="danger">{error}</Alert>}
 
+                <Form.Group controlId="formFirstName"className="mt-3">
+                  <Form.Label>First Name</Form.Label>
+                  <Form.Control
+                    name="first_name"
+                    type="text"
+                    placeholder="Enter first name"
+                    value={formData.first_name}
+                    onChange={handleFormChange}
+                  />
+                </Form.Group>
+
+
+                <Form.Group controlId="formLastName" className="mt-3">
+                  <Form.Label>Last Name</Form.Label>
+                  <Form.Control
+                    name="last_name"
+                    type="text"
+                    placeholder="Enter last name"
+                    value={formData.last_name}
+                    onChange={handleFormChange}
+                  />
+                </Form.Group>
 
                 <Form.Group id="formUsername" >
                   <Form.Label>Username</Form.Label>
@@ -119,30 +141,6 @@ const handleSubmit = (e) => {
                 </Form.Group>
 
 
-                 <Form.Group controlId="formFirstName"className="mt-3">
-                  <Form.Label>First Name</Form.Label>
-                  <Form.Control
-                    name="first_name"
-                    type="text"
-                    placeholder="Enter first name"
-                    value={formData.first_name}
-                    onChange={handleFormChange}
-                  />
-                </Form.Group>
-
-
-                <Form.Group controlId="formLastName" className="mt-3">
-                  <Form.Label>Last Name</Form.Label>
-                  <Form.Control
-                    name="last_name"
-                    type="text"
-                    placeholder="Enter last name"
-                    value={formData.last_name}
-                    onChange={handleFormChange}
-                  />
-                </Form.Group>
-
-
                 <Form.Group controlId="formDisplayName" className="formDisplayName mt-3">
                   <Form.Label>Display Name</Form.Label>
                   <Form.Control
@@ -150,12 +148,13 @@ const handleSubmit = (e) => {
                     type="text"
                     placeholder="Your display name will appear here..."
                     value={formData.first_name !== '' ? `${formData.first_name}.${formData.last_name}` : ''}
-                    onChange={handleFormChange}
+                     onChange={handleFormChange}
+                     disabled readOnly
                   />
                 </Form.Group>
 
 
-                <Form.Group controlId="formPhone" className="mt-3">
+                {/* <Form.Group controlId="formPhone" className="mt-3">
                   <Form.Label>Phone</Form.Label>
                   <Form.Control
                     name="phone"
@@ -164,9 +163,9 @@ const handleSubmit = (e) => {
                     value={formData.phone}
                     onChange={handleFormChange}
                   />
-                </Form.Group>
+                </Form.Group> */}
 
-                <Form.Group  controlId="formPictureUrl" className="mt-3">
+                {/* <Form.Group  controlId="formPictureUrl" className="mt-3">
                   <Form.Label>Picture URL</Form.Label>
                   <Form.Control
                     name="picture_url"
@@ -175,7 +174,7 @@ const handleSubmit = (e) => {
                     value={formData.picture_url}
                     onChange={handleFormChange}
                   />
-                </Form.Group>
+                </Form.Group> */}
                   <div className="text-center">
                     {error && <Alert variant="danger">{error}</Alert>}
                     <Button className="btn-signup mt-3" type="submit" disabled={isLoading}>
