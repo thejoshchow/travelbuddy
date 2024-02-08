@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { useCreateTripMutation } from "../services/tripsApi";
-import SuccessAlert from "../components/SucessAlert";
-import Spinner from "../components/Spinner";
+import { useCreateTripMutation } from "../../services/tripsApi";
+import SuccessAlert from "../../components/SucessAlert";
+import Spinner from "../../components/Spinner";
+
 
 
 const CreateTrip = () => {
-    const [createTrip, {isLoading, isSuccess}] = useCreateTripMutation()
-    const [setError] = useState('');
+    const [createTrip, {isLoading, isSuccess, isError}] = useCreateTripMutation()
 
     const [formData, setFormData] = useState({
         name: '',
@@ -26,24 +26,19 @@ const CreateTrip = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
         createTrip(formData)
-
-        .then(result => {
-            if (result.error) {
-                setError(`Could not create the trip. Error: Please fill out all forms properly.`);
-            }else{
-                setFormData({
-                    name: '',
-                    location: '',
-                    start_date: '',
-                    end_date: '',
-                    picture_url: '',
-                });
-            }
-        })
+        if (!isError) {
+            setFormData({
+                name: '',
+                location: '',
+                start_date: '',
+                end_date: '',
+                picture_url: '',
+            });
+        }
     }
 
     return (
-        <div className="container">
+        <div className="create-trip-modal">
             <Spinner isLoading={isLoading} />
             <SuccessAlert isSuccess={isSuccess} message='Trip added'/>
             <form className={!isSuccess ? null: 'd-none'} onSubmit={handleSubmit}>
@@ -59,7 +54,9 @@ const CreateTrip = () => {
                 <div className="mb-3">
                     <input type="date" name='end_date' value={formData.end_date} onChange={handleChange} className="form-control"/>
                 </div>
-                <button className='btn btn-primary' type='submit'>Submit</button>
+                <div className="create-trip-submit-container">
+                    <button className='create-trip-submit' type='submit'>Submit</button>
+                </div>
             </form>
         </div>
     )

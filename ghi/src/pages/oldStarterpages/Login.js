@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { useLoginMutation } from '../services/authApi'
-import { setToken, selectToken } from "../state/auth/authSlice";
+import { useLoginMutation } from '../../services/authApi'
+import { setToken, selectToken } from "../../state/auth/authSlice";
 
 const Login = () => {
     const [username, setUsername] = useState('');

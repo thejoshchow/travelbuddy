@@ -1,8 +1,8 @@
 import React, { useState} from 'react';
 //import { useNavigate } from 'react-router-dom';
 //import { useDispatch } from 'react-redux';
-import { useCreateAccountMutation } from '../services/authApi';
-import '../styles/SignupPage.css';
+import { useCreateAccountMutation } from '../../services/authApi';
+import '../../styles/SignupPage.css';
 import {Container,
         Row,
         Col,

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { useLoginMutation } from '../services/authApi';
-import { setToken } from '../state/auth/authSlice';
+import { useLoginMutation } from '../../services/authApi';
+import { setToken } from '../../state/auth/authSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import '../styles/Loginpage.css';
+import '../../styles/Loginpage.css';
 
 
 function LoginForm() {

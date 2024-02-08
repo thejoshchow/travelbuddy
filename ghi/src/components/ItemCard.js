@@ -1,4 +1,4 @@
-import accomodations from '../pages/tripOverviewPlaceholderphotos/accomodations.jpg'
+import accomodations from '../ph_photos/accomodations.jpg'
 import { useAddVoteMutation, useDeleteVoteMutation, useGetVotesQuery } from '../services/itemsApi';
 import ItemModal from './ItemModal';
 import { useGetAccountQuery } from '../services/authApi';

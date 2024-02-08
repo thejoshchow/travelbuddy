@@ -1,4 +1,4 @@
-import './App.css';
+import './styles/App.css';
 import { NavLink,useLocation} from 'react-router-dom';
 
 
@@ -10,13 +10,16 @@ function Nav() {
   }
   
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark custom-navbar">
-      <div className="container-fluid">
+    <nav className="main-navbar-tb navbar-expand-lg navbar-dark custom-navbar">
+      <div className="navbar-tb">
      
 
         <div className="nav-links ml-auto">
-          <NavLink className="navbar-link" to="/">
-            Home
+          <NavLink className="navbar-link" to="/dashboard">
+            Dashboard
+          </NavLink>
+          <NavLink className="navbar-link" to="/dashboard/past">
+            Past Trips
           </NavLink>
           <NavLink className="navbar-link" to="signup">
             Signup

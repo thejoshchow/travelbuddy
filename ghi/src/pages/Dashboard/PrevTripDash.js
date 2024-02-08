@@ -1,6 +1,6 @@
-
 import { useGetAllTripsQuery } from "../../services/tripsApi";
 import TripsDisplay from "./TripDisplayfun";
+import "../../styles/prev_trip.css"
 
 const PrevTripDash = () => {
     const { data: trips } = useGetAllTripsQuery()
@@ -13,7 +13,7 @@ const PrevTripDash = () => {
     console.log(past)
     return (
         <>
-        <div className='container'>
+        <div className='prev-trips-cards-container'>
             <div className='row m-2'>
             {past.map((trip, index) => <TripsDisplay trip={trip} index={index} />
             )}

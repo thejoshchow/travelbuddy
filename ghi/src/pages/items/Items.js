@@ -3,7 +3,8 @@ import { useParams } from "react-router-dom";
 import { useGetItemsQuery } from "../../services/itemsApi";
 import ItemCard from "../../components/ItemCard";
 import { useGetBuddyQuery } from "../../services/buddiesApi";
-import "./items.css"
+import '../../styles/items.css';
+
 
 const Items = () => {
     const { trip_id, category_id } = useParams()

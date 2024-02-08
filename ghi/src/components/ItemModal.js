@@ -1,5 +1,5 @@
-import "./itemModal.css"
-import accomodations from '../pages/tripOverviewPlaceholderphotos/accomodations.jpg'
+import "../styles/itemModal.css"
+import accomodations from '../ph_photos/accomodations.jpg'
 import Modal from 'react-bootstrap/Modal';
 import { Card } from 'react-bootstrap';
 

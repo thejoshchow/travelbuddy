@@ -3,9 +3,8 @@ import { useGetCategoriesQuery } from "../services/categoryApi";
 import { useLocation } from 'react-router-dom';
 import AddModal from "./AddModal"; 
 import ItemsForm from "../pages/items/ItemsForm";
-import "../pages/items/items.css"
 import { Nav, Navbar } from 'react-bootstrap';
-import "../pages/items/items.css"
+import "../styles/items.css"
 
 const CategoriesMenu = ({ trip_id }) => {
     const { data: categories, isLoading } = useGetCategoriesQuery(trip_id)

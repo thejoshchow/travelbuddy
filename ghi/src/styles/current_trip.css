@@ -1,0 +1,119 @@
+@font-face {
+  font-family: 'Sharpie';
+  src: url('./sharpie.ttf') format('truetype');
+}
+
+/* modal */
+.modal-header{
+    display: flex;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: 'Sharpie', sans-serif;
+}
+
+.modal-body{
+    margin-left: 0px !important;
+    padding: 15px;
+    font-family: 'Sharpie', sans-serif;
+}
+
+
+
+.create-trip-submit-container{
+    display: flex;
+    justify-content: center;
+}
+.create-trip-submit{
+    border-radius: 25px;
+    background-color: #FF9F1C;
+    padding: 10px;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.19), 0px 6px 6px rgba(0, 0, 0, 0.23);
+    margin-right: 25px;
+    transition: background-color 0.5s ease, box-shadow 0.5s ease, transform 0.2s ease;
+    border: solid 4px black;
+}
+.create-trip-submit:hover{
+    background-color: #2EC4B6;
+}
+.create-trip-submit:active{
+   box-shadow: 10px 5px 00px rgba(0, 0, 0, 0.19), 0px 3px 3px rgba(0, 0, 0, 0.23);
+    transform: translateY(4px);
+}
+
+/* trips */
+.btn-container{
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.create-trip-btn{
+    font-family: 'Sharpie', sans-serif;
+    color:black;
+    border-radius: 25px;
+    background-color: #FF9F1C;
+    padding: 10px;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.19), 0px 6px 6px rgba(0, 0, 0, 0.23);
+    margin-right: 25px;
+    transition: background-color 0.5s ease, box-shadow 0.5s ease, transform 0.2s ease;
+    border: solid 4px black;
+
+}
+
+.create-trip-btn:active{
+    box-shadow: 10px 5px 00px rgba(0, 0, 0, 0.19), 0px 3px 3px rgba(0, 0, 0, 0.23);
+    transform: translateY(4px);
+ 
+}
+.create-trip-btn:hover{
+     background-color: #2EC4B6;
+
+}
+.trips-container{
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    margin-top: 25px;
+    flex-direction: row;
+    gap: 25px;
+}
+.trip-cards-container{
+
+    font-family: 'Sharpie', sans-serif;
+    align-items: center;
+    font-size: small;
+}
+.trips-cards{
+    border: 2px solid black ;
+    padding: 15px;
+    transform: rotate(0deg);
+    transition: transform 1s;
+    border-radius: 0px;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.19), 0px 6px 6px rgba(0, 0, 0, 0.23);
+    color: black;
+}
+
+.trips-cards:hover{
+    transform: scale(1.1) rotate(1deg);
+}
+
+.trips-card-body{
+    padding: 5px;
+    border-radius: 25px;
+}
+
+.trip-cards:hover{
+    transform: scale(1.1) rotate(1deg) ;
+}
+
+.card-img-top{
+    height: 200px;
+    padding: 0px;
+    border: 1px black solid;
+}
+
+
+
+

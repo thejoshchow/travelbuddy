@@ -13,10 +13,12 @@ const TripsDisplay = ({ trip, index }) => {
     return (
         <div className='col align-self-start m-2' key={index}>
             <Link to={`/trip/${trip.trip_id}`} style={{ visited: "none", textDecoration: "none"}}>
-                <div className="card" key={index} style={{ width: 250 }}>
+                
+                
+                <div className="trips-cards" key={index} style={{ width: 250 }}>
                     <img src={trip.picture_url}
                         className="card-img-top" alt="..." />
-                    <div className="card-body">
+                    <div className="trips-card-body">
                         <h5 className="card-text  text-center text-uppercase">{trip.name}</h5>
                         <p className="card-text text-center text-wrap m-1">
                             From: <strong>{tripDate(trip.start_date)}</strong>
