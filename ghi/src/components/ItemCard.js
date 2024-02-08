@@ -23,8 +23,8 @@ const ItemCard = ({ item, trip_id, buddies}) => {
             <div className="card-footer">
                 <div className='col'>
                     <div className='row'>{item.name}</div>
-                    <div className='d-flex'>
-                        <p className='m-1'>{`votes: ${votes.votes.length}/${buddies.buddies.length}`}</p>
+                    <div className='d-flex flex-row justify-content-end'>
+                        <p className=''>{`votes: ${votes.votes.length}/${buddies.buddies.length}`}</p>
                         <button onClick={() => addVote(info)} className='vote-button' >Vote</button>
                         <button onClick={() => deleteVote(info)} className='unvote-button'>Unvote</button>
                     </div>

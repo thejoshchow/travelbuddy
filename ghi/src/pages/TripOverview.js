@@ -95,14 +95,14 @@ function skewCard() {
         <Container className="categories" >
            {categories.map((category) => (
                
-              
+            <a href={`/trip/${trip_id}/${category.category_id}`} style={{textDecoration: 'none'}} key={category.category_id}>
                <Card 
                     style={{ 
                         width: '18rem', 
                         transform: `rotate(${skewCard()})`
                     }} 
                     className="card-container-categories" 
-                    key={category.category_id}>
+                    >
                 
                     <Card.Body className="category-body">
                        {
@@ -122,7 +122,8 @@ function skewCard() {
                     <Card.Footer className="categories">
                         <strong>{category.category_name}</strong> 
                     </Card.Footer>
-                   </Card>
+                </Card>
+            </a>
             
             ))}
         </Container>
