@@ -31,7 +31,7 @@ const AddBuddyForm = ({ trip_id }) => {
                 trip_id: trip_id,
             };
 
-            const response = await addBuddy(info).unwrap();
+            await addBuddy(info).unwrap();
             setUsername('');
 
         } catch (error) {

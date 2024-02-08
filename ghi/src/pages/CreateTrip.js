@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { tripsApi, useCreateTripMutation } from "../services/tripsApi";
+import { useCreateTripMutation } from "../services/tripsApi";
 import SuccessAlert from "../components/SucessAlert";
 import Spinner from "../components/Spinner";
 
 
 const CreateTrip = () => {
     const [createTrip, {isLoading, isSuccess}] = useCreateTripMutation()
-    const [error, setError] = useState('');
+    const [setError] = useState('');
 
     const [formData, setFormData] = useState({
         name: '',
@@ -17,7 +17,6 @@ const CreateTrip = () => {
     })
 
     const handleChange = (e) => {
-        const type = e.target.type;
         const name = e.target.name;
         const value = e.target.value;
         setFormData(data => ({...data, [name]:value}))

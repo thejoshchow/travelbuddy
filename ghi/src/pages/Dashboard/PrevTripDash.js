@@ -3,7 +3,9 @@ import { useGetAllTripsQuery } from "../../services/tripsApi";
 import TripsDisplay from "./TripDisplayfun";
 
 const PrevTripDash = () => {
-    const { data: past } = useGetAllTripsQuery()
+    const { data: trips } = useGetAllTripsQuery()
+
+    const past = trips?.trips.filter((trip) => new Date(trip.end_date.replace(/-/g, "/")) <= new Date())
 
     if (past === undefined) {
         return null
@@ -13,14 +15,8 @@ const PrevTripDash = () => {
         <>
         <div className='container'>
             <div className='row m-2'>
-            {past.trips.map((trip, index) => {
-                if (new Date(trip.end_date.replace(/-/g, "/")) < new Date()) {
-                    return (
-
-                            <TripsDisplay trip={trip} index={index} />
-                    )
-                }
-            })}
+            {past.map((trip, index) => <TripsDisplay trip={trip} index={index} />
+            )}
             </div>
         </div>
         </>

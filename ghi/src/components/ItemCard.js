@@ -3,6 +3,7 @@ import { useAddVoteMutation, useDeleteVoteMutation, useGetVotesQuery } from '../
 import ItemModal from './ItemModal';
 import { useGetAccountQuery } from '../services/authApi';
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 const ItemCard = ({ item, trip_id, buddies  }) => {
     const [showItem, setShowItem] = useState(false)
@@ -22,9 +23,8 @@ const ItemCard = ({ item, trip_id, buddies  }) => {
         if (votes?.votes) {
             setVoted(votes.votes.includes(account.user_id))
         }
-    }, [votes?.votes])
+    }, [votes?.votes, account?.user_id])
 
-    console.log(voted)
 
     if (!votes) {
         return null
@@ -33,9 +33,9 @@ const ItemCard = ({ item, trip_id, buddies  }) => {
         <>
         <ItemModal show={showItem} onHide={() => setShowItem(false)} item={item} />
         <div className="image-card">
-           <a onClick={()=> setShowItem(true)}>
+           <Link onClick={()=> setShowItem(true)}>
                <img className="image" src={/*item.picture_url*/accomodations}  alt="..." />
-           </a>
+           </Link>
             <div className="card-footer">
                 <div className='col'>
                     <div className='row'>{item.name}</div>

@@ -4,7 +4,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import "./App.css";
 import "./styles/Loginpage.css"
 import "./styles/SignupPage.css"
-import Login from "./pages/Login";
 import LoginForm from "./pages/LoginForm";
 import Dashboard from "./pages/Dashboard";
 import Landing from "./pages/Landing";
@@ -13,7 +12,6 @@ import RequireAuth from "./state/auth/RequireAuth";
 import Nav from './Nav';
 import SignupForm from "./pages/SignupForm";
 import TripOverview from './pages/TripOverview';
-import CreateTrip from "./pages/CreateTrip";
 import CurrentDash from './pages/Dashboard/CurrentTripDash';
 import PrevTripDash from './pages/Dashboard/PrevTripDash';
 import Items from './pages/items/Items';

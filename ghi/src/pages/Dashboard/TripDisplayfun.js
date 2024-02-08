@@ -1,7 +1,5 @@
-import { useGetAllTripsQuery } from "../../services/tripsApi"
 import { Link } from "react-router-dom"
 const TripsDisplay = ({ trip, index }) => {
-    const {data} = useGetAllTripsQuery()
 
     const tripDate = (date) => {
         let curDate = new Date(date.replace(/-/g, "/"))

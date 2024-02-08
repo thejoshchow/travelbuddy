@@ -27,12 +27,12 @@ const Login = () => {
         setPassword('')
         console.log(token)
     }
-    
+
     useEffect(() => {
         if (token) {
             navigate('/dashboard')
         }
-    }, [success])
+    }, [success, token, navigate])
 
     return (
         <>

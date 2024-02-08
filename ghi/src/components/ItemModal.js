@@ -1,6 +1,5 @@
 import "./itemModal.css"
 import accomodations from '../pages/tripOverviewPlaceholderphotos/accomodations.jpg'
-import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { Card } from 'react-bootstrap';
 
@@ -13,7 +12,7 @@ function ItemModal(props) {
       centered
     >
         <Card className='card-modal'>
-         <Card.Header className='card-header2'><img className="modal-image" src={accomodations}></img></Card.Header>
+         <Card.Header className='card-header2'><img className="modal-image" src={accomodations} alt=""></img></Card.Header>
             <Card.Body className='modal-body'>
                 <div>
                     <p>{props.item.name}</p>
