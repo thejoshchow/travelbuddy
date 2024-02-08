@@ -1,10 +1,12 @@
 import accomodations from '../pages/tripOverviewPlaceholderphotos/accomodations.jpg'
 import { useAddVoteMutation, useDeleteVoteMutation, useGetVotesQuery } from '../services/itemsApi';
 import ItemModal from './ItemModal';
-import { useState } from 'react';
+import { useGetAccountQuery } from '../services/authApi';
+import { useState, useEffect } from 'react';
 
-const ItemCard = ({ item, trip_id, buddies }) => {
+const ItemCard = ({ item, trip_id, buddies  }) => {
     const [showItem, setShowItem] = useState(false)
+    const [voted, setVoted] = useState()
     const info = {
         trip_id: trip_id,
         item_id:item.item_id
@@ -15,7 +17,14 @@ const ItemCard = ({ item, trip_id, buddies }) => {
     const [addVote] = useAddVoteMutation()
     const [deleteVote] = useDeleteVoteMutation()
     const { data: votes } = useGetVotesQuery(item.item_id)
+    const { data: {account} } = useGetAccountQuery()
+    useEffect(() => {
+        if (votes?.votes) {
+            setVoted(votes.votes.includes(account.user_id))
+        }
+    }, [votes?.votes])
 
+    console.log(voted)
 
     if (!votes) {
         return null
@@ -31,9 +40,11 @@ const ItemCard = ({ item, trip_id, buddies }) => {
                 <div className='col'>
                     <div className='row'>{item.name}</div>
                     <div className='d-flex flex-row justify-content-end'>
-                        <p className=''>{`votes: ${votes.votes.length}/${buddies.buddies.length}`}</p>
+                        <p className='me-3'>{`votes: ${votes.votes.length}/${buddies.buddies.length}`}</p>
+                        { !voted ?
                         <button onClick={() => addVote(info)} className='vote-button' >Vote</button>
-                        <button onClick={() => deleteVote(info)} className='unvote-button'>Unvote</button>
+                        : <button onClick={() => deleteVote(info)} className='unvote-button'>Unvote</button>
+                        }
                     </div>
                 </div>
             </div>

@@ -9,9 +9,16 @@ export const itemsApi = createApi({
         deleteVote: build.mutation({
             query: (info) => ({
                 url: `/api/trip/${info.trip_id}/item/${info.item_id}/vote`,
-                method: "delete",
+                method: "delete"
             }),
-            invalidatesTags: ['votes'],
+            invalidatesTags: ['votes','items'],
+        }),
+        getVotes: build.query({
+            query: (item_id) => ({
+                url: `/api/item/${item_id}/vote`,
+                method: "get"
+            }),
+            providesTags: ['vote', 'items'],
         }),
         addItem: build.mutation({
             query: (info) => ({
@@ -33,14 +40,7 @@ export const itemsApi = createApi({
                 url: `/api/trip/${info.trip_id}/item/${info.item_id}/vote`,
                 method: "post",
             }),
-            invalidatesTags: ['votes'],
-        }),
-        getVotes: build.query({
-            query: (item_id) => ({
-                url: `/api/item/${item_id}/vote`,
-                method: "get"
-            }),
-            providesTags: ['vote']
+            invalidatesTags: ['votes', 'items'],
         }),
     })
 })
