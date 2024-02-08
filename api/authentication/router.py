@@ -73,15 +73,23 @@ def update_account(
         raise HTTPException(status_code=400, detail="Passwords do not match")
     else:
         try:
-            hashed_password = authenticator.hash_password(
-                user_form.new_password
-            )
-            updated_account = accounts.update(
-                account.user_id,
-                hashed_password,
-                user_form.email,
-            )
-            return updated_account
+            if not user_form.new_password == '':
+                hashed_password = authenticator.hash_password(
+                    user_form.new_password
+                )
+                updated_account = accounts.update(
+                    account.user_id,
+                    hashed_password,
+                    user_form.email,
+                )
+                return updated_account
+            else:
+                updated_account = accounts.update(
+                    account.user_id,
+                    account.hashed_password,
+                    user_form.email,
+                )
+
         except Exception:
             raise HTTPException(
                 status_code=400, detail="Could not update account"

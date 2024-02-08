@@ -20,6 +20,7 @@ import Items from './pages/items/Items';
 import UsersUpdate from './pages/UsersUpdate';
 import AddBuddyModal from './pages/AddBuddyModal';
 import CheckAuth from './state/auth/CheckAuth';
+import AccountUpdate from './pages/AccountUpdate';
 
 function App() {
    return (
@@ -41,6 +42,7 @@ function App() {
                     <Route path='/dashboard/past' element={<PrevTripDash />} />
                 </Route>
                 <Route path='user/update' element={<UsersUpdate />} />
+                <Route path='account/update' element={<AccountUpdate />} />
 
 
                 <Route path='trip/' >

@@ -38,15 +38,23 @@ export const authApi = createApi({
     createAccount: build.mutation({
         query: (userInfo) => {
             return {
-                url: '/api/account',  
+                url: '/api/account',
                 method: "POST",
                 body: userInfo
               }
           },
           invalidatesTags: ['token']
-        }),
+    }),
+    updateAccount: build.mutation({
+      query: (info) => ({
+        url: '/api/account',
+        body: info,
+        method: 'PUT',
+        credentials: 'include',
+      }),
+      invalidatesTags: ['token']
+    }),
     })
   });
-  
-  export const { useLoginMutation, useLogoutMutation, useGetAccountQuery, useCreateAccountMutation } = authApi;
-                    
+
+  export const { useLoginMutation, useLogoutMutation, useGetAccountQuery, useCreateAccountMutation, useUpdateAccountMutation } = authApi;
