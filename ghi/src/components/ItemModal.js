@@ -13,7 +13,7 @@ function ItemModal(props) {
     >
         <Card className='card-modal'>
          <Card.Header className='card-header2'><img className="modal-image" src={accomodations} alt=""></img></Card.Header>
-            <Card.Body className='modal-body'>
+            <Card.Body className='item-modal-body'>
                 <div>
                     <p>{props.item.name}</p>
                     <p>Description: {props.item.description}</p>
