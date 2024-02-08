@@ -11,6 +11,7 @@ import {Container,
         Button,
         Alert } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Link } from 'react-router-dom';
 
 
 
@@ -175,12 +176,12 @@ const handleSubmit = (e) => {
                     onChange={handleFormChange}
                   />
                 </Form.Group>
-                  <Form onSubmit={handleSubmit} className="text-center">
-                  {error && <Alert variant="danger">{error}</Alert>}
-                  <Button className="btn-signup mt-3" type="submit" disabled={isLoading}>
-                    {isLoading ? 'Taking a short trip...' : 'Sign Up'}
-                  </Button>
-                </Form>
+                  <div className="text-center">
+                    {error && <Alert variant="danger">{error}</Alert>}
+                    <Button className="btn-signup mt-3" type="submit" disabled={isLoading}>
+                      {isLoading ? 'Taking a short trip...' : 'Sign Up'}
+                    </Button>
+                  </div>
 
 
 
@@ -194,7 +195,9 @@ const handleSubmit = (e) => {
          <div className="centered-signup-right">
            <img src="TB_transparent_logo_white.png" alt="" style={{ width: '400px', height: 'auto', filter: 'drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.5))' }} />
            <h2 style={{ color: 'white' }}>Welcome!</h2>
-           <p style={{ color: 'white' }}>blah blah blah</p>
+           <p>
+            <Link className='already-a-buddy' to="/login">Already a buddy?</Link>
+           </p>
          </div>
        </Col>
 

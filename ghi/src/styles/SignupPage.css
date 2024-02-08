@@ -67,3 +67,11 @@ button.btn-signup {
   margin: 0 auto;
 }
 
+.already-a-buddy{
+ 
+  color:white;
+}
+
+.already-a-buddy:hover{
+  color:#2EC4B6;
+}

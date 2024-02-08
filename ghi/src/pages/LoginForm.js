@@ -4,6 +4,9 @@ import { setToken } from '../state/auth/authSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import '../styles/Loginpage.css';
+
 
 function LoginForm() {
 
@@ -95,7 +98,9 @@ function LoginForm() {
         <div className="centered">
         <img src="TB_transparent_logo_orange.png" alt="" style={{ width: '400px', height: 'auto', filter: 'drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.5))' }} />
         <h2 style={{ color: '#ff9f1c' }}>Welcome!</h2>
-        <p style={{ color: '#ff9f1c' }}>blah blah blah</p>
+        <p>
+          <Link className='not-a-buddy' to="/signup" >Not a buddy?</Link>
+        </p>
       </div>
 
       </div>

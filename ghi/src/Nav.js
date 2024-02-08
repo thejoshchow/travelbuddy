@@ -1,14 +1,18 @@
 import './App.css';
-import { NavLink } from 'react-router-dom';
+import { NavLink,useLocation} from 'react-router-dom';
 
 
 function Nav() {
+   const location = useLocation();
+
+  if (location.pathname === '/login' || location.pathname === '/signup') {
+    return null;
+  }
+  
   return (
     <nav className="navbar navbar-expand-lg navbar-dark custom-navbar">
       <div className="container-fluid">
-        <a className="logo" href="/">
-          <img src="logo-transparent-png.png" alt="" width="60" height="48"/>
-        </a>
+     
 
         <div className="nav-links ml-auto">
           <NavLink className="navbar-link" to="/">

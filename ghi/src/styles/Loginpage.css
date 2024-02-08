@@ -57,3 +57,11 @@
 .centered-right {
   margin-bottom: 250px;
 }
+
+
+.not-a-buddy{
+  color: #ff9f1c;
+}
+.not-a-buddy:hover{
+  color: white;
+}
