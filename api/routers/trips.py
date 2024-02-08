@@ -14,6 +14,7 @@ from queries.trips import (
     TripBuddyList,
 )
 from queries.errors import Error
+from pexels import get_pic_url
 
 
 router = APIRouter()
@@ -27,8 +28,9 @@ def create_trip(
 ) -> Union[TripOut, Error]:
     user_id = account_data["user_id"]
     user = account_data["username"]
+    pic = get_pic_url(trip_form.location)
     try:
-        trip = trips.create(trip_form, user_id)
+        trip = trips.create(trip_form, user_id, picture=pic)
         trips.add_buddy(
             BuddyIn(user=user, buddy=True, admin=True),
             trip.trip_id,

@@ -38,7 +38,7 @@ class TripBuddyList(BaseModel):
 
 
 class TripRepo:
-    def create(self, trip_form: TripIn, user_id: int):
+    def create(self, trip_form: TripIn, user_id: int, picture: str):
         try:
             with pool.connection() as conn:
                 with conn.cursor() as cur:
@@ -60,10 +60,11 @@ class TripRepo:
                             trip_form.location,
                             trip_form.start_date,
                             trip_form.end_date,
-                            trip_form.picture_url,
+                            picture,
                             user_id,
                         ],
                     )
+                    print(type(picture))
                     trip_id = result.fetchone()[0]
                     return TripOut(trip_id=trip_id, **trip_form.dict())
         except Exception as e:

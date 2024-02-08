@@ -12,7 +12,7 @@ class EmptyTripRepo:
     def get_all(self, user_id: int):
         return {"trips": []}
 
-    def create(self, trip_form, user_id: int):
+    def create(self, trip_form, user_id: int, picture: str):
         result = {"trip_id": 1}
         result.update(trip_form)
         return TripOut(**result)
