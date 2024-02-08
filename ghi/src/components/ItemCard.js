@@ -1,7 +1,10 @@
 import accomodations from '../pages/tripOverviewPlaceholderphotos/accomodations.jpg'
 import { useAddVoteMutation, useDeleteVoteMutation, useGetVotesQuery } from '../services/itemsApi';
+import ItemModal from './ItemModal';
+import { useState } from 'react';
 
-const ItemCard = ({ item, trip_id, buddies}) => {
+const ItemCard = ({ item, trip_id, buddies }) => {
+    const [showItem, setShowItem] = useState(false)
     const info = {
         trip_id: trip_id,
         item_id:item.item_id
@@ -18,8 +21,12 @@ const ItemCard = ({ item, trip_id, buddies}) => {
         return null
     }
     return (
+        <>
+        <ItemModal show={showItem} onHide={() => setShowItem(false)} item={item} />
         <div className="image-card">
-           <img className="image" src={/*item.picture_url*/accomodations}  alt="..." />
+           <a onClick={()=> setShowItem(true)}>
+               <img className="image" src={/*item.picture_url*/accomodations}  alt="..." />
+           </a>
             <div className="card-footer">
                 <div className='col'>
                     <div className='row'>{item.name}</div>
@@ -31,6 +38,7 @@ const ItemCard = ({ item, trip_id, buddies}) => {
                 </div>
             </div>
         </div>
+        </>
     )
 }
 

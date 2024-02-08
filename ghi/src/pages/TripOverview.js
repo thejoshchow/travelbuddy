@@ -1,3 +1,4 @@
+import '../App.css'
 import React, { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import { useGetOneTripQuery } from "../services/tripsApi"
@@ -11,7 +12,7 @@ import {Container,
         Form, 
         Button, } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../App.css'
+
 import TripAdmin from './TripAdminForm'
 import AddModal from "../components/AddModal"
 import { useSelector, useDispatch } from "react-redux"

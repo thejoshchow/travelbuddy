@@ -12,22 +12,27 @@ const Items = () => {
         category_id: category_id,
     }
     const { data: items, isLoading } = useGetItemsQuery(info)
-    const {data: buddies} = useGetBuddyQuery(trip_id)
+    const { data: buddies } = useGetBuddyQuery(trip_id)
 
 
 
     return (
         isLoading ? null :
+        <>
+        
         <div className='navbar-items'>
                 <CategoriesMenu trip_id={trip_id} />
-
                 <div className='items d-flex flex-row flex-wrap'>
                     {items.items.map((item) => {
-                        return <ItemCard key={item.item_id} buddies={buddies} item={item} trip_id={trip_id} />
+                        return (
+                            <div key={item.item_id}>
+                                <ItemCard buddies={buddies} item={item} trip_id={trip_id} />
+                            </div>
+                        )
                 })}
                 </div>
-
         </div>
+        </>
     )
 }
 

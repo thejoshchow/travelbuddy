@@ -1,0 +1,41 @@
+.modal-content{
+    border-radius: 25px ;
+    box-sizing: border-box;
+   
+}
+
+
+.card-header2{
+    display: flex;
+    border-radius: 50px !important;
+    padding: 0px;
+    box-sizing: border-box;
+}
+    
+.card-modal{
+    display: flex;
+    border:solid 2px black(126, 125, 125);
+    border-radius: 25px;
+    width: 800px;
+    box-sizing: border-box;
+}
+
+.modal-image{
+   
+    justify-content: center;
+    border-radius: 25px;
+    border:solid 2px black(126, 125, 125);
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.19), 0px 6px 6px rgba(0, 0, 0, 0.23);
+    font-family: 'Sharpie', sans-serif;
+    border: 3px solid black;
+    max-height: 100%;
+    max-width: 800px;
+    box-sizing: border-box;
+}
+
+.modal-body{
+    margin-left: 150px;
+   
+}
+    
+   
