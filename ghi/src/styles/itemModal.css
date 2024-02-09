@@ -1,4 +1,20 @@
 
+@media (max-width: 600px) {
+    .nav-links,
+    .trip-overview,
+    .categories,
+    .details {
+        flex-direction: column;
+    }
+
+    .card-container-trip-details,
+    .card-container-categories,
+    .card-container-cost{
+        width: 100%;
+    }
+}
+
+
 .btn-primary{
     display: flex;
     justify-content: center;

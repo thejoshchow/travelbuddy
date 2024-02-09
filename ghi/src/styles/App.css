@@ -3,6 +3,23 @@
   src: url('./sharpie.ttf') format('truetype');
 }
 
+@media (max-width: 600px) {
+    .nav-links,
+    .trip-overview,
+    .categories,
+    .details {
+        flex-direction: column;
+    }
+
+    .card-container-trip-details,
+    .card-container-categories,
+    .card-container-cost{
+        width: 100%;
+    }
+}
+
+
+
 body {
   margin: 0;
   padding: 0;

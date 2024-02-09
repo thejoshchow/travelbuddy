@@ -25,7 +25,7 @@ const CategoriesMenu = ({ trip_id }) => {
         <>
             <AddModal show={showModal} onHide={() => setShowModal(false)} modaltitle='Add item' form={<ItemsForm trip={trip_id} />} />
             <Navbar className='nav-container'>
-                <Nav className="mr-auto d-flex flex-row">
+                <Nav className="navbar-nav">
                     <button
                         onClick={() => setShowModal(true)}
                         className='btn-add-item mr-3'>

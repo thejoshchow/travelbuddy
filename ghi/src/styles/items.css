@@ -3,6 +3,23 @@
   src: url('./sharpie.ttf') format('truetype');
 }
 
+
+@media (max-width: 600px) {
+    .nav-links,
+    .trip-overview,
+    .categories,
+    .details {
+        flex-direction: column;
+    }
+
+    .card-container-trip-details,
+    .card-container-categories,
+    .card-container-cost{
+        width: 100%;
+    }
+}
+
+
 /* Add item btn and Nav categories*/
 
 
@@ -15,7 +32,13 @@
     margin-top: 25px;
     margin-bottom: 25px;
     font-family: 'Sharpie', sans-serif;
+ 
 
+}
+.navbar-nav{
+    display: flex;
+    gap: 25px;
+   
 }
 .btn-add-item{
     font-family: 'Sharpie', sans-serif;
