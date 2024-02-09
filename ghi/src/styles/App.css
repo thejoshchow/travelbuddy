@@ -174,7 +174,7 @@ pointer-events: none;
   border-radius: 0px;
 }
 .trip-detail-body{
-  flex: 1 1 auto;
+  display: flex;
   border-radius: 0px;
   flex-direction: column;
   flex-wrap: wrap;

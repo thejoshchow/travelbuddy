@@ -48,22 +48,19 @@ const TripOverview = () => {
     return (
     <>
         <AddModal show={showAdminModal} onHide={() => setShowAdminModal(false)} modaltitle='Update trip' form={<TripAdmin trip_id={trip_id} />} />
-        <AddModal show={showBuddyModal} onHide={() => setShowBuddyModal(false)} modaltitle='Add buddy' form={<AddBuddyForm />} />
-        <div className="trip-overview"> <h1>Trip Dash</h1> </div>
+        <AddModal show={showBuddyModal} onHide={() => setShowBuddyModal(false)} modaltitle='Add buddy' form={<AddBuddyForm trip_id={trip_id}/>} />
+        <div className="trip-overview"> 
+            <h1>{trip.name}</h1>
+        </div>
         <Container className="details">
           
             <Link onClick={() => roles.admin? setShowAdminModal(true) : null} style={{textDecoration: 'none'}}>
-                <Card style={{ width: '18rem' }} className="card-container-trip-details">
+                <Card style={{ width: '18rem', minHeight: '250px' }} className="card-container-trip-details">
                     <Card.Header className="header-trip-details"><strong>Trip Details</strong></Card.Header>
                         <Card.Body className="trip-detail-body">
-                            <Card.Title className="card-title-trip-details"></Card.Title>
-                            <ul>
-                                <li>{trip.name}</li> 
-                                <li>{trip.location}</li>
-                                <li>{trip.start_date}</li>
-                                <li>{trip.end_date}</li>
-                                <li>{trip.picture_url}</li> 
-                            </ul>
+                                <p>{trip.location}</p>
+                                <p>{trip.start_date}</p>
+                                <p>{trip.end_date}</p>
                         </Card.Body>
                 </Card>
             </Link>    
