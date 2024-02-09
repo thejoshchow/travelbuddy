@@ -15,6 +15,8 @@ import UsersUpdate from './pages/UsersUpdate';
 import CheckAuth from './state/auth/CheckAuth';
 import AccountUpdate from './pages/AccountUpdate';
 import LoginForm from "./pages/login_signup/LoginForm";
+import ItemsForm from './pages/items/ItemsForm';
+
 
 function App() {
    return (
@@ -29,10 +31,12 @@ function App() {
 
             {/* protected routes */}
             <Route element={<RequireAuth />}>
+                <Route path='items' element={<ItemsForm />} />
+                {/* <Route path='dashboard' element={<Dashboard />}> */}
                 <Route path='dashboard' element={<CurrentDash />} />
-                <Route path='history' element={<PrevTripDash />} />
-                <Route path='user' element={<UsersUpdate />} />
-                <Route path='account' element={<AccountUpdate />} />
+                <Route path='dashboard/past' element={<PrevTripDash />} />
+                <Route path='user/update' element={<UsersUpdate />} />
+                <Route path='account/update' element={<AccountUpdate />} />
 
                 <Route path='trip/' >
                     <Route index element={<CurrentDash />} />

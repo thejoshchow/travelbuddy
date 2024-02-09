@@ -11,7 +11,7 @@ export const itemsApi = createApi({
                 url: `/api/trip/${info.trip_id}/item/${info.item_id}/vote`,
                 method: "delete"
             }),
-            invalidatesTags: ['votes','items'],
+            invalidatesTags: ['votes', 'items'],
         }),
         getVotes: build.query({
             query: (item_id) => ({
@@ -42,7 +42,22 @@ export const itemsApi = createApi({
             }),
             invalidatesTags: ['votes', 'items'],
         }),
+        updateItem: build.mutation({
+            query: (info) => ({
+                url: `/api/trip/${info.trip_id}/item/${info.item_id}`,
+                body: info,
+                method: 'PUT',
+            }),
+            invalidatesTags: ['items'],
+        }),
+        deleteItem: build.mutation({
+            query: (info) => ({
+                url: `/api/trip/${info.trip_id}/item/${info.item_id}`,
+                method: 'DELETE'
+            }),
+            invalidatesTags: ['items'],
+        }),
     })
-})
+});
 
-export const {useGetVotesQuery, useDeleteVoteMutation, useAddItemMutation, useGetItemsQuery, useAddVoteMutation } = itemsApi
+export const { useGetVotesQuery, useDeleteVoteMutation, useAddItemMutation, useGetItemsQuery, useAddVoteMutation, useUpdateItemMutation, useDeleteItemMutation } = itemsApi
