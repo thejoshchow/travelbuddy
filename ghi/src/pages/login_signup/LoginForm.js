@@ -94,7 +94,7 @@ function LoginForm() {
 
       <div className="split left">
         <div className="centered">
-        <img src="TB_transparent_logo_orange.png" alt="" style={{ width: '400px', height: 'auto', filter: 'drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.5))' }} />
+        <img src={require("../../public/TB_transparent_logo_orange.png")} alt="" style={{ width: '400px', height: 'auto', filter: 'drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.5))' }} />
         <h2 style={{ color: '#ff9f1c' }}>Welcome!</h2>
         <p>
           <Link className='not-a-buddy' to="/signup" >Not a buddy?</Link>

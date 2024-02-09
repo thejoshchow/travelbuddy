@@ -183,7 +183,7 @@ const handleSubmit = (e) => {
 
        <Col md={6} className="split signup-right">
          <div className="centered-signup-right">
-           <img src="TB_transparent_logo_white.png" alt="" style={{ width: '400px', height: 'auto', filter: 'drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.5))' }} />
+           <img src={require('../../public/TB_transparent_logo_white.png')} alt="" style={{ width: '400px', height: 'auto', filter: 'drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.5))' }} />
            <h2 style={{ color: 'white' }}>Welcome!</h2>
            <p>
             <Link className='already-a-buddy' to="/login">Already a buddy?</Link>

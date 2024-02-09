@@ -3,7 +3,6 @@ import { NavLink, useLocation, Link } from 'react-router-dom';
 import { useLogoutMutation } from './services/authApi';
 import { useGetCurrentUserQuery } from './services/usersApi';
 
-
 function Nav() {
    const location = useLocation();
    const { data: user } = useGetCurrentUserQuery()
@@ -15,7 +14,7 @@ function Nav() {
   return (
     <nav className="main-navbar-tb navbar-expand-lg navbar-dark custom-navbar">
         <div className="nav-links">
-          <Link to="#"><img src='TB_transparent_logo_orange.png' style={{width: '45px', height: '45px'}} alt='' disable /></Link>
+          <Link to="#"><img src={require('./public/TB_transparent_logo_orange.png')} style={{width: '45px', height: '45px'}} alt='' disable /></Link>
           <div className='align-self-center'>
           <NavLink className="navbar-link" to="/dashboard">
             Dashboard
