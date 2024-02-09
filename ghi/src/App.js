@@ -4,7 +4,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import "./styles/App.css";
 import "./styles/Loginpage.css"
 import "./styles/SignupPage.css"
-import Landing from "./pages/oldStarterpages/Landing";
 import RequireAuth from "./state/auth/RequireAuth";
 import Nav from './Nav';
 import SignupForm from "./pages/login_signup/SignupForm";
@@ -24,7 +23,7 @@ function App() {
     <Routes>
         <Route path='/' element={<CheckAuth />}>
             {/* public routes */}
-            <Route index element={<Landing />} />
+            <Route index element={<LoginForm/>} />
             <Route path='login' element={<LoginForm />} />
             <Route path='signup' element={<SignupForm />} />
 
