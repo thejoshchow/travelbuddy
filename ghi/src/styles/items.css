@@ -59,6 +59,25 @@
     box-shadow: 10px 5px 00px rgba(0, 0, 0, 0.19), 0px 3px 3px rgba(0, 0, 0, 0.23);
     transform: translateY(4px);
 }
+.back-dash{
+    font-family: 'Sharpie', sans-serif;
+    color:black;
+    border-radius: 25px;
+    background-color: #FF9F1C;
+    padding: 10px;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.19), 0px 6px 6px rgba(0, 0, 0, 0.23);
+    margin-right: 25px;
+    transition: background-color 0.5s ease, box-shadow 0.5s ease, transform 0.2s ease;
+    border: solid 4px black;
+}
+.back-dash-item:hover{
+    background-color: #2EC4B6;
+}
+.back-dash:active{
+    background-color: #2EC4B6;
+    box-shadow: 10px 5px 00px rgba(0, 0, 0, 0.19), 0px 3px 3px rgba(0, 0, 0, 0.23);
+    transform: translateY(4px);
+}
 
 .navbar-categories{
     color: #2EC4B6;
@@ -69,6 +88,8 @@
 .navbar-categories.active {
   text-decoration: underline;
 }
+
+.back
 /* Items */
 
 

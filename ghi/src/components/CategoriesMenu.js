@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useGetCategoriesQuery } from "../services/categoryApi";
-import { useLocation } from 'react-router-dom';
+import { useLocation,useNavigate } from 'react-router-dom';
 import AddModal from "./AddModal"; 
 import ItemsForm from "../pages/items/ItemsForm";
 import { Nav, Navbar } from 'react-bootstrap';
@@ -11,7 +11,8 @@ const CategoriesMenu = ({ trip_id }) => {
     const { data: categories, isLoading } = useGetCategoriesQuery(trip_id)
     const [showModal, setShowModal] = useState(false);
     const location = useLocation();
-
+    const navigate = useNavigate();
+    
     // don't really need this because of the font but will keep it in in case we change it
     const capitalizeFirstLetter = (string) => {
 
@@ -27,6 +28,11 @@ const CategoriesMenu = ({ trip_id }) => {
             <Navbar className='nav-container'>
                 <Nav className="navbar-nav">
                     <button
+                        onClick={() => navigate(`/trip/${trip_id}`)}
+                        className='back-dash'>
+                        Back to Dash
+                    </button>
+                    <button
                         onClick={() => setShowModal(true)}
                         className='btn-add-item mr-3'>
                         Add Item
@@ -36,7 +42,7 @@ const CategoriesMenu = ({ trip_id }) => {
                         return (
                             <Link 
                                 className={`navbar-categories ${location.pathname === currentPath ? 'active' : ''}`} 
-                                to={currentPath}
+                                href={currentPath}
                                 key={cat.category_id}>
                                 {capitalizeFirstLetter(cat.category_name)}
                             </Link>
