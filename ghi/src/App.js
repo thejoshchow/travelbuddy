@@ -4,9 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import "./styles/App.css";
 import "./styles/Loginpage.css"
 import "./styles/SignupPage.css"
-// import Dashboard from "./pages/oldStarterpages/Dashboard";
 import Landing from "./pages/oldStarterpages/Landing";
-import ItemsForm from "./pages/items/ItemsForm";
 import RequireAuth from "./state/auth/RequireAuth";
 import Nav from './Nav';
 import SignupForm from "./pages/login_signup/SignupForm";
@@ -19,8 +17,6 @@ import AddBuddyModal from './pages/AddBuddyModal';
 import CheckAuth from './state/auth/CheckAuth';
 import AccountUpdate from './pages/AccountUpdate';
 import LoginForm from "./pages/login_signup/LoginForm";
-// import Login from "./pages/oldStarterpages/Login";
-// import CreateTrip from "./pages/Dashboard/CreateTrip";
 
 function App() {
    return (
@@ -36,12 +32,10 @@ function App() {
 
             {/* protected routes */}
             <Route element={<RequireAuth />}>
-                <Route path='items' element={<ItemsForm />} />
-                {/* <Route path='dashboard' element={<Dashboard />}> */}
-                <Route path='dashboard' element={<CurrentDash />} /> 
-                <Route path='dashboard/past' element={<PrevTripDash />} />
-                <Route path='user/update' element={<UsersUpdate />} />
-                <Route path='account/update' element={<AccountUpdate />} />
+                <Route path='dashboard' element={<CurrentDash />} />
+                <Route path='history' element={<PrevTripDash />} />
+                <Route path='user' element={<UsersUpdate />} />
+                <Route path='account' element={<AccountUpdate />} />
 
                 <Route path='trip/' >
                     <Route index element={<CurrentDash />} />

@@ -1,38 +1,41 @@
 import './styles/App.css';
-import { NavLink,useLocation} from 'react-router-dom';
+import { NavLink, useLocation, Link } from 'react-router-dom';
+import { useLogoutMutation } from './services/authApi';
+import { useGetCurrentUserQuery } from './services/usersApi';
 
 
 function Nav() {
    const location = useLocation();
+   const { data: user } = useGetCurrentUserQuery()
+   const [logout] = useLogoutMutation()
 
   if (location.pathname === '/login' || location.pathname === '/signup') {
     return null;
   }
-  
   return (
     <nav className="main-navbar-tb navbar-expand-lg navbar-dark custom-navbar">
-      <div className="navbar-tb">
-     
-
-        <div className="nav-links ml-auto">
+        <div className="nav-links">
+          <Link to="#"><img src='TB_transparent_logo_orange.png' style={{width: '45px', height: '45px'}} alt='' disable /></Link>
+          <div className='align-self-center'>
           <NavLink className="navbar-link" to="/dashboard">
             Dashboard
           </NavLink>
-          <NavLink className="navbar-link" to="/dashboard/past">
+          <NavLink className="navbar-link" to="/history">
             Past Trips
           </NavLink>
-          <NavLink className="navbar-link" to="signup">
-            Signup
-          </NavLink>
-          <NavLink className="navbar-link" to="login">
-            Login
-          </NavLink>
+          </div>
+        </div>  
+        <div className='nav-right align-self-center' >
+            <li className='nav-item dropdown'>
+                <button className='nav-link dropdown-toggle' data-bs-toggle="dropdown">Hello, {user?.first_name}</button>
+                <ul className='dropdown-menu'>
+                    <li><Link className="dropdown-item dropdown-link" to="user">Update user profile</Link></li>
+                    <li><Link className='dropdown-item dropdown-link' to='account'>Update account settings</Link></li>
+                    <li><Link className='dropdown-item dropdown-link' onClick={() => logout()} to='#'>Sign out</Link></li>
+                </ul>
+            </li>
         </div>
-        <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-          </ul>
-        </div>
-      </div>
+        
     </nav>
 
   );

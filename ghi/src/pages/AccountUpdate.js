@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { useGetAccountQuery, useUpdateAccountMutation } from "../services/authApi";
-import { useNavigate } from "react-router-dom";
+import Spinner from "../components/Spinner";
+import SuccessAlert from "../components/SucessAlert";
 
 
 const AccountUpdate = () => {
-    const navigate = useNavigate();
     const { data: accountData } = useGetAccountQuery();
-    const [updateAccount] = useUpdateAccountMutation();
+    const [updateAccount, {isLoading, isSuccess}] = useUpdateAccountMutation();
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [currentPassword, setCurrentPassword] = useState('');
@@ -48,8 +48,9 @@ const AccountUpdate = () => {
                 new_password: updatedPassword,
                 confirm_new_password: confirmPassword,
             };
-            await updateAccount(data);
-            navigate('/dashboard')
+            console.log(data)
+            const response = await updateAccount(data)
+            console.log(response)
 
         } catch (error) {
             console.error('An error occurred while updating account details', error);
@@ -67,7 +68,9 @@ const AccountUpdate = () => {
         <div className="account-update-container mt-5">
             <div className="d-flex align-items-center">
             <div className="offset-3 col-6">
-                <div className="shadow p-4" style={{ border: '2px solid black', borderRadius: '8px'}}>
+                <Spinner isLoading={isLoading} />
+                <SuccessAlert isSuccess={isSuccess} message='Account details updated'/>
+                <div className={!isSuccess ? "shadow p-4" : 'd-none'} style={{ border: '2px solid black', borderRadius: '8px'}}>
                 <h1 style={{ textAlign: 'center' }}>Update Account Details</h1>
                 <form onSubmit={handleSubmit} id="account-update-form">
 
@@ -94,7 +97,7 @@ const AccountUpdate = () => {
                         id="email"
                         value={email}
                         className="form-control"/>
-                    <label htmlFor="name">Email or Updated Email</label>
+                    <label htmlFor="name">Email</label>
                     </div>
 
                     <div className="form-floating mb-3">
