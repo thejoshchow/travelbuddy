@@ -4,6 +4,7 @@ import { useLocation } from 'react-router-dom';
 import AddModal from "./AddModal"; 
 import ItemsForm from "../pages/items/ItemsForm";
 import { Nav, Navbar } from 'react-bootstrap';
+import { Link } from "react-router-dom";
 import "../styles/items.css"
 
 const CategoriesMenu = ({ trip_id }) => {
@@ -33,12 +34,12 @@ const CategoriesMenu = ({ trip_id }) => {
                     {categories.map((cat) => {
                         const currentPath = `/trip/${trip_id}/${cat.category_id}`; 
                         return (
-                            <Nav.Link 
+                            <Link 
                                 className={`navbar-categories ${location.pathname === currentPath ? 'active' : ''}`} 
                                 href={currentPath}
                                 key={cat.category_id}>
                                 {capitalizeFirstLetter(cat.category_name)}
-                            </Nav.Link>
+                            </Link>
                         );
                     })}
                 </Nav>
