@@ -38,25 +38,27 @@ const CreateTrip = () => {
     }
 
     return (
-        <div className="create-trip-modal">
+        <div className="container">
             <Spinner isLoading={isLoading} />
             <SuccessAlert isSuccess={isSuccess} message='Trip added'/>
             <form className={!isSuccess ? null: 'd-none'} onSubmit={handleSubmit}>
-                <div className="mb-3">
-                    <input type="text" name='name' value={formData.name} onChange={handleChange} className="form-control" placeholder="Trip name"/>
+                <div className="form-floating mb-3">
+                    <input type="text" name='name' value={formData.name} onChange={handleChange} id='trip-name' className="form-control" placeholder="Trip name" />
+                    <label htmlFor="trip-name">Trip name</label>
                 </div>
-                <div className="mb-3">
-                    <input type="text" name='location' value={formData.location} onChange={handleChange} className="form-control" placeholder="Location" />
+                <div className="form-floating mb-3">
+                    <input type="text" name='location' value={formData.location} onChange={handleChange} id='trip-location' className="form-control" placeholder="Location" />
+                    <label htmlFor="trip-location">Location</label>
                 </div>
-                <div className="mb-3">
-                    <input type="date" name='start_date' value={formData.start_date}  onChange={handleChange} className="form-control" />
+                <div className="form-floating mb-3">
+                    <input type="date" name='start_date' value={formData.start_date} onChange={handleChange} id='trip-start' className="form-control" />
+                    <label htmlFor="trip-start">Start date</label>
                 </div>
-                <div className="mb-3">
-                    <input type="date" name='end_date' value={formData.end_date} onChange={handleChange} className="form-control"/>
+                <div className="form-floating mb-3">
+                    <input type="date" name='end_date' value={formData.end_date} id='trip-end' onChange={handleChange} className="form-control" />
+                    <label htmlFor="trip-end">End date</label>
                 </div>
-                <div className="create-trip-submit-container">
-                    <button className='create-trip-submit' type='submit'>Submit</button>
-                </div>
+                <button className='btn blue-button' type='submit'>Submit</button>
             </form>
         </div>
     )

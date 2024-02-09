@@ -55,17 +55,21 @@ const TripAdmin = ({trip_id}) => {
             <Spinner isLoading={isLoading} />
             <SuccessAlert isSuccess={isSuccess} message='Trip details updated successfully'/>
             <form className={!isSuccess ? null: 'd-none'} onSubmit={handleSubmit}>
-                <div className='mb-3'>
-                    <input onChange={handleFormChange} value={formChange.name} className='form-control' name='name' type='text' />
+                <div className='form-floating mb-3'>
+                    <input onChange={handleFormChange} value={formChange.name} id='trip-name' className='form-control' name='name' type='text' />
+                    <label htmlFor="trip-name">Name</label>
                 </div>
-                <div className='mb-3'>
-                    <input onChange={handleFormChange} value={formChange.location} className='form-control' name='location' type='text' />
+                <div className='form-floating mb-3'>
+                    <input onChange={handleFormChange} value={formChange.location} id='trip-location' className='form-control' name='location' type='text' />
+                    <label htmlFor="trip-location">Location</label>
                 </div>
-                <div className='mb-3'>
-                    <input onChange={handleFormChange} value={formChange.start_date} className='form-control' name='start_date' type='date'/>
+                <div className='form-floating mb-3'>
+                    <input onChange={handleFormChange} value={formChange.start_date} id='trip-start' className='form-control' name='start_date' type='date'/>
+                    <label htmlFor="trip-start">Start date</label>
                 </div>
-                <div className='mb-3'>
-                    <input onChange={handleFormChange} value={formChange.end_date} className='form-control' name='end_date' type='date' />
+                <div className='form-floating mb-3'>
+                    <input onChange={handleFormChange} value={formChange.end_date} id='trip-end' className='form-control' name='end_date' type='date' />
+                    <label htmlFor="trip-end">End date</label>
                 </div>
                 <button className='btn blue-button'>Update trip</button>
             </form>

@@ -5,7 +5,7 @@ import Spinner from "../components/Spinner";
 
 const AddBuddyForm = ({ trip_id }) => {
     const [username, setUsername] = useState('');
-    const [selectedOption, setSelectedOption] = useState('buddy');
+    const [selectedOption, setSelectedOption] = useState(true);
     const [addBuddy, {isLoading, isSuccess}] = useAddBuddyMutation();
 
 
@@ -23,7 +23,8 @@ const AddBuddyForm = ({ trip_id }) => {
 
         try {
             const data = {
-            user: username
+                user: username,
+                buddy: selectedOption
             }
 
             const info = {
@@ -41,55 +42,51 @@ const AddBuddyForm = ({ trip_id }) => {
     }
 
 return (
-    <div className="form-container">
+    <div className="container">
         <Spinner isLoading={isLoading} />
         <SuccessAlert isSuccess={isSuccess} message='Buddy added!' />
         <form className={!isSuccess ? null : 'd-none' } onSubmit={handleSubmit}>
-            <label>
-                Username:
+            <div className='form-floating mb3'>
                 <input
+                    className='form-control'
                     onChange={handleUsernameChange}
                     type="text"
                     value={username}
-                    style={{ marginLeft: '10px' }}
                 />
-            </label>
+                <label htmlFor='username'>Buddy's username or email</label>
+            </div>
 
-            <div className="add-buddy mb-3" style={{ marginTop: '10px' }}>
+            <div className="form-check mb-3" style={{ marginTop: '10px' }}>
                 <input
-                    value="buddy"
+                    value={true}
                     onChange={handleFormChange}
                     type="radio"
-                    className="form-input"
+                    className="form-check-input"
                     id="buddy"
-                    name="buddyOrGuest"
-                    checked={selectedOption === 'buddy'} />
+                    name="buddyOrGuest"/>
                 <label
-                    className="form-label"
-                    htmlFor="buddy"
-                    style={{ marginLeft: '10px' }}>
+                    className="form-check-label"
+                    htmlFor="buddy">
                         Buddy
                 </label>
             </div>
 
-            <div className="add-buddy mb-3" style={{ marginTop:'10px' }}>
+            <div className="form-check mb-3" style={{ marginTop:'10px' }}>
                 <input
-                    value="guest"
+                    value={false}
                     onChange={handleFormChange}
                     type="radio"
-                    className="form-input"
+                    className="form-check-input"
                     id="guest"
-                    name="buddyOrGuest"
-                    checked={selectedOption === 'guest'} />
+                    name="buddyOrGuest"/>
                 <label
-                    className="form-label"
-                    htmlFor="guest"
-                    style={{ marginLeft: '10px' }}>
+                    className="form-check-label"
+                    htmlFor="guest">
                         Guest
                 </label>
                 </div>
 
-        <button type="submit">Add Buddy</button>
+        <button className='btn blue-button' type="submit">Add Buddy</button>
         </form>
     </div>
 

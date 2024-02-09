@@ -1,5 +1,5 @@
-import React, { useState} from 'react';
-//import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState} from 'react';
+import { useNavigate } from 'react-router-dom';
 //import { useDispatch } from 'react-redux';
 import { useCreateAccountMutation } from '../../services/authApi';
 import '../../styles/SignupPage.css';
@@ -9,13 +9,18 @@ import {Container,
         Card,
         Form,
         Button,
-        Alert } from 'react-bootstrap';
+        Alert,
+        FloatingLabel } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { selectToken } from '../../state/auth/authSlice';
 
 
 
 export function SignupForm() {
+  const token = useSelector(selectToken)
+  const navigate = useNavigate()
   const [createAccount, { isLoading }] = useCreateAccountMutation();
   // bring navigate back when dashboard is working
   //const navigate = useNavigate();
@@ -24,6 +29,7 @@ export function SignupForm() {
     username: '',
     email: '',
     password: '',
+    // confirmPassword: '',
     first_name: '',
     last_name: '',
     display_name: '',
@@ -52,11 +58,10 @@ export function SignupForm() {
         username: '',
         email: '',
         password: '',
+        // confirmPassword: '',
         first_name: '',
         last_name: '',
         display_name: '',
-        phone: '',
-        picture_url: ''
       });
       //bring navigate back delete seterror when dashboard is working
       setError("")
@@ -65,12 +70,18 @@ export function SignupForm() {
     }})
 };
 
+useEffect(() => {
+    if (token) {
+        navigate('/dashboard')
+    }
+})    
+
 const handleSubmit = (e) => {
   e.preventDefault();
   signUp(formData);
-
-
 };
+    
+
 
  return (
     <Container>
@@ -81,108 +92,88 @@ const handleSubmit = (e) => {
           <Card className ="signup-card shadow p-4 mt-4" style={{ border: '2px solid #2EC4B6' }}>
             <Card.Body>
                <Form onSubmit={handleSubmit}>
-             {error && <Alert variant="danger">{error}</Alert>}
+                {error && <Alert variant="danger">{error}</Alert>}
 
-                <Form.Group controlId="formFirstName"className="mt-3">
-                  <Form.Label>First Name</Form.Label>
-                  <Form.Control
-                    name="first_name"
-                    type="text"
-                    placeholder="Enter first name"
-                    value={formData.first_name}
-                    onChange={handleFormChange}
-                  />
-                </Form.Group>
-
-
-                <Form.Group controlId="formLastName" className="mt-3">
-                  <Form.Label>Last Name</Form.Label>
-                  <Form.Control
-                    name="last_name"
-                    type="text"
-                    placeholder="Enter last name"
-                    value={formData.last_name}
-                    onChange={handleFormChange}
-                  />
-                </Form.Group>
-
-                <Form.Group id="formUsername" >
-                  <Form.Label>Username</Form.Label>
-                  <Form.Control
-                    name="username"
-                    type="text"
-                    placeholder="Enter username"
-                    value={formData.username}
-                    onChange={handleFormChange}
-                  />
-                </Form.Group>
-
-                 <Form.Group controlId="formEmail" className="mt-3">
-                  <Form.Label>Email</Form.Label>
-                  <Form.Control
-                    name="email"
-                    type="email"
-                    placeholder="Enter email"
-                    value={formData.email}
-                    onChange={handleFormChange}
-                  />
-                </Form.Group>
+                  <FloatingLabel controlId="formFirstName"className="mb-3" label='First name'>
+                    <Form.Control
+                        name="first_name"
+                        type="text"
+                        placeholder="Enter first name"
+                        value={formData.first_name}
+                        onChange={handleFormChange}
+                    />
+                  </FloatingLabel>
 
 
-                 <Form.Group controlId="formPassword" className="mt-3" >
-                  <Form.Label>Password</Form.Label>
-                  <Form.Control
-                    name="password"
-                    type="password"
-                    placeholder="Password"
-                    value={formData.password}
-                    onChange={handleFormChange}
-                  />
-                </Form.Group>
+                  <FloatingLabel controlId="formLastName" className="mb-3" label='Last name'>
+                    <Form.Control
+                        name="last_name"
+                        type="text"
+                        placeholder="Enter last name"
+                        value={formData.last_name}
+                        onChange={handleFormChange}
+                    />
+                  </FloatingLabel>
 
 
-                <Form.Group controlId="formDisplayName" className="formDisplayName mt-3">
-                  <Form.Label>Display Name</Form.Label>
-                  <Form.Control
-                    name="display_name"
-                    type="text"
-                    placeholder="Your display name will appear here..."
-                    value={formData.first_name !== '' ? `${formData.first_name}.${formData.last_name}` : ''}
-                     onChange={handleFormChange}
-                     disabled readOnly
-                  />
-                </Form.Group>
+                  <FloatingLabel id="formUsername" className='mb-3' label='Username'>
+                    <Form.Control
+                        name="username"
+                        type="text"
+                        placeholder="Enter username"
+                        value={formData.username}
+                        onChange={handleFormChange}
+                    />
+                  </FloatingLabel>
+
+                  <FloatingLabel controlId="formEmail" className="mb-3" label='Email'>
+                    <Form.Control
+                        name="email"
+                        type="email"
+                        placeholder="Enter email"
+                        value={formData.email}
+                        onChange={handleFormChange}
+                    />
+                  </FloatingLabel>
 
 
-                {/* <Form.Group controlId="formPhone" className="mt-3">
-                  <Form.Label>Phone</Form.Label>
-                  <Form.Control
-                    name="phone"
-                    type="tel"
-                    placeholder="Enter phone number"
-                    value={formData.phone}
-                    onChange={handleFormChange}
-                  />
-                </Form.Group> */}
+                  <FloatingLabel controlId="formPassword" className="mb-3" label='Password'>
+                    <Form.Control
+                        name="password"
+                        type="password"
+                        placeholder="Password"
+                        value={formData.password}
+                        onChange={handleFormChange}
+                    />
+                  </FloatingLabel>
+                  
+                  {/* <FloatingLabel controlId="formConfirmPassword" className="mb-3" label='Confirm password'>
+                    <Form.Control
+                        name="confirmPassword"
+                        type="password"
+                        placeholder="Confirm password"
+                        value={formData.confirmPassword}
+                        onChange={handleFormChange}
+                    />
+                  </FloatingLabel> */}
 
-                {/* <Form.Group  controlId="formPictureUrl" className="mt-3">
-                  <Form.Label>Picture URL</Form.Label>
-                  <Form.Control
-                    name="picture_url"
-                    type="text"
-                    placeholder="Enter picture URL"
-                    value={formData.picture_url}
-                    onChange={handleFormChange}
-                  />
-                </Form.Group> */}
+                  <FloatingLabel controlId="formDisplayName" className="formDisplayName mb-3" label='Display name'>
+                    <Form.Control
+                        name="display_name"
+                        type="text"
+                        placeholder="Your display name will appear here..."
+                        value={formData.first_name !== '' ? `${formData.first_name}.${formData.last_name}` : ''}
+                        onChange={handleFormChange}
+                        disabled readOnly
+                    />
+                  </FloatingLabel>
+
                   <div className="text-center">
                     {error && <Alert variant="danger">{error}</Alert>}
                     <Button className="btn-signup mt-3" type="submit" disabled={isLoading}>
                       {isLoading ? 'Taking a short trip...' : 'Sign Up'}
                     </Button>
                   </div>
-
-
 
               </Form>
             </Card.Body>

@@ -14,9 +14,6 @@ const UsersUpdate = () => {
     })
 
 
-
-    console.log(userData)
-
      const handleChange = (e) => {
         const name = e.target.name;
         const value = e.target.value;
@@ -55,14 +52,27 @@ const UsersUpdate = () => {
     }, [userData])
     return (
         <>
-        <form onSubmit={handlesubmit}>
-            <input type="text" name="first_name" value={formData.first_name} onChange={handleChange} placeholder="First Name" />
-            <input type="text" name="last_name" value={formData.last_name} onChange={handleChange} placeholder="last Name" />
-            <input type="text" name="display_name" value={formData.display_name} onChange={handleChange} placeholder="display Name"/>
-            <input type="text" name="picture_url" value={formData.picture_url} onChange={handleChange} placeholder="picture url"/>
-            <input type="text" name="phone" value={formData.phone} onChange={handleChange} placeholder="phone"/>
-            <button type="submit">Submit</button>
-        </form>
+        <div className='container'>    
+            <form onSubmit={handlesubmit}>
+                <div className='form-floating mb-3'>       
+                    <input className="form-control" id='firstname' type="text" name="first_name"  value={formData.first_name} onChange={handleChange} placeholder="First Name" />
+                    <label htmlFor="firstname">First name</label>
+                </div>
+                <div className='form-floating mb-3'> 
+                    <input className="form-control" id='lastname' type="text" name="last_name" value={formData.last_name} onChange={handleChange} placeholder="last Name" />
+                    <label htmlFor="lastname">Last name</label>
+                </div>
+                <div className='form-floating mb-3'> 
+                    <input className="form-control" id='displayname'  type="text" name="display_name" value={formData.display_name} onChange={handleChange} placeholder="display Name"/>
+                    <label htmlFor="displayname">Display name</label>
+                </div>
+                <div className='form-floating mb-3'> 
+                    <input className="form-control" id='phone' type="text" name="phone" value={formData.phone} onChange={handleChange} placeholder="phone"/>
+                    <label htmlFor="phone">Phone</label>
+                </div>
+                <button className='btn blue-button' type="submit">Submit</button>
+            </form>
+        </div>
         </>
     )
 }
