@@ -10,12 +10,11 @@ const PrevTripDash = () => {
     if (past === undefined) {
         return null
     }
-    console.log(past)
     return (
         <>
         <div className='prev-trips-cards-container'>
             <div className='row m-2'>
-            {past.map((trip, index) => <TripsDisplay trip={trip} index={index} />
+            {past.map((trip) => <TripsDisplay key={trip.trip_id} trip={trip} />
             )}
             </div>
         </div>

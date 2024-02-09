@@ -24,10 +24,10 @@ return (
                     <button className="create-trip-btn" onClick={() => setShow(true)}>Create Trip</button>
                 </div>
             <div className='trips-container'>
-            {current.map((trip, index) => {
+            {current.map((trip) => {
                     return (
                         <div className='trip-cards-container' key={trip.id}>
-                            <TripsDisplay className='trips-cards' trip={trip} index={index} />
+                            <TripsDisplay className='trips-cards' trip={trip} />
                         </div>
                     )
             })}

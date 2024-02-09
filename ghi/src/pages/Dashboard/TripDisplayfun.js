@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-const TripsDisplay = ({ trip, index }) => {
+const TripsDisplay = ({ trip }) => {
 
     const tripDate = (date) => {
         let curDate = new Date(date.replace(/-/g, "/"))
@@ -11,11 +11,11 @@ const TripsDisplay = ({ trip, index }) => {
     }
 
     return (
-        <div className='col align-self-start m-2' key={index}>
+        <div className='col align-self-start m-2' >
             <Link to={`/trip/${trip.trip_id}`} style={{ visited: "none", textDecoration: "none"}}>
                 
                 
-                <div className="trips-cards" key={index} style={{ width: 250 }}>
+                <div className="trips-cards" style={{ width: 250 }}>
                     <img src={trip.picture_url}
                         className="card-img-top" alt="..." />
                     <div className="trips-card-body">

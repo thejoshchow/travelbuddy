@@ -1,5 +1,5 @@
 import '../../styles/App.css'
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { useParams, Link } from "react-router-dom"
 import { useGetOneTripQuery } from "../../services/tripsApi"
 import { useGetCategoriesQuery} from "../../services/categoryApi"
@@ -29,22 +29,21 @@ const TripOverview = () => {
     const { data: buddyRoles, isSuccess } = useIsBuddyQuery(trip_id);
     const dispatch = useDispatch()
     const roles = useSelector(getRoles)
-
-    if (isSuccess) {
-        dispatch(setRoles(buddyRoles))
-    }
     
+    function skewCard() {
+        const degree = Math.floor(Math.random()*20) - 10;
+        return degree.toString() + 'deg';
+    }
 
+    useEffect(() => {
+        if (isSuccess) {
+            dispatch(setRoles(buddyRoles))
+        }
+    })
+    
     if (categories === undefined || trip === undefined || buddies === undefined ) {
         return null
     }
-
-function skewCard() {
-    const degree = Math.floor(Math.random()*20) - 10;
-    return degree.toString() + 'deg';
-}
-
-    
     return (
     <>
         <AddModal show={showModal} onHide={() => setShowModal(false)} modaltitle='Update trip' form={<TripAdmin trip_id={trip_id} />} />
@@ -127,14 +126,5 @@ function skewCard() {
     </>
     )
 }
-                   
-       
-                        
-                         
-                        
-                
-        
-      
-
 
 export default TripOverview
