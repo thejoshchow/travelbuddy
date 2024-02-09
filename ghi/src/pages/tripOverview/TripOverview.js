@@ -51,21 +51,21 @@ function skewCard() {
         <div className="trip-overview"> <h1>Trip Dash</h1> </div>
         <Container className="details">
           
-            <Card style={{ width: '18rem' }} className="card-container-trip-details">
-                <Card.Header className="header-trip-details"><strong>Trip Details</strong></Card.Header>
-                <Link onClick={() => roles.admin? setShowModal(true) : null} style={{textDecoration: 'none'}}>
-                    <Card.Body className="trip-detail-body">
-                        <Card.Title className="card-title-trip-details"></Card.Title>
-                        <ul>
-                            <li>{trip.name}</li> 
-                            <li>{trip.location}</li>
-                            <li>{trip.start_date}</li>
-                            <li>{trip.end_date}</li>
-                            <li>{trip.picture_url}</li> 
-                        </ul>
-                    </Card.Body>
-                </Link>    
-            </Card>
+            <Link onClick={() => roles.admin? setShowModal(true) : null} style={{textDecoration: 'none'}}>
+                <Card style={{ width: '18rem' }} className="card-container-trip-details">
+                    <Card.Header className="header-trip-details"><strong>Trip Details</strong></Card.Header>
+                        <Card.Body className="trip-detail-body">
+                            <Card.Title className="card-title-trip-details"></Card.Title>
+                            <ul>
+                                <li>{trip.name}</li> 
+                                <li>{trip.location}</li>
+                                <li>{trip.start_date}</li>
+                                <li>{trip.end_date}</li>
+                                <li>{trip.picture_url}</li> 
+                            </ul>
+                        </Card.Body>
+                </Card>
+            </Link>    
             
             <Card style={{ width: '18rem' }} className="card-container-cost">
                 <Card.Header className="card-title-cost">Total Cost</Card.Header>
@@ -91,7 +91,7 @@ function skewCard() {
         <Container className="categories" >
            {categories.map((category) => (
                
-            <Link href={`/trip/${trip_id}/${category.category_id}`} style={{textDecoration: 'none'}} key={category.category_id}>
+            <Link to={`/trip/${trip_id}/${category.category_id}`} style={{textDecoration: 'none'}} key={category.category_id}>
                <Card 
                     style={{ 
                         width: '18rem', 
