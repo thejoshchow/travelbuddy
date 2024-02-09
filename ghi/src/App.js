@@ -13,7 +13,6 @@ import CurrentDash from './pages/Dashboard/CurrentTripDash';
 import PrevTripDash from './pages/Dashboard/PrevTripDash';
 import Items from './pages/items/Items';
 import UsersUpdate from './pages/UsersUpdate';
-import AddBuddyModal from './pages/AddBuddyModal';
 import CheckAuth from './state/auth/CheckAuth';
 import AccountUpdate from './pages/AccountUpdate';
 import LoginForm from "./pages/login_signup/LoginForm";
@@ -28,7 +27,6 @@ function App() {
             <Route index element={<Landing />} />
             <Route path='login' element={<LoginForm />} />
             <Route path='signup' element={<SignupForm />} />
-            <Route path='test' element={<AddBuddyModal />} />
 
             {/* protected routes */}
             <Route element={<RequireAuth />}>

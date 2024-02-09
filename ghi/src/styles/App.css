@@ -193,6 +193,7 @@ pointer-events: none;
 }
 .card-container-buddies{
   flex: 1 1 auto;
+  height: 100%;
   font-family: 'Sharpie', sans-serif;
   max-width: 300px;
   background-color: #FF9F1C;

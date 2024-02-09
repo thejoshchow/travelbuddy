@@ -46,17 +46,18 @@ return (
         <Spinner isLoading={isLoading} />
         <SuccessAlert isSuccess={isSuccess} message='Buddy added!' />
         <form className={!isSuccess ? null : 'd-none' } onSubmit={handleSubmit}>
-            <div className='form-floating mb3'>
+            <div className='form-floating mb-3'>
                 <input
                     className='form-control'
                     onChange={handleUsernameChange}
                     type="text"
                     value={username}
+                    placeholder="Buddy's username or email"
                 />
                 <label htmlFor='username'>Buddy's username or email</label>
             </div>
 
-            <div className="form-check mb-3" style={{ marginTop: '10px' }}>
+            <div className="form-check mb-3 mx-3" style={{ marginTop: '10px' }}>
                 <input
                     value={true}
                     onChange={handleFormChange}
@@ -71,7 +72,7 @@ return (
                 </label>
             </div>
 
-            <div className="form-check mb-3" style={{ marginTop:'10px' }}>
+            <div className="form-check mb-3 mx-3" style={{ marginTop:'10px' }}>
                 <input
                     value={false}
                     onChange={handleFormChange}

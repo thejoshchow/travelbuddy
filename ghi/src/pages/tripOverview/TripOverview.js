@@ -7,7 +7,7 @@ import { useGetBuddyQuery } from "../../services/buddiesApi"
 
 import {Container, Card} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import AddBuddyForm from '../AddBuddyForm'
 import TripAdmin from '../TripAdminForm'
 import AddModal from "../../components/AddModal"
 import { useSelector, useDispatch } from "react-redux"
@@ -21,7 +21,8 @@ import activitiesImage from '../../ph_photos/activities.jpg';
 import placeholder from '../../ph_photos/placeholder.png'
 
 const TripOverview = () => {
-    const [showModal, setShowModal] = useState(false);
+    const [showAdminModal, setShowAdminModal] = useState(false);
+    const [showBuddyModal, setShowBuddyModal] = useState(false);
     const { trip_id } = useParams();
     const { data: trip } = useGetOneTripQuery(trip_id);
     const { data: categories } = useGetCategoriesQuery(trip_id);
@@ -46,11 +47,12 @@ const TripOverview = () => {
     }
     return (
     <>
-        <AddModal show={showModal} onHide={() => setShowModal(false)} modaltitle='Update trip' form={<TripAdmin trip_id={trip_id} />} />
+        <AddModal show={showAdminModal} onHide={() => setShowAdminModal(false)} modaltitle='Update trip' form={<TripAdmin trip_id={trip_id} />} />
+        <AddModal show={showBuddyModal} onHide={() => setShowBuddyModal(false)} modaltitle='Add buddy' form={<AddBuddyForm />} />
         <div className="trip-overview"> <h1>Trip Dash</h1> </div>
         <Container className="details">
           
-            <Link onClick={() => roles.admin? setShowModal(true) : null} style={{textDecoration: 'none'}}>
+            <Link onClick={() => roles.admin? setShowAdminModal(true) : null} style={{textDecoration: 'none'}}>
                 <Card style={{ width: '18rem' }} className="card-container-trip-details">
                     <Card.Header className="header-trip-details"><strong>Trip Details</strong></Card.Header>
                         <Card.Body className="trip-detail-body">
@@ -73,6 +75,7 @@ const TripOverview = () => {
                     </Card.Body>
             </Card>
             
+            <Link onClick={() => setShowBuddyModal(true)} style={{textDecoration: 'none'}}>
             <Card style={{ width: '18rem' }} className="card-container-buddies">
                    <Card.Header className="card-header-whos-going">Who's going</Card.Header>
                     <Card.Body className="buddy-body">
@@ -84,6 +87,7 @@ const TripOverview = () => {
                     ))}
                 </Card.Body>
             </Card>
+            </Link>
        
         </Container>
            
