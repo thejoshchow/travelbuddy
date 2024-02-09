@@ -36,7 +36,7 @@ const CategoriesMenu = ({ trip_id }) => {
                         return (
                             <Link 
                                 className={`navbar-categories ${location.pathname === currentPath ? 'active' : ''}`} 
-                                href={currentPath}
+                                to={currentPath}
                                 key={cat.category_id}>
                                 {capitalizeFirstLetter(cat.category_name)}
                             </Link>
