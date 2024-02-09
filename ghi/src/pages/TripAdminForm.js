@@ -26,7 +26,8 @@ const TripAdmin = ({trip_id}) => {
             name: formChange.name,
             location: formChange.location,
             start_date: formChange.start_date,
-            end_date: formChange.end_date
+            end_date: formChange.end_date,
+            picture_url:trip.picture_url
         }
 
         const info = {
@@ -43,7 +44,8 @@ const TripAdmin = ({trip_id}) => {
                 name: trip.name,
                 location: trip.location,
                 start_date: trip.start_date,
-                end_date: trip.end_date
+                end_date: trip.end_date,
+                picture_url:trip.picture_url
             })
         }
 
