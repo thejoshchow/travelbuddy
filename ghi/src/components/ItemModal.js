@@ -1,5 +1,4 @@
 import "../styles/itemModal.css"
-import accomodations from '../ph_photos/accomodations.jpg'
 import Modal from 'react-bootstrap/Modal';
 import { Card } from 'react-bootstrap';
 import { useState } from "react";
@@ -33,7 +32,7 @@ function ItemModal(props) {
         </div>
     }
         <Card className='card-modal'>
-         <Card.Header className='card-header2'><img className="modal-image" src={accomodations} alt=""></img></Card.Header>
+         <Card.Header className='card-header2'><img className="modal-image" src={props.item.picture_url} alt=""></img></Card.Header>
             <Card.Body className='item-modal-body'>
                 <div>
                     <p>{props.item.name}</p>

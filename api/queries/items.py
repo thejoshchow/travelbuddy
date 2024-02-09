@@ -122,7 +122,9 @@ class ItemRepository:
             print(e)
             raise Exception
 
-    def create(self, trip_id: int, item: ItemIn, user_id: int) -> ItemOut:
+    def create(
+        self, trip_id: int, item: ItemIn, user_id: int, picture: str
+    ) -> ItemOut:
         try:
             # connect to db
             with pool.connection() as conn:
@@ -155,7 +157,7 @@ class ItemRepository:
                             item.description,
                             item.scheduled,
                             item.url,
-                            item.picture_url,
+                            picture,
                             item.cost,
                             item.cost_per_person,
                             item.notes,
@@ -164,7 +166,11 @@ class ItemRepository:
                     id = result.fetchone()[0]
                     # return new data
                     old_data = item.dict()
-                    return ItemOut(trip_id=trip_id, item_id=id, **old_data)
+                    return ItemOut(
+                        trip_id=trip_id,
+                        item_id=id,
+                        **old_data,
+                    )
         except Exception as e:
             raise HTTPException(status_code=400, detail=f"{e}")
 

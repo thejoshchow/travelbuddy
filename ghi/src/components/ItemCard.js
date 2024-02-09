@@ -1,4 +1,3 @@
-import accomodations from '../ph_photos/accomodations.jpg'
 import { useAddVoteMutation, useDeleteVoteMutation, useGetVotesQuery } from '../services/itemsApi';
 import ItemModal from './ItemModal';
 import { useGetAccountQuery } from '../services/authApi';
@@ -71,7 +70,7 @@ const ItemCard = ({ item, trip_id, buddies }) => {
             <ItemModal show={showItem} onHide={() => setShowItem(false)} item={item} />
                 <div className="image-card" style={{ backgroundColor: `rgb(${redValue}, ${greenValue}, ${blueValue})` }}>
                 <Link onClick={() => setShowItem(true)}>
-                    <img className="image" src={accomodations} alt="..." />
+                    <img className="image" src={item.picture_url} alt="..." />
                 </Link>
                 <div className="card-footer">
                     <div className='col'>

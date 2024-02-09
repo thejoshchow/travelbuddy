@@ -13,6 +13,7 @@ from queries.items import (
     VotesList,
 )
 from queries.errors import Error
+from pexels.pexels import PexelsApi
 
 
 router = APIRouter()
@@ -25,12 +26,14 @@ def create_item(
     repo: ItemRepository = Depends(),
     account_data: dict = Depends(authenticator.get_current_account_data),
     auth: Authorize = Depends(),
+    pexels: PexelsApi = Depends(),
 ) -> Union[ItemOut, Error]:
+    picture = pexels.get_pic(item.name)
     user_id = account_data["user_id"]
     is_buddy = auth.is_buddy(user_id, trip_id)
     if is_buddy.participant and is_buddy.buddy:
         try:
-            return repo.create(trip_id, item, user_id)
+            return repo.create(trip_id, item, user_id, picture)
         except Exception:
             raise Exception
     else:
