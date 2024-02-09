@@ -9,6 +9,7 @@ services:
       WAIT_HOSTS: db:5432
       PORT: 8000
       SIGNING_KEY: ${DEV_SIGNING_KEY}
+      PEXELS_API_KEY: ${PEXELS_API_KEY}
     build:
       context: api
       dockerfile: Dockerfile.dev

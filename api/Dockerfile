@@ -16,6 +16,7 @@ COPY main.py main.py
 COPY queries queries
 COPY routers routers
 COPY authentication authentication
+COPY pexels pexels
 
 # Installs all the python packages listed in our requirements.txt file
 RUN python -m pip install -r requirements.txt

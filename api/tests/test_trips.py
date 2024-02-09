@@ -3,6 +3,7 @@ from main import app
 from queries.trips import TripRepo, TripIn, TripOut
 from authentication.accounts import Authorize, IsBuddyOut
 from authentication.authentication import authenticator
+from pexels.pexels import PexelsApi
 
 
 client = TestClient(app)
@@ -26,6 +27,11 @@ class EmptyTripRepo:
     def delete(self, trip_id: int):
 
         return True
+
+
+class FakePexels:
+    def get_pic(self, search_term):
+        return "fake_url"
 
 
 class TestAuth:
@@ -62,6 +68,8 @@ def test_create_trip():
     app.dependency_overrides[authenticator.get_current_account_data] = (
         dummy_account_data
     )
+
+    app.dependency_overrides[PexelsApi] = FakePexels
 
     trip = {
         "name": "Bob",

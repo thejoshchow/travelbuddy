@@ -14,7 +14,7 @@ from queries.trips import (
     TripBuddyList,
 )
 from queries.errors import Error
-from pexels import get_pic_url
+from pexels.pexels import PexelsApi
 
 
 router = APIRouter()
@@ -25,10 +25,11 @@ def create_trip(
     trip_form: TripIn,
     trips: TripRepo = Depends(),
     account_data: dict = Depends(authenticator.get_current_account_data),
+    pexels: PexelsApi = Depends(),
 ) -> Union[TripOut, Error]:
     user_id = account_data["user_id"]
     user = account_data["username"]
-    pic = get_pic_url(trip_form.location)
+    pic = pexels.get_pic(trip_form.location)
     try:
         trip = trips.create(trip_form, user_id, picture=pic)
         trips.add_buddy(
