@@ -34,9 +34,9 @@ function App() {
                 <Route path='items' element={<ItemsForm />} />
                 {/* <Route path='dashboard' element={<Dashboard />}> */}
                 <Route path='dashboard' element={<CurrentDash />} />
-                <Route path='dashboard/past' element={<PrevTripDash />} />
-                <Route path='user/update' element={<UsersUpdate />} />
-                <Route path='account/update' element={<AccountUpdate />} />
+                <Route path='history' element={<PrevTripDash />} />
+                <Route path='user' element={<UsersUpdate />} />
+                <Route path='account' element={<AccountUpdate />} />
 
                 <Route path='trip/' >
                     <Route index element={<CurrentDash />} />

@@ -28,11 +28,6 @@ const CategoriesMenu = ({ trip_id }) => {
             <Navbar className='nav-container'>
                 <Nav className="navbar-nav">
                     <button
-                        onClick={() => navigate(`/trip/${trip_id}`)}
-                        className='back-dash'>
-                        Back to Dash
-                    </button>
-                    <button
                         onClick={() => setShowModal(true)}
                         className='btn-add-item mr-3'>
                         Add Item
@@ -42,12 +37,17 @@ const CategoriesMenu = ({ trip_id }) => {
                         return (
                             <Link 
                                 className={`navbar-categories ${location.pathname === currentPath ? 'active' : ''}`} 
-                                href={currentPath}
+                                to={currentPath}
                                 key={cat.category_id}>
                                 {capitalizeFirstLetter(cat.category_name)}
                             </Link>
                         );
                     })}
+                    <button
+                        onClick={() => navigate(`/trip/${trip_id}`)}
+                        className='back-dash'>
+                        Trip Overview
+                    </button>
                 </Nav>
             </Navbar>
         </>
