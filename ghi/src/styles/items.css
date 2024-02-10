@@ -80,12 +80,14 @@
 }
 
 .navbar-categories{
+    text-decoration: none;
     color: #2EC4B6;
 }
 .navbar-categories:hover{
     color: #cbf3f0;
 }
 .navbar-categories.active {
+  color: black;
   text-decoration: underline;
 }
 
