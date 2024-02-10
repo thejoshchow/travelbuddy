@@ -39,3 +39,11 @@ Recommended naming convention is `first_last.md`.
   3. Worked on polishing frontend bug fixes visual issues
 
 
+## 02/05/2024 - 02/09/2024
+  1. Worked on styles on all the pages
+  2. Worked on Votes color changing feature
+  3. Worked on polishing frontend bug fixes visual issues
+  4. Finished category endpoint MDs 
+  5. Discussed stretch goals and mobbed readme
+
+

@@ -32,3 +32,13 @@ Week 4 Travel Buddy (week 16):
 - We each need to do a unit test. I offered to lead our group in that and show them the components for creating a Get and a Post unit test. I created those for getting all trips by a user id and for creating a trip and presented to the group earlier this week.
 - I worked on desiging the login page and navbar today. I simplified the navbar we had and added a logo and I laid out and designed the login page per our design we chose earlier this week.
 - Aaron and I worked on design for the trips overview page. He already had the flexbox features implemented for each category so we came up with design aspects for each card. He coded while we bounced ideas off each other and I sent over photos for the category placeholders.
+
+
+Week 5 Travel Buddy (week 17):
+- This week we were working on all frontend pages/components/styling
+- I created the update account page, update item modal and add buddy modal.
+- I also worked on some styling for the login and signup page.
+- There was a lot of little tasks that needed to be done that we all jumped on and took care of.
+- Darnell led us on deployment of the backend and frontend.
+- We collabed on the ReadME and all broke up the tasks to complete equally.
+- Friday, the project due date, we did a quick presentation for Paul to showcase our working app and explain the pieces we all contributed on.

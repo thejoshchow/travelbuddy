@@ -15,3 +15,8 @@ week two
  week four
  - completed "create trip" frontend
  - completed "dashboard trip widget" frontend
+
+Week five
+- pexels implementation
+- votes auto rerender
+- update user unit test

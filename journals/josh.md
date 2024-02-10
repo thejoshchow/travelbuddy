@@ -32,3 +32,11 @@
 - [x] created modal component to be used wherever forms are needed
 - [ ] review process and steps to deploy backend to cloud
 - [ ] add migration to create a new column in item categories table: show
+
+### 2/9/2024
+
+- [x] ensured all crucial mvp pages and forms have been made 
+- [x] write up readme with team
+- [x] deployed front and backend
+- [x] fixed broken deployed backend due to code changes
+- [x] make final touches to styling of navbar and forms
