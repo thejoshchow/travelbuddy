@@ -1,13 +1,10 @@
-import { useState, useEffect } from "react";
-import { useUpdateItemMutation, useGetItemsQuery } from "../../services/itemsApi";
+import { useState } from "react";
+import { useUpdateItemMutation } from "../../services/itemsApi";
 import SuccessAlert from "../../components/SucessAlert";
 import Spinner from "../../components/Spinner";
-import { useNavigate } from "react-router-dom";
 
 const ItemUpdate = ({ item }) => {
-    const navigate = useNavigate();
     const [updateItem, { isLoading, isSuccess }] = useUpdateItemMutation();
-    const { data: itemData } = useGetItemsQuery();
     const [formData, setFormData] = useState(item)
     const handleFormChange = (e) => {
         setFormData({
@@ -16,28 +13,17 @@ const ItemUpdate = ({ item }) => {
 
         })
     }
-
+    
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await updateItem({
-                trip_id: item.trip_id,
-                item_id: item.item_id,
-                ...formData,
-            });
-            navigate(`/trip/${item.trip_id}`);
+            await updateItem(formData);
         } catch (error) {
             console.error('An error occurred while updating an item', error)
         }
 
 
     };
-
-    useEffect(() => {
-        if (itemData) {
-            setFormData(itemData);
-        }
-    }, [itemData]);
 
 
     return (

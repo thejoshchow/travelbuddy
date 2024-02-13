@@ -11,7 +11,6 @@ function ItemModal(props) {
 
   const handleUpdateButtonClick = () => {
     setShowUpdateModal(true);
-    console.log("Update button clicked");
   };
 
   return (
