@@ -8,7 +8,11 @@ function Nav() {
     const { data: user } = useGetCurrentUserQuery();
     const [logout] = useLogoutMutation();
 
-    if (location.pathname === "/login" || location.pathname === "/signup") {
+    if (
+        location.pathname === "/login" ||
+        location.pathname === "/signup" ||
+        location.pathname === "/"
+    ) {
         return null;
     }
     return (
