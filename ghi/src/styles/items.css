@@ -32,13 +32,13 @@
     margin-top: 25px;
     margin-bottom: 25px;
     font-family: 'Sharpie', sans-serif;
- 
+
 
 }
 .navbar-nav{
     display: flex;
     gap: 25px;
-   
+
 }
 .btn-add-item{
     font-family: 'Sharpie', sans-serif;
@@ -179,4 +179,9 @@
   min-height: 170px;
   border:solid 1px black;
   border-radius: 25px;
+}
+
+.item-container {
+    justify-content: space-evenly;
+
 }

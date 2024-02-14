@@ -4,13 +4,26 @@ import { Card } from 'react-bootstrap';
 import { useState } from "react";
 import ItemUpdate from "../pages/items/ItemUpdate";
 import AddModal from './AddModal';
+import { useDeleteItemMutation } from "../services/itemsApi";
 
 function ItemModal(props) {
 
   const [showUpdateModal, setShowUpdateModal] = useState(false);
+  const [deleteItem] = useDeleteItemMutation();
 
   const handleUpdateButtonClick = () => {
     setShowUpdateModal(true);
+  };
+
+  const handleDeleteButtonClick = async () => {
+    try {
+      await deleteItem({
+        trip_id: props.item.trip_id,
+        item_id: props.item.item_id,
+      });
+    } catch (error) {
+      console.error("An error occurred while deleting an item", error);
+    }
   };
 
   return (
@@ -39,10 +52,11 @@ function ItemModal(props) {
                     <p>${props.item.cost}</p>
                     <p>Notes: {props.item.notes}</p>
                 </div>
-            <div className="container d-flex justify-content-center align-items-center">
-            <button className="btn btn-primary login-button blue-button:hover" onClick={handleUpdateButtonClick}>Update</button>
-              </div>
-            </Card.Body>
+            <div className="item-container d-flex">
+            <button className="btn blue-button" onClick={handleUpdateButtonClick}>Update</button>
+            <button className="btn red-button" onClick={handleDeleteButtonClick}>Delete Item</button>
+            </div>
+          </Card.Body>
       </Card>
 
     </Modal>
