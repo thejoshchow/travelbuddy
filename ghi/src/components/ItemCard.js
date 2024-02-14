@@ -17,14 +17,14 @@ const ItemCard = ({ item, trip_id, buddies }) => {
     const [addVote] = useAddVoteMutation();
     const [deleteVote] = useDeleteVoteMutation();
     const { data: votes } = useGetVotesQuery(item.item_id);
-    const { data: { account } } = useGetAccountQuery();
+    const { data: account } = useGetAccountQuery();
     useEffect(() => {
-            if (votes?.votes) {
+            if (votes?.votes && account?.user_id) {
                 const initialVoteCount = votes.votes.length;
                 setVoteCount(initialVoteCount);
                 setVoted(votes.votes.includes(account.user_id));
             }
-        }, [votes?.votes, account?.user_id]);
+        }, [votes, account]);
 
     
     // rgb state and rg info

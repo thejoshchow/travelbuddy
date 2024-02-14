@@ -18,19 +18,18 @@ const CurrentDash = () => {
 
 return (
         <>
-            <AddModal show={show} onHide={() => setShow(false)} modaltitle='Create A Trip' form={ <CreateTrip /> } />
-            
-                <div className="btn-container">
-                    <button className="create-trip-btn" onClick={() => setShow(true)}>Create Trip</button>
-                </div>
+            <AddModal show={show} onHide={() => setShow(false)} modaltitle='Create A Trip' form={ <CreateTrip /> } />            
+            <div className="btn-container">
+                <button className="create-trip-btn" onClick={() => setShow(true)}>Create Trip</button>
+            </div>
             <div className='trips-container'>
-            {current.map((trip) => {
+                {current.map((trip) => {
                     return (
-                        <div className='trip-cards-container' key={trip.id}>
+                        <div className='trip-cards-container' key={trip.trip_id}>
                             <TripsDisplay className='trips-cards' trip={trip} />
                         </div>
-                    )
-            })}
+                        )
+                        })}
             </div>
         
         </>

@@ -13,8 +13,6 @@ const TripsDisplay = ({ trip }) => {
     return (
         <div className='col align-self-start m-2' >
             <Link to={`/trip/${trip.trip_id}`} style={{ visited: "none", textDecoration: "none"}}>
-                
-                
                 <div className="trips-cards" style={{ width: 250 }}>
                     <img src={trip.picture_url}
                         className="card-img-top" alt="..." />
@@ -23,7 +21,6 @@ const TripsDisplay = ({ trip }) => {
                         <p className="card-text text-center text-wrap m-1">
                             From: <strong>{tripDate(trip.start_date)}</strong>
                         </p>
-
                         <p className="card-text text-center text-wrap m-1">
                             To: <strong>{tripDate(trip.end_date)}</strong>
                         </p>
