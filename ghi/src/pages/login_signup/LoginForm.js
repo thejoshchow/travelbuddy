@@ -10,7 +10,7 @@ import { useGetCurrentUserQuery } from "../../services/usersApi";
 function LoginForm() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    const [login] = useLoginMutation();
+    const [login, { isError }] = useLoginMutation();
     const [success, setSuccess] = useState(false);
     const dispatch = useDispatch();
     const { refetch } = useGetCurrentUserQuery();
@@ -92,6 +92,17 @@ function LoginForm() {
                                         className="form-control"
                                     />
                                     <label htmlFor="name">Password</label>
+                                </div>
+
+                                <div
+                                    className={
+                                        isError
+                                            ? "alert alert-danger"
+                                            : "d-none"
+                                    }
+                                    role="alert"
+                                >
+                                    Incorrect username or password
                                 </div>
 
                                 <div className="container d-flex justify-content-center align-items-center">
