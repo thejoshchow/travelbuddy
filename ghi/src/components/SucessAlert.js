@@ -1,7 +1,7 @@
 const SuccessAlert = ({ isSuccess, message }) => {
     return (
         <div
-            className={isSuccess ? "alert alert-danger" : "d-none"}
+            className={isSuccess ? "alert alert-success" : "d-none"}
             role="alert"
         >
             {message}
