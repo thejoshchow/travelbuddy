@@ -145,14 +145,15 @@ class AccountRepo:
                     )
                     account = result.fetchone()
                     user_id = account[0]
-                    username = account[1]
-                    email = account[2]
+                    updated_username = account[1]
+                    updated_email = account[2]
                     return AccountOut(
                         user_id=user_id,
-                        username=username,
-                        email=email,
+                        email=updated_email,
+                        username=updated_username,
                     )
                 except Exception as e:
+                    print(e)
                     return f"{e}"
 
     def delete(self, user_id: int):
