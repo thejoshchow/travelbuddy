@@ -16,6 +16,7 @@ import CheckAuth from "./state/auth/CheckAuth";
 import AccountUpdate from "./pages/AccountUpdate";
 import LoginForm from "./pages/login_signup/LoginForm";
 import ItemsForm from "./pages/items/ItemsForm";
+import Error from "./components/Error";
 
 function App() {
     return (
@@ -27,11 +28,11 @@ function App() {
                     <Route index element={<LoginForm />} />
                     <Route path="login" element={<LoginForm />} />
                     <Route path="signup" element={<SignupForm />} />
+                    <Route path="error" element={<Error />} />
 
                     {/* protected routes */}
                     <Route element={<RequireAuth />}>
                         <Route path="items" element={<ItemsForm />} />
-                        {/* <Route path='dashboard' element={<Dashboard />}> */}
                         <Route path="dashboard" element={<CurrentDash />} />
                         <Route path="history" element={<PrevTripDash />} />
                         <Route path="user" element={<UsersUpdate />} />

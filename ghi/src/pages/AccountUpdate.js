@@ -8,7 +8,7 @@ import SuccessAlert from "../components/SucessAlert";
 
 const AccountUpdate = () => {
     const { data: accountData } = useGetAccountQuery();
-    const [updateAccount, { isLoading, isSuccess }] =
+    const [updateAccount, { isLoading, isSuccess, isError }] =
         useUpdateAccountMutation();
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
@@ -75,7 +75,13 @@ const AccountUpdate = () => {
                         message="Account details updated"
                     />
                     <div
-                        className={!isSuccess ? "shadow p-4" : "d-none"}
+                        className={isError ? "alert alert-danger" : "d-none"}
+                        role="alert"
+                    >
+                        Incorrect password
+                    </div>
+                    <div
+                        className={!isLoading ? "shadow p-4" : "d-none"}
                         style={{
                             border: "2px solid black",
                             borderRadius: "8px",
