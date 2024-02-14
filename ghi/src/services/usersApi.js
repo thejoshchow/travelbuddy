@@ -2,7 +2,7 @@ import { createApi } from "@reduxjs/toolkit/query/react";
 import { baseQuery } from "./baseQuery";
 
 export const usersApi = createApi({
-    reducerPath: 'users',
+    reducerPath: "users",
     baseQuery: baseQuery,
     endpoints: (build) => ({
         updateUser: build.mutation({
@@ -10,12 +10,12 @@ export const usersApi = createApi({
                 url: "/api/user",
                 body: info,
                 method: "put",
-            })
+            }),
         }),
-         getCurrentUser: build.query({
-            query: () => "/api/user"
-        })
-    })
-})
+        getCurrentUser: build.query({
+            query: () => "/api/user",
+        }),
+    }),
+});
 
-export const { useUpdateUserMutation, useGetCurrentUserQuery } = usersApi
+export const { useUpdateUserMutation, useGetCurrentUserQuery } = usersApi;
