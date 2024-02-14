@@ -81,7 +81,7 @@
 .create-trip-btn:active{
     box-shadow: 10px 5px 00px rgba(0, 0, 0, 0.19), 0px 3px 3px rgba(0, 0, 0, 0.23);
     transform: translateY(4px);
- 
+
 }
 .create-trip-btn:hover{
      background-color: #2EC4B6;
@@ -94,6 +94,7 @@
     margin-top: 25px;
     flex-direction: row;
     gap: 25px;
+
 }
 .trip-cards-container{
 
@@ -130,6 +131,6 @@
     border: 1px black solid;
 }
 
-
-
-
+.card-text {
+    font-size: medium;
+}
