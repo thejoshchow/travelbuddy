@@ -1,7 +1,5 @@
 from typing import Union
-
 from fastapi import APIRouter, Depends, HTTPException
-
 from authentication.authentication import authenticator
 from authentication.accounts import Authorize
 from queries.trips import (
@@ -15,7 +13,6 @@ from queries.trips import (
 )
 from queries.errors import Error
 from pexels.pexels import PexelsApi
-
 
 router = APIRouter()
 
@@ -154,3 +151,18 @@ def get_trip_buddies(
             )
     else:
         raise HTTPException(status_code=401, detail="Unauthorized")
+
+
+@router.delete("/api/trip/{trip_id}/buddy")
+def delete_buddy(
+    trip_id: int,
+    trips: TripRepo = Depends(),
+    account_data: dict = Depends(authenticator.get_current_account_data),
+) -> bool:
+
+    user_id = account_data["user_id"]
+
+    try:
+        return trips.delete_buddy(user_id, trip_id)
+    except Exception:
+        raise HTTPException(status_code=400, detail="Deleting buddy failed")

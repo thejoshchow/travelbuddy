@@ -60,7 +60,10 @@ body {
   background-color: #acf8f3;
   border-color: #2EC4B6;
 }
-
+.whos-going-modal-buttons{
+  display: flex;
+  justify-content: space-between;
+}
 .red-button {
   background-color: #c42e2e;
   border-color: #c42e2e;
@@ -301,6 +304,10 @@ div.category-body.card-body{
  color: #2EC4B6;
 }
 /* Trip overview dummy total cost css */
+
+.btn-margin-remove-buddy {
+    margin: 10px;
+}
 
 .card-container-cost{
   display:flex;

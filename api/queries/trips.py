@@ -247,3 +247,24 @@ class TripRepo:
             raise HTTPException(
                 status_code=400, detail="Username or email does not exist"
             )
+
+    def delete_buddy(self, user_id: int, trip_id: int):
+        with pool.connection() as conn:
+            with conn.cursor() as cur:
+                try:
+                    cur.execute(
+                        """
+                        DELETE FROM buddies
+                        WHERE trip_id = %s AND user_id = %s
+                        RETURNING *;
+                        """,
+                        [
+                            trip_id,
+                            user_id,
+                        ],
+                    )
+                    result = cur.fetchone()
+                    return True if result else False
+                except Exception as e:
+                    print(e)
+                    raise Exception

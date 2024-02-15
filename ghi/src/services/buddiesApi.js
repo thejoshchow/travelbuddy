@@ -27,8 +27,14 @@ export const buddiesApi = createApi({
                 url: `/api/trip/${trip_id}/role`,
                 method: 'GET'
             })
-        })
+        }),
+        deleteBuddy: builder.mutation({
+            query: ({ trip_id}) => ({
+                url: `/api/trip/${trip_id}/buddy`,
+                method: 'DELETE',
+            }),
+        }),
     }),
-})
+});
 
-export const { useGetBuddyQuery, useIsBuddyQuery, useAddBuddyMutation } = buddiesApi;
+export const { useGetBuddyQuery, useIsBuddyQuery, useAddBuddyMutation,useDeleteBuddyMutation } = buddiesApi;

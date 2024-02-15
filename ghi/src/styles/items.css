@@ -89,6 +89,7 @@
 .navbar-categories.active {
   color: black;
   text-decoration: underline;
+  text-decoration: none;
 }
 
 /* Items */

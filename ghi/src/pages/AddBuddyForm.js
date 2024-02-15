@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { useAddBuddyMutation } from "../services/buddiesApi";
+import { useNavigate } from 'react-router-dom';
+import { useAddBuddyMutation,useDeleteBuddyMutation } from "../services/buddiesApi";
 import SuccessAlert from "../components/SucessAlert";
 import Spinner from "../components/Spinner";
 
@@ -7,8 +8,8 @@ const AddBuddyForm = ({ trip_id }) => {
     const [username, setUsername] = useState('');
     const [selectedOption, setSelectedOption] = useState(true);
     const [addBuddy, {isLoading, isSuccess}] = useAddBuddyMutation();
-
-
+    const [deleteBuddy] = useDeleteBuddyMutation();
+    const navigate = useNavigate();
     const handleUsernameChange = (event) => {
         setUsername(event.target.value);
     }
@@ -17,7 +18,7 @@ const AddBuddyForm = ({ trip_id }) => {
         setSelectedOption(event.target.value);
     }
 
-    const handleSubmit = async (event) => {
+   const handleSubmit = async (event) => {
         event.preventDefault();
 
 
@@ -40,6 +41,19 @@ const AddBuddyForm = ({ trip_id }) => {
         }
 
     }
+                
+    const handleDeleteBuddy = async () => {
+   
+    try {
+        await deleteBuddy({ trip_id }).unwrap();
+        console.log('Successfully left the trip');
+        navigate('/dashboard');
+    } catch (error) {
+        console.error('Error deleting buddy', error);
+    }
+}
+        
+
 
 return (
     <div className="container">
@@ -86,8 +100,15 @@ return (
                         Guest
                 </label>
                 </div>
-
-        <button className='btn blue-button' type="submit">Add Buddy</button>
+            <div className="whos-going-modal-buttons">
+            <button className='btn blue-button' type="submit">Add Buddy</button>
+            <button 
+            onClick={handleDeleteBuddy}
+            className='btn btn-danger btn-margin-remove-buddy' 
+            type="button">
+            I'm not going...
+            </button>
+            </div>
         </form>
     </div>
 
