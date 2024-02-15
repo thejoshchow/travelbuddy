@@ -71,7 +71,7 @@ function LoginForm() {
                                         onChange={handleUsernameChange}
                                         placeholder="Username"
                                         required
-                                        type="text"
+                                        type="username"
                                         name="username"
                                         id="username"
                                         value={username}
@@ -85,7 +85,7 @@ function LoginForm() {
                                         onChange={handlePasswordChange}
                                         placeholder="Password"
                                         required
-                                        type="text"
+                                        type="password"
                                         name="password"
                                         id="password"
                                         value={password}
