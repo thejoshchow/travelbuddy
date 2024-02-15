@@ -22,6 +22,7 @@ class ItemIn(BaseModel):
 class ItemOut(ItemIn):
     trip_id: int
     item_id: int
+    author: Optional[int]
 
 
 class ItemUpdate(ItemIn):
@@ -66,8 +67,7 @@ class ItemRepository:
                     }
                     return ItemOut(**item)
 
-        except Exception as e:
-            print(e)
+        except Exception:
             raise Exception
 
     def update(self, trip_id: int, item_id: int, item: ItemUpdate):
@@ -118,8 +118,7 @@ class ItemRepository:
                         "notes": result[11],
                     }
                     return ItemOut(**item)
-        except Exception as e:
-            print(e)
+        except Exception:
             raise Exception
 
     def create(

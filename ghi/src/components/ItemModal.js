@@ -1,15 +1,20 @@
 import "../styles/itemModal.css"
 import Modal from 'react-bootstrap/Modal';
 import { Card } from 'react-bootstrap';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ItemUpdate from "../pages/items/ItemUpdate";
 import AddModal from './AddModal';
 import { useDeleteItemMutation } from "../services/itemsApi";
+import { useIsBuddyQuery } from "../services/buddiesApi";
+import { useGetAccountQuery } from "../services/authApi";
 
 function ItemModal(props) {
 
   const [showUpdateModal, setShowUpdateModal] = useState(false);
+  const { data: role } = useIsBuddyQuery(props.item.trip_id);
+  const { data: account } = useGetAccountQuery();
   const [deleteItem] = useDeleteItemMutation();
+  const [adminClass, setAdminClass] = useState('d-none');
 
   const handleUpdateButtonClick = () => {
     setShowUpdateModal(true);
@@ -25,6 +30,14 @@ function ItemModal(props) {
       console.error("An error occurred while deleting an item", error);
     }
   };
+
+  useEffect(() => {
+    if (role?.admin || account?.account.user_id === props.item.author) {
+      setAdminClass('item-container d-flex');
+    }
+
+
+  }, [role, account, props]);
 
   return (
     <Modal
@@ -52,10 +65,11 @@ function ItemModal(props) {
                     <p>${props.item.cost}</p>
                     <p>Notes: {props.item.notes}</p>
                 </div>
-            <div className="item-container d-flex">
+
+          <div className={adminClass}>
             <button className="btn blue-button" onClick={handleUpdateButtonClick}>Update</button>
             <button className="btn red-button" onClick={handleDeleteButtonClick}>Delete Item</button>
-            </div>
+          </div>
           </Card.Body>
       </Card>
 
@@ -65,4 +79,3 @@ function ItemModal(props) {
 }
 
 export default ItemModal;
-
