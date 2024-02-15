@@ -61,7 +61,7 @@ class AccountRepo:
                         RETURNING user_id;
                         """,
                         [
-                            user_form.username,
+                            user_form.username.lower(),
                             user_form.email,
                             hashed_password,
                         ],

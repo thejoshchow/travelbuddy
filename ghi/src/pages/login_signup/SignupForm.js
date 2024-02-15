@@ -45,6 +45,17 @@ export function SignupForm() {
     }));
   };
 
+
+  const handleUsernameChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(formData => ({
+      ...formData,
+      [name]: value.toLowerCase()
+    }));
+  };
+
+
+
   const signUp = (accountData) => {
   accountData.display_name = `${accountData.first_name}.${accountData.last_name}`;
   createAccount(accountData)
@@ -74,13 +85,13 @@ useEffect(() => {
     if (token) {
         navigate('/dashboard')
     }
-})    
+})
 
 const handleSubmit = (e) => {
   e.preventDefault();
   signUp(formData);
 };
-    
+
 
 
  return (
@@ -122,7 +133,7 @@ const handleSubmit = (e) => {
                         type="text"
                         placeholder="Enter username"
                         value={formData.username}
-                        onChange={handleFormChange}
+                        onChange={handleUsernameChange}
                     />
                   </FloatingLabel>
 
@@ -146,7 +157,7 @@ const handleSubmit = (e) => {
                         onChange={handleFormChange}
                     />
                   </FloatingLabel>
-                  
+
                   {/* <FloatingLabel controlId="formConfirmPassword" className="mb-3" label='Confirm password'>
                     <Form.Control
                         name="confirmPassword"

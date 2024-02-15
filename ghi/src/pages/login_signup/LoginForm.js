@@ -17,7 +17,7 @@ function LoginForm() {
     const token = useSelector((state) => state.auth.token);
 
     const handleUsernameChange = (event) => {
-        setUsername(event.target.value);
+        setUsername(event.target.value.toLowerCase());
     };
 
     const handlePasswordChange = (event) => {
