@@ -32,8 +32,6 @@ const TripOverview = () => {
     const dispatch = useDispatch();
     const roles = useSelector(getRoles);
 
-    console.log(isError);
-
     function skewCard() {
         const degree = Math.floor(Math.random() * 20) - 10;
         return degree.toString() + "deg";
@@ -129,7 +127,7 @@ const TripOverview = () => {
                 </Link>
             </Container>
 
-            <Container className="categories">
+            <Container className="categories" style={{ maxWidth: "1200px" }}>
                 {categories.map((category) => (
                     <Link
                         to={`/trip/${trip_id}/${category.category_id}`}
