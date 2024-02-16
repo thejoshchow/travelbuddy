@@ -17,12 +17,12 @@ https://thethirteen.gitlab.io/travelbuddy/
 ___
 Travel Buddy Vocabulary:
 
-trip: repository of users and suggestions for an event with specific date range
-user: someone authenticated in the system
-owner: user who creates a trip
-buddy: user invited to a trip
-guest: non-participant user with trip link
-item: item within a trip that can be suggested by buddies and voted on
+trip: repository of users and suggestions for an event with specific date range  
+user: someone authenticated in the system  
+owner: user who creates a trip  
+buddy: user invited to a trip  
+guest: non-participant user with trip link  
+item: item within a trip that can be suggested by buddies and voted on  
 
 ## Navigating the application
 
