@@ -10,8 +10,8 @@ import { useGetCurrentUserQuery } from "../../services/usersApi";
 function LoginForm() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    const [login, { isError }] = useLoginMutation();
-    const [success, setSuccess] = useState(false);
+    const [login, { isError, isSuccess }] = useLoginMutation();
+    // const [success, setSuccess] = useState(false);
     const dispatch = useDispatch();
     const { refetch } = useGetCurrentUserQuery();
     const token = useSelector((state) => state.auth.token);
@@ -34,7 +34,6 @@ function LoginForm() {
         try {
             const result = await login(data).unwrap();
             dispatch(setToken(result.access_token));
-            setSuccess(true);
             refetch();
         } catch (error) {
             console.error("Login error, please check your credentials", error);
@@ -45,7 +44,7 @@ function LoginForm() {
         if (token) {
             navigate("/dashboard");
         }
-    }, [success, navigate, token]);
+    }, [isSuccess, navigate, token]);
 
     return (
         <div className="login-container">
